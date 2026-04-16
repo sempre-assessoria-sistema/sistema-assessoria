@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Faturamento Contábil 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#1a3a5c;--pl:#2563a8;--accent:#0ea5e9;--as:#e0f2fe;--ok:#059669;--oks:#d1fae5;--warn:#d97706;--warns:#fef3c7;--err:#dc2626;--errs:#fee2e2;--neu:#64748b;--neus:#f1f5f9;--bg:#f8fafc;--surf:#fff;--bdr:#e2e8f0;--bdrs:#cbd5e1;--txt:#0f172a;--txt2:#475569;--txt3:#94a3b8;--sw:260px;--hh:64px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);display:flex;height:100vh;overflow:hidden;font-size:14px}
+#sb{width:var(--sw);background:var(--primary);display:flex;flex-direction:column;height:100vh;overflow:hidden;flex-shrink:0}
+.sb-logo{padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,.1)}
+.sb-logo-row{display:flex;align-items:center;gap:10px}
+.sb-icon{width:36px;height:36px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:15px;flex-shrink:0}
+.sb-text{color:#fff;font-size:13px;font-weight:500;line-height:1.3}
+.sb-text span{display:block;font-size:10px;color:rgba(255,255,255,.45);font-weight:400;letter-spacing:.06em;text-transform:uppercase}
+.sb-sec{padding:12px 12px 4px;font-size:10px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em;font-weight:500}
+.sb-nav{flex:1;overflow-y:auto;padding:6px 0;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent}
+.ni{display:flex;align-items:center;gap:9px;padding:8px 14px;color:rgba(255,255,255,.6);cursor:pointer;transition:all .15s;font-size:13px;user-select:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-right:2px solid transparent}
+.ni:hover{background:rgba(255,255,255,.08);color:#fff}
+.ni.active{background:rgba(14,165,233,.2);color:#fff;border-right-color:var(--accent)}
+.ni svg{width:16px;height:16px;flex-shrink:0;opacity:.8}
+.nb{margin-left:auto;background:var(--accent);color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;font-weight:500}
+.rb{margin-left:auto;font-size:9px;padding:1px 5px;border-radius:4px;font-weight:500;flex-shrink:0}
+.rb-mei{background:rgba(245,158,11,.25);color:#fbbf24}
+.rb-sn{background:rgba(14,165,233,.25);color:#7dd3fc}
+.rb-lp{background:rgba(167,139,250,.25);color:#c4b5fd}
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+#hdr{height:var(--hh);background:var(--surf);border-bottom:1px solid var(--bdr);display:flex;align-items:center;padding:0 24px;gap:14px;flex-shrink:0}
+.hdr-t{font-size:16px;font-weight:600}
+.hdr-s{font-size:12px;color:var(--txt3);margin-top:1px}
+.hs{flex:1}
+.srch{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:0 11px;height:34px;min-width:200px}
+.srch input{border:none;background:transparent;font-family:inherit;font-size:13px;color:var(--txt);outline:none;width:100%}
+.srch input::placeholder{color:var(--txt3)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:0 14px;height:34px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;border:none}
+.btn-p{background:var(--pl);color:#fff}
+.btn-p:hover{background:var(--primary)}
+.btn-g{background:transparent;color:var(--txt2);border:1px solid var(--bdr)}
+.btn-g:hover{background:var(--bg)}
+#cnt{flex:1;overflow-y:auto;padding:22px}
+.card{background:var(--surf);border:1px solid var(--bdr);border-radius:12px;padding:18px 22px}
+.ct{font-size:12px;font-weight:600;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.cv{font-size:26px;font-weight:600;color:var(--txt);font-variant-numeric:tabular-nums}
+.cs{font-size:12px;color:var(--txt3);margin-top:3px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mb20{margin-bottom:20px}
+.mb14{margin-bottom:14px}
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.st{font-size:15px;font-weight:600}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:11px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:.06em;padding:9px 14px;border-bottom:1px solid var(--bdr);white-space:nowrap;background:var(--bg)}
+td{padding:11px 14px;border-bottom:1px solid var(--bdr);font-size:13px;color:var(--txt)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg)}
+.tm{font-family:'DM Mono',monospace;font-size:12px}
+.badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:500;white-space:nowrap;gap:4px}
+.b-ok{background:var(--oks);color:var(--ok)}
+.b-w{background:var(--warns);color:var(--warn)}
+.b-e{background:var(--errs);color:var(--err)}
+.b-n{background:var(--neus);color:var(--neu)}
+.b-i{background:var(--as);color:var(--pl)}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.d-g{background:var(--ok)}.d-y{background:var(--warn)}.d-n{background:var(--txt3)}
+.ftabs{display:flex;gap:3px;background:var(--bg);padding:3px;border-radius:9px;border:1px solid var(--bdr);width:fit-content}
+.ft{padding:5px 12px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;color:var(--txt2);transition:all .15s;user-select:none}
+.ft.active{background:var(--surf);color:var(--primary);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.ft:hover:not(.active){color:var(--txt)}
+.pb{height:5px;background:var(--bdr);border-radius:3px;overflow:hidden;margin-top:6px}
+.pf{height:100%;border-radius:3px;background:var(--pl);transition:width .3s}
+.page{display:none}
+.page.active{display:block}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-thumb{background:var(--bdrs);border-radius:3px}
+/* CLIENT HEADER */
+.ch{display:flex;align-items:flex-start;gap:18px;padding:22px;background:var(--surf);border:1px solid var(--bdr);border-radius:12px;margin-bottom:18px}
+.cav{width:52px;height:52px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;color:#fff;flex-shrink:0}
+.cn{font-size:19px;font-weight:600;margin-bottom:4px}
+.cm{font-size:13px;color:var(--txt2);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+/* SN TABLE */
+.sn-table-wrap{overflow-x:auto;margin-top:12px}
+.sn-table{min-width:900px}
+.sn-faixa-hdr{background:var(--primary);color:#fff;font-size:11px;font-weight:600;padding:8px 12px;border-radius:8px 8px 0 0;text-transform:uppercase;letter-spacing:.06em}
+.faixa-row{display:grid;grid-template-columns:40px 160px 130px 130px 80px 100px 100px 100px;gap:0;border-bottom:1px solid var(--bdr)}
+.faixa-cell{padding:9px 10px;font-size:12px;border-right:1px solid var(--bdr)}
+.faixa-cell:last-child{border-right:none}
+.faixa-hdr-row{background:var(--bg);font-weight:600;font-size:11px;color:var(--txt3);text-transform:uppercase;letter-spacing:.04em}
+.faixa-current{background:rgba(37,99,168,.06)!important}
+.faixa-num{display:inline-flex;width:22px;height:22px;border-radius:50%;background:var(--pl);color:#fff;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+/* ALIQUOTA CALC */
+.aliq-box{background:linear-gradient(135deg,#1a3a5c 0%,#2563a8 100%);border-radius:12px;padding:18px 22px;color:#fff;margin-bottom:18px}
+.aliq-title{font-size:13px;font-weight:500;color:rgba(255,255,255,.7);margin-bottom:12px}
+.aliq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.aliq-item{background:rgba(255,255,255,.1);border-radius:8px;padding:12px}
+.aliq-label{font-size:11px;color:rgba(255,255,255,.6);margin-bottom:3px}
+.aliq-value{font-size:18px;font-weight:600}
+/* MODAL */
+.mover{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100;display:none;align-items:center;justify-content:center}
+.mover.open{display:flex}
+.modal{background:var(--surf);border-radius:14px;width:660px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.mhdr{padding:18px 22px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--surf);z-index:1}
+.mt{font-size:15px;font-weight:600}
+.mbody{padding:18px 22px}
+.mfooter{padding:14px 22px;border-top:1px solid var(--bdr);display:flex;justify-content:flex-end;gap:8px}
+.cbtn{width:30px;height:30px;border-radius:7px;border:1px solid var(--bdr);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--txt2)}
+.cbtn:hover{background:var(--bg)}
+input[type=text],input[type=number],select,textarea{font-family:inherit;font-size:13px;border:1px solid var(--bdr);border-radius:7px;padding:7px 11px;background:var(--surf);color:var(--txt);outline:none;transition:border .15s;width:100%}
+input:focus,select:focus{border-color:var(--pl);box-shadow:0 0 0 3px rgba(37,99,168,.1)}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.fr3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
+.fg{display:flex;flex-direction:column}
+.fl{font-size:11px;font-weight:500;color:var(--txt2);margin-bottom:3px}
+.fst{font-size:12px;font-weight:600;color:var(--pl);margin:14px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--bdr)}
+/* BAR CHART */
+.bc{display:flex;align-items:flex-end;gap:6px;height:110px;padding-top:10px}
+.bi{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end}
+.bf{width:100%;background:var(--pl);border-radius:4px 4px 0 0;min-height:3px;position:relative;cursor:pointer}
+.bf:hover{background:var(--accent)}
+.bl{font-size:9px;color:var(--txt3);text-transform:uppercase;margin-top:3px}
+.bv{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--txt2);white-space:nowrap;font-family:'DM Mono',monospace}
+/* TIPO BADGE */
+.tp-badge{display:inline-flex;align-items:center;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:.04em}
+.tp-c{background:#dcfce7;color:#166534}
+.tp-s{background:#dbeafe;color:#1e40af}
+.tp-m{background:#fef9c3;color:#854d0e}
+/* TOAST */
+.toast{position:fixed;bottom:22px;right:22px;background:var(--ok);color:#fff;padding:11px 18px;border-radius:8px;font-size:13px;font-weight:500;z-index:200;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+@media(max-width:1200px){.g4{grid-template-columns:repeat(2,1fr)}.aliq-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div id="sb">
+  <div class="sb-logo">
+    <div class="sb-logo-row">
+      <div class="sb-icon">C</div>
+      <div class="sb-text">ContaFácil Pro<span>Escritório Contábil 2026</span></div>
+    </div>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-sec">Principal</div>
+    <div class="ni active" onclick="showPage('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
+    <div class="ni" onclick="showPage('clientes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clientes<span class="nb">49</span></div>
+    <div class="ni" onclick="showPage('lancamentos')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Lançamentos</div>
+    <div class="ni" onclick="showPage('simples')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2z"/><path d="M15 19V9a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2z"/><path d="M21 19V5a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2z"/></svg>Tabela Simples 2026</div>
+    <div class="ni" onclick="showPage('visao')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Visão Geral 2026</div>
+    <div class="sb-sec">Clientes</div>
+    <div id="cl-list"></div>
+  </div>
+</div>
+
+<div id="main">
+  <div id="hdr">
+    <div><div class="hdr-t" id="pg-title">Dashboard</div><div class="hdr-s" id="pg-sub">Visão executiva — 2026</div></div>
+    <div class="hs"></div>
+    <div class="srch"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Buscar cliente..." id="srch-input" oninput="onSearch()"></div>
+    <button class="btn btn-p" onclick="openModal()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Novo Lançamento</button>
+  </div>
+  <div id="cnt">
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="g4 mb20" id="dash-kpis"></div>
+      <div class="g2 mb20">
+        <div class="card"><div class="sh"><div class="st">Faturamento por Mês</div></div><div class="bc" id="bc-mensal"></div></div>
+        <div class="card"><div class="sh"><div class="st">Clientes por Regime</div></div><div id="reg-dist" style="display:flex;flex-direction:column;gap:10px;margin-top:6px"></div></div>
+      </div>
+      <div class="card mb20">
+        <div class="sh">
+          <div class="st">Status dos Clientes</div>
+          <div class="ftabs" id="sf">
+            <div class="ft active" onclick="setSF('todos',this)">Todos</div>
+            <div class="ft" onclick="setSF('Concluído',this)">Concluídos</div>
+            <div class="ft" onclick="setSF('Pendente',this)">Pendentes</div>
+            <div class="ft" onclick="setSF('sem',this)">Sem Movimento</div>
+          </div>
+        </div>
+        <div class="tw"><table><thead><tr><th>Cliente</th><th>Tipo</th><th>Regime</th><th>Últ. Mês</th><th>Fat. Mês</th><th>Impostos</th><th>Acumulado</th><th>Status</th><th>Alerta</th></tr></thead><tbody id="dash-tbody"></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- CLIENTES -->
+    <div class="page" id="page-clientes">
+      <div class="mb14"><div class="ftabs" id="rf"><div class="ft active" onclick="setRF('todos',this)">Todos</div><div class="ft" onclick="setRF('MEI',this)">MEI</div><div class="ft" onclick="setRF('Simples Nacional',this)">Simples Nacional</div><div class="ft" onclick="setRF('Lucro Presumido',this)">Lucro Presumido</div></div></div>
+      <div class="card"><div class="tw"><table><thead><tr><th>Cliente</th><th>Tipo Ativ.</th><th>Regime</th><th>Status</th><th>Fat. Atual</th><th>Cert. Digital</th><th></th></tr></thead><tbody id="cl-tbody"></tbody></table></div></div>
+    </div>
+
+    <!-- LANÇAMENTOS -->
+    <div class="page" id="page-lancamentos">
+      <div class="card mb14">
+        <div class="sh">
+          <div class="st">Lançamentos Mensais</div>
+          <select id="mf" onchange="renderLanc()" style="width:150px"><option value="todos">Todos os meses</option><option value="JANEIRO">Janeiro</option><option value="FEVEREIRO">Fevereiro</option><option value="MARÇO">Março</option></select>
+        </div>
+        <div class="tw"><table><thead><tr><th>Cliente</th><th>Mês</th><th>Tipo</th><th>Regime</th><th>Vendas</th><th>Serviços</th><th>Total</th><th>DAS/Imp.</th><th>INSS</th><th>Status</th></tr></thead><tbody id="lanc-tbody"></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- TABELA SIMPLES 2026 -->
+    <div class="page" id="page-simples">
+      <div class="g2 mb20">
+        <div class="card">
+          <div class="st mb14">Anexo I — Comércio</div>
+          <div class="tw"><div id="sn-ane1"></div></div>
+        </div>
+        <div class="card">
+          <div class="st mb14">Anexo III — Serviços</div>
+          <div class="tw"><div id="sn-ane3"></div></div>
+        </div>
+      </div>
+      <div class="card mb20">
+        <div class="st mb14">Clientes no Simples Nacional — Situação de Faixa</div>
+        <div class="tw"><table><thead><tr><th>Cliente</th><th>Tipo Ativ.</th><th>Acumulado 12m (RBT12)</th><th>Faixa Atual</th><th>Alíquota Nominal</th><th>Dedução</th><th>Alíquota Efetiva</th><th>DAS Último Mês</th><th>Alerta</th></tr></thead><tbody id="sn-cl-tbody"></tbody></table></div>
+      </div>
+      <div class="card">
+        <div class="st mb14">Calculadora Simples Nacional 2026</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:14px;">
+          <div class="fg"><div class="fl">Tipo de Atividade</div><select id="calc-tipo" onchange="calcSN()"><option value="COMERCIO">Comércio (Anexo I)</option><option value="SERVICO">Serviços (Anexo III)</option><option value="MISTO">Misto (Média)</option></select></div>
+          <div class="fg"><div class="fl">RBT12 — Receita Acum. 12 meses (R$)</div><input type="number" id="calc-rbt12" value="360000" step="1000" oninput="calcSN()"></div>
+          <div class="fg"><div class="fl">Faturamento do Mês (R$)</div><input type="number" id="calc-fat" value="30000" step="100" oninput="calcSN()"></div>
+          <div class="fg" style="justify-content:flex-end;padding-top:18px;"><button class="btn btn-p" onclick="calcSN()">Calcular</button></div>
+        </div>
+        <div id="calc-result"></div>
+      </div>
+    </div>
+
+    <!-- VISÃO GERAL -->
+    <div class="page" id="page-visao">
+      <div class="g4 mb20" id="vg-kpis"></div>
+      <div class="card">
+        <div class="st mb14">Painel Consolidado 2026</div>
+        <div class="tw"><table><thead><tr><th>#</th><th>Cliente</th><th>Tipo</th><th>Regime</th><th>Jan</th><th>Fev</th><th>Mar</th><th>Acumulado</th><th>Impostos</th><th>Alerta</th></tr></thead><tbody id="vg-tbody"></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- CLIENTE DETALHE -->
+    <div class="page" id="page-detalhe"><div id="detalhe-content"></div></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="mover" id="mover" onclick="closeMOut(event)">
+  <div class="modal">
+    <div class="mhdr"><div class="mt">Novo Lançamento Mensal</div><button class="cbtn" onclick="closeM()">×</button></div>
+    <div class="mbody">
+      <div class="fr">
+        <div class="fg"><div class="fl">Cliente</div><select id="f-cl" onchange="updateForm()"><option value="">Selecione...</option></select></div>
+        <div class="fg"><div class="fl">Mês de Referência</div>
+          <select id="f-mes"><option value="JANEIRO">Janeiro</option><option value="FEVEREIRO">Fevereiro</option><option value="MARÇO">Março</option><option value="ABRIL">Abril</option><option value="MAIO">Maio</option><option value="JUNHO">Junho</option><option value="JULHO">Julho</option><option value="AGOSTO">Agosto</option><option value="SETEMBRO">Setembro</option><option value="OUTUBRO">Outubro</option><option value="NOVEMBRO">Novembro</option><option value="DEZEMBRO">Dezembro</option></select>
+        </div>
+      </div>
+      <div id="form-regime-lbl" class="fst"></div>
+      <div id="form-fields"></div>
+      <div class="fst">Folha de Pagamento</div>
+      <div class="fr3">
+        <div class="fg"><div class="fl">INSS (R$)</div><input type="number" id="f-inss" placeholder="0,00" step="0.01"></div>
+        <div class="fg"><div class="fl">FGTS (R$)</div><input type="number" id="f-fgts" placeholder="0,00" step="0.01"></div>
+        <div class="fg"><div class="fl">Pró-Labore (R$)</div><input type="number" id="f-pl" placeholder="0,00" step="0.01"></div>
+      </div>
+      <div class="fg" style="margin-bottom:10px"><div class="fl">Folha Líquida (R$)</div><input type="number" id="f-folha" placeholder="0,00" step="0.01"></div>
+      <div class="fst">Status</div>
+      <div class="fr">
+        <div class="fg"><div class="fl">Status</div><select id="f-status"><option value="Concluído">Concluído</option><option value="Pendente">Pendente</option><option value="Entregue">Entregue</option></select></div>
+        <div class="fg"><div class="fl">Observações</div><input type="text" id="f-obs" placeholder="..."></div>
+      </div>
+    </div>
+    <div class="mfooter"><button class="btn btn-g" onclick="closeM()">Cancelar</button><button class="btn btn-p" onclick="salvar()">Salvar</button></div>
+  </div>
+</div>
+
+<script>
+// ===== TABELA SIMPLES NACIONAL 2026 =====
+const SN = {
+  I: [ // COMÉRCIO - Anexo I
+    {f:1,min:0,max:180000,aliq:4.00,ded:0,desc:'Até R$ 180.000'},
+    {f:2,min:180000.01,max:360000,aliq:7.30,ded:5940,desc:'De R$ 180.000,01 a R$ 360.000'},
+    {f:3,min:360000.01,max:720000,aliq:9.50,ded:13860,desc:'De R$ 360.000,01 a R$ 720.000'},
+    {f:4,min:720000.01,max:1800000,aliq:10.70,ded:22500,desc:'De R$ 720.000,01 a R$ 1.800.000'},
+    {f:5,min:1800000.01,max:3600000,aliq:14.30,ded:87300,desc:'De R$ 1.800.000,01 a R$ 3.600.000'},
+    {f:6,min:3600000.01,max:4800000,aliq:19.00,ded:378000,desc:'De R$ 3.600.000,01 a R$ 4.800.000'}
+  ],
+  III: [ // SERVIÇOS - Anexo III
+    {f:1,min:0,max:180000,aliq:6.00,ded:0,desc:'Até R$ 180.000'},
+    {f:2,min:180000.01,max:360000,aliq:11.20,ded:9360,desc:'De R$ 180.000,01 a R$ 360.000'},
+    {f:3,min:360000.01,max:720000,aliq:13.50,ded:17640,desc:'De R$ 360.000,01 a R$ 720.000'},
+    {f:4,min:720000.01,max:1800000,aliq:16.00,ded:35640,desc:'De R$ 720.000,01 a R$ 1.800.000'},
+    {f:5,min:1800000.01,max:3600000,aliq:21.00,ded:125640,desc:'De R$ 1.800.000,01 a R$ 3.600.000'},
+    {f:6,min:3600000.01,max:4800000,aliq:33.00,ded:648000,desc:'De R$ 3.600.000,01 a R$ 4.800.000'}
+  ]
+};
+
+function getFaixa(tabela, rbt12) {
+  return tabela.find(f => rbt12 >= f.min && rbt12 <= f.max) || tabela[tabela.length-1];
+}
+
+function getAliqEfetiva(tabela, rbt12) {
+  if(rbt12 <= 0) return {faixa:null, aliq:0, ded:0, efetiva:0};
+  const f = getFaixa(tabela, rbt12);
+  const ef = ((rbt12 * f.aliq/100) - f.ded) / rbt12 * 100;
+  return {faixa:f, aliq:f.aliq, ded:f.ded, efetiva:Math.max(0,ef)};
+}
+
+function calcDAS(tabela, rbt12, fat) {
+  if(!rbt12 || !fat) return 0;
+  const {efetiva} = getAliqEfetiva(tabela, rbt12);
+  return fat * efetiva / 100;
+}
+
+// ===== CLIENT DATA =====
+</script>
+<script id="data-script">
+const RAW = {"clients":{"ABRAAO":{"regime":"MEI","meses":{"JANEIRO":{"fat":5000.0,"das":87.05,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"fat":18100.0,"das":87.05,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"ALGODAO DOCES":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":16003.91,"servicos":0.0,"total":16003.91,"das":640.01,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"FEVEREIRO":{"vendas":22668.45,"servicos":0.0,"total":22668.45,"das":906.75,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":27821.86,"servicos":0.0,"total":27821.86,"das":1112.88,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"ANA":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":7350.85,"servicos":0.0,"total":7350.85,"das":294.03,"inss":488.77,"fgts":319.2,"folha":0.0,"prolabore":1621.0,"status":"Concluído"},"FEVEREIRO":{"vendas":8282.4,"servicos":0.0,"total":8282.4,"das":331.3,"inss":488.77,"fgts":319.2,"folha":0.0,"prolabore":1621.0,"status":"Concluído"},"MARÇO":{"vendas":9855.2,"servicos":0.0,"total":9855.2,"das":394.21,"inss":616.52,"fgts":455.47,"folha":4499.22,"prolabore":1621.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"BIG PARTNER":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":468000.0,"total":468000.0,"das":63059.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":0.0,"servicos":236285.82,"total":236285.82,"das":28872.62,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"SERVICO"},"C PRECISA":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Pendente"},"FEVEREIRO":{"vendas":525.95,"servicos":0.0,"total":525.95,"das":20.26,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Concluído"},"MARÇO":{"vendas":1464.25,"servicos":0.0,"total":1464.25,"das":53.32,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"CHAVEIRO":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":1980.0,"servicos":60.0,"total":2040.0,"das":82.81,"inss":121.57,"fgts":129.68,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"FEVEREIRO":{"vendas":980.0,"servicos":1556.0,"total":2536.0,"das":132.57,"inss":121.57,"fgts":129.68,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":121.57,"fgts":129.68,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"MISTO"},"CONTROL":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":20361.71,"servicos":0.0,"total":20361.71,"das":1300.13,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"FEVEREIRO":{"vendas":17870.45,"servicos":0.0,"total":17870.45,"das":1165.42,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":13392.3,"servicos":0.0,"total":13392.3,"das":827.41,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"DEBORA":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":17097.54,"total":17097.54,"das":1034.01,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"FEVEREIRO":{"vendas":0.0,"servicos":47339.43,"total":47339.43,"das":2895.3,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"SERVICO"},"ELCIO":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"ESTILLOS":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":35858.0,"servicos":7530.0,"total":43388.0,"das":3698.73,"inss":77.7,"fgts":150.72,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"FEVEREIRO":{"vendas":9105.0,"servicos":42585.42,"total":51690.42,"das":5259.5,"inss":77.7,"fgts":150.72,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":26888.0,"servicos":12496.67,"total":39384.67,"das":3352.33,"inss":77.7,"fgts":150.72,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"MISTO"},"EVERTON":{"regime":"Lucro Presumido","meses":{"JANEIRO":{"servicos":1800.0,"vendas":385.5,"total":2185.5,"iss":90.0,"pis":14.21,"cofins":65.56,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"servicos":1150.0,"vendas":1002.5,"total":2152.5,"iss":57.5,"pis":13.99,"cofins":64.58,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"GROW YOUR":{"regime":"Lucro Presumido","meses":{"JANEIRO":{"servicos":197647.07,"vendas":0.0,"total":197647.07,"iss":9882.35,"pis":1284.71,"cofins":5929.41,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Entregue"},"FEVEREIRO":{"servicos":253742.66,"vendas":0.0,"total":253742.66,"iss":12687.13,"pis":1649.33,"cofins":7612.28,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Entregue"},"MARÇO":{"servicos":197647.07,"vendas":0.0,"total":197647.07,"iss":9882.35,"pis":1284.71,"cofins":5929.41,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"LL AUDIO":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":40210.0,"total":40210.0,"das":2690.76,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"FEVEREIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"vendas":0.0,"servicos":51911.0,"total":51911.0,"das":3853.46,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"SERVICO"},"IFART":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Pendente"},"FEVEREIRO":{"vendas":7293.8,"servicos":0.0,"total":7293.8,"das":291.76,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Concluído"},"MARÇO":{"vendas":4995.6,"servicos":0.0,"total":4995.6,"das":199.83,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"IMPORTS MASTER":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"JCARLOS":{"regime":"Lucro Presumido","meses":{"JANEIRO":{"servicos":7827.25,"vendas":0.0,"total":7827.25,"iss":391.36,"pis":50.88,"cofins":234.82,"inss":175.6,"fgts":259.36,"folha":0.0,"prolabore":0.0,"status":"Entregue"},"FEVEREIRO":{"servicos":6260.0,"vendas":0.0,"total":6260.0,"iss":331.0,"pis":187.8,"cofins":40.69,"inss":1060.66,"fgts":259.36,"folha":0.0,"prolabore":0.0,"status":"Entregue"},"MARÇO":{"servicos":2383.0,"vendas":0.0,"total":2383.0,"iss":119.15,"pis":15.49,"cofins":71.49,"inss":1060.66,"fgts":259.36,"folha":0.0,"prolabore":0.0,"status":"Entregue"},"ABRIL":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"JOSUE":{"regime":"MEI","meses":{"JANEIRO":{"fat":345.0,"das":86.05,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"fat":595.0,"das":86.05,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"fat":1073.0,"das":86.05,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"JULIO CESAR":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":15904.46,"servicos":0.0,"total":15904.46,"das":719.41,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"FEVEREIRO":{"vendas":50097.57,"servicos":0.0,"total":50097.57,"das":1866.08,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"KAUAN":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":5983.42,"servicos":0.0,"total":5983.42,"das":261.71,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"FEVEREIRO":{"vendas":7528.22,"servicos":0.0,"total":7528.22,"das":319.97,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"LG MOTOS":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":5684.65,"servicos":0.0,"total":5684.65,"das":227.4,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Concluído"},"FEVEREIRO":{"vendas":6780.3,"servicos":1864.0,"total":8644.3,"das":383.05,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Concluído"},"MARÇO":{"vendas":2528.0,"servicos":5407.0,"total":7935.0,"das":425.53,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"MISTO"},"LINDINALVA":{"regime":"MEI","meses":{"JANEIRO":{"fat":0.0,"das":86.05,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Pendente"},"FEVEREIRO":{"fat":0.0,"das":86.05,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Pendente"},"MARÇO":{"fat":0.0,"das":86.05,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Pendente"},"ABRIL":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"M B CONFC":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"M G UENOBO":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":5105.7,"servicos":0.0,"total":5105.7,"das":299.05,"inss":403.54,"fgts":169.12,"folha":1948.06,"prolabore":2160.0,"status":"Concluído"},"FEVEREIRO":{"vendas":6680.75,"servicos":0.0,"total":6680.75,"das":299.05,"inss":403.54,"fgts":169.12,"folha":1948.06,"prolabore":2160.0,"status":"Concluído"},"MARÇO":{"vendas":7744.8,"servicos":0.0,"total":7744.8,"das":291.63,"inss":403.54,"fgts":169.12,"folha":1948.06,"prolabore":2160.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"M. V. CAMA":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":552.9,"servicos":0.0,"total":552.9,"das":222.12,"inss":403.54,"fgts":169.12,"folha":1948.06,"prolabore":2160.0,"status":"Concluído"},"FEVEREIRO":{"vendas":9747.52,"servicos":0.0,"total":9747.52,"das":387.25,"inss":403.54,"fgts":169.12,"folha":1948.06,"prolabore":2160.0,"status":"Concluído"},"MARÇO":{"vendas":11993.36,"servicos":0.0,"total":11993.36,"das":476.44,"inss":403.54,"fgts":169.12,"folha":1948.06,"prolabore":2160.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"MARCIA FERREIRA":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Pendente"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":1621.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"MARISA":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":23100.0,"servicos":1000.0,"total":24100.0,"das":1322.68,"inss":927.08,"fgts":522.86,"folha":0.0,"prolabore":3242.0,"status":"Concluído"},"FEVEREIRO":{"vendas":20850.0,"servicos":8200.0,"total":29050.0,"das":1795.09,"inss":877.57,"fgts":499.33,"folha":0.0,"prolabore":3242.0,"status":"Concluído"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":1004.97,"fgts":623.25,"folha":6768.41,"prolabore":3242.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"MISTO"},"MERC ARRUDA":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"MITIKO":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":10235.1,"servicos":0.0,"total":10235.1,"das":419.63,"inss":165.94,"fgts":169.12,"folha":1948.06,"prolabore":0.0,"status":"Concluído"},"FEVEREIRO":{"vendas":10209.8,"servicos":0.0,"total":10209.8,"das":408.74,"inss":165.94,"fgts":169.12,"folha":1948.06,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":13566.3,"servicos":0.0,"total":13566.3,"das":0.0,"inss":542.65,"fgts":169.12,"folha":1948.06,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"N&L CARDOSO":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":13400.0,"total":13400.0,"das":804.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":0.0,"servicos":9345.0,"total":9345.0,"das":560.69,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"SERVICO"},"NANDO":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"NEW SEVEN":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":2434.8,"total":2434.8,"das":273.64,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"FEVEREIRO":{"vendas":0.0,"servicos":12153.24,"total":12153.24,"das":1308.71,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":0.0,"servicos":129588.94,"total":129588.94,"das":9163.39,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"SERVICO"},"NH MAT":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"OSMAR":{"regime":"MEI","meses":{"JANEIRO":{"fat":0.0,"das":86.06,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"fat":0.0,"das":86.06,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"POLO RETIFICA":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":712.82,"fgts":543.05,"folha":2760.93,"prolabore":1621.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":1300.0,"total":1300.0,"das":78.0,"inss":356.83,"fgts":531.11,"folha":4107.68,"prolabore":1621.0,"status":"Concluído"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":5985.87,"prolabore":1621.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"SERVICO"},"REGIANE":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":34358.12,"servicos":0.0,"total":34358.12,"das":971.77,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"FEVEREIRO":{"vendas":47934.6,"servicos":0.0,"total":47934.6,"das":1463.07,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":51746.8,"servicos":0.0,"total":51746.8,"das":1641.14,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"RF IMPORTS":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"RICARDO - ZERO BALA":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":7325.0,"servicos":0.0,"total":7325.0,"das":293.04,"inss":427.21,"fgts":264.48,"folha":3057.1,"prolabore":1621.0,"status":"Concluído"},"FEVEREIRO":{"vendas":7990.35,"servicos":0.0,"total":7990.35,"das":319.62,"inss":0.0,"fgts":0.0,"folha":3057.1,"prolabore":1621.0,"status":"Concluído"},"MARÇO":{"vendas":8960.65,"servicos":150.0,"total":9110.65,"das":367.42,"inss":0.0,"fgts":0.0,"folha":3057.1,"prolabore":1621.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"MISTO"},"RICARDO FRETA":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"ROSILENE":{"regime":"Lucro Presumido","meses":{"JANEIRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"SABRINA":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"SEMPRE CONTA":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":4779.49,"servicos":0.0,"total":4779.49,"das":190.97,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"FEVEREIRO":{"vendas":11162.81,"servicos":0.0,"total":11162.81,"das":446.51,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"SIMONE":{"regime":"MEI","meses":{"JANEIRO":{"fat":7000.0,"das":87.05,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"fat":12500.0,"das":87.05,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"fat":0.0,"das":87.05,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"fat":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"SIMONE PERUA":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"SOM EXPRESS":{"regime":"Lucro Presumido","meses":{"JANEIRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"TELHADO GAMA":{"regime":"MEI","meses":{"JANEIRO":{"fat":0.0,"das":75.6,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"fat":0.0,"das":75.6,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"fat":0.0,"das":75.6,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"fat":0.0,"das":75.6,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"fat":0.0,"das":75.6,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"fat":0.0,"das":75.6,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"fat":0.0,"das":75.6,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"fat":0.0,"das":75.6,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"fat":0.0,"das":75.6,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"fat":0.0,"das":75.6,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"fat":0.0,"das":75.6,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"fat":0.0,"das":75.6,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"TIME ENG":{"regime":"Lucro Presumido","meses":{"JANEIRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"TIME OBRAS":{"regime":"Lucro Presumido","meses":{"JANEIRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"VERO":{"regime":"Lucro Presumido","meses":{"JANEIRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MARÇO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"ABRIL":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"servicos":0.0,"vendas":0.0,"total":0.0,"iss":0.0,"pis":0.0,"cofins":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"COMERCIO"},"VITAL":{"regime":"Simples Nacional","meses":{"JANEIRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"FEVEREIRO":{"vendas":0.0,"servicos":600.0,"total":600.0,"das":57.07,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"MARÇO":{"vendas":0.0,"servicos":2600.0,"total":2600.0,"das":243.5,"inss":178.31,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Concluído"},"ABRIL":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"MAIO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JUNHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"JULHO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"AGOSTO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"SETEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"OUTUBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"NOVEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"},"DEZEMBRO":{"vendas":0.0,"servicos":0.0,"total":0.0,"das":0.0,"inss":0.0,"fgts":0.0,"folha":0.0,"prolabore":0.0,"status":"Pendente"}},"tipo":"SERVICO"}},"painel":{"ABRAAO":{"cert":"Vence 06/02/2027","regime":"MEI"},"ALGODAO DOCES":{"cert":"2026-11-15 00:00:00","regime":"Simples Nacional"},"ANA":{"cert":"Vence 06/02/2029","regime":"Simples Nacional"},"BIG PARTNER":{"cert":"Vence 06/02/2030","regime":"Simples Nacional"},"C PRECISA":{"cert":"Vence 06/02/2031","regime":"Simples Nacional"},"CHAVEIRO":{"cert":"Vence 06/02/2032","regime":"Simples Nacional"},"CONTROL":{"cert":"Vence 06/02/2033","regime":"Simples Nacional"},"DEBORA":{"cert":"Vence 06/02/2034","regime":"Simples Nacional"},"ELCIO":{"cert":"Vence 06/02/2035","regime":"Simples Nacional"},"ESTILLOS":{"cert":"Vence 06/02/2036","regime":"Simples Nacional"},"EVERTON":{"cert":"Vence 06/02/2037","regime":"Lucro Presumido"},"GROW YOUR":{"cert":"Vence 06/02/2038","regime":"Lucro Presumido"},"GRUPO":{"cert":"Vence 06/02/2039","regime":"Simples Nacional"},"IFART":{"cert":"Vence 06/02/2040","regime":"Simples Nacional"},"IMPORTS MASTER":{"cert":"Vence 06/02/2041","regime":"Simples Nacional"},"JCARLOS":{"cert":"Vence 06/02/2042","regime":"Lucro Presumido"},"JOSUE":{"cert":"Vence 06/02/2043","regime":"MEI"},"JULIO CESAR":{"cert":"Vence 06/02/2044","regime":"Simples Nacional"},"KAUAN":{"cert":"Vence 06/02/2045","regime":"Simples Nacional"},"LG MOTOS":{"cert":"Vence 06/02/2046","regime":"Simples Nacional"},"LINDINALVA":{"cert":"Vence 06/02/2047","regime":"MEI"},"M B CONFC":{"cert":"Vence 06/02/2048","regime":"Simples Nacional"},"M G UENOBO":{"cert":"Vence 06/02/2049","regime":"Simples Nacional"},"M. V. CAMA":{"cert":"Vence 06/02/2050","regime":"Simples Nacional"},"MARCIA FERREIRA":{"cert":"Vence 06/02/2051","regime":"Simples Nacional"},"MARISA":{"cert":"Vence 06/02/2052","regime":"Simples Nacional"},"MERC ARRUDA":{"cert":"Vence 06/02/2053","regime":"Simples Nacional"},"MITIKO":{"cert":"Vence 06/02/2054","regime":"Simples Nacional"},"N&L CARDOSO":{"cert":"Vence 06/02/2055","regime":"Simples Nacional"},"NANDO":{"cert":"Vence 06/02/2056","regime":"Simples Nacional"},"NEW SEVEN":{"cert":"Vence 06/02/2057","regime":"Simples Nacional"},"NH MAT":{"cert":"Vence 06/02/2058","regime":"Simples Nacional"},"OSMAR":{"cert":"Vence 06/02/2059","regime":"MEI"},"POLO RETIFICA":{"cert":"Vence 06/02/2060","regime":"Simples Nacional"},"REGIANE":{"cert":"Vence 06/02/2061","regime":"Simples Nacional"},"RF IMPORTS":{"cert":"Vence 06/02/2062","regime":"Simples Nacional"},"RICARDO - ZERO BALA":{"cert":"Vence 06/02/2063","regime":"Simples Nacional"},"RICARDO FRETA":{"cert":"Vence 06/02/2064","regime":"Simples Nacional"},"SABRINA":{"cert":"Vence 06/02/2065","regime":"Simples Nacional"},"SEMPRE CONTA":{"cert":"Vence 06/02/2066","regime":"Simples Nacional"},"SIMONE":{"cert":"Vence 06/02/2067","regime":"MEI"},"SIMONE PERUA":{"cert":"Vence 06/02/2068","regime":"Simples Nacional"},"SOM EXPRESS":{"cert":"Vence 06/02/2069","regime":"Lucro Presumido"},"TELHADO GAMA":{"cert":"Vence 06/02/2070","regime":"MEI"},"TIME ENG":{"cert":"Vence 06/02/2071","regime":"Lucro Presumido"},"TIME OBRAS":{"cert":"Vence 06/02/2072","regime":"Lucro Presumido"},"VERO":{"cert":"Vence 06/02/2073","regime":"Lucro Presumido"},"VITAL":{"cert":"Vence 06/02/2074","regime":"Simples Nacional"}}};
+</script>
+<script>
+const CLIENTS = RAW.clients;
+const PAINEL = RAW.painel;
+
+const SN_TYPES = {};
+Object.entries(CLIENTS).forEach(([k,v]) => { SN_TYPES[k] = v.tipo || 'COMERCIO'; });
+
+const MESES = ['JANEIRO','FEVEREIRO','MARÇO','ABRIL','MAIO','JUNHO','JULHO','AGOSTO','SETEMBRO','OUTUBRO','NOVEMBRO','DEZEMBRO'];
+const MESES_PT = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+function fmt(v) { return 'R$ '+Number(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtPct(v) { return Number(v||0).toFixed(2)+'%'; }
+function getAv(n){ const p=n.trim().split(' '); return p.length>=2?p[0][0]+p[1][0]:n.substring(0,2).toUpperCase(); }
+function getColor(n){ const c=['#2563a8','#059669','#d97706','#7c3aed','#db2777','#0891b2','#dc2626','#0d9488']; let h=0; for(let x of n) h=(h*31+x.charCodeAt(0))&0xffffff; return c[Math.abs(h)%c.length]; }
+
+function rBadge(r){
+  if(r==='MEI') return '<span class="badge b-w">MEI</span>';
+  if(r==='Simples Nacional') return '<span class="badge b-i">Simples</span>';
+  if(r==='Lucro Presumido') return '<span class="badge" style="background:#f3e8ff;color:#7c3aed">L. Presumido</span>';
+  return '<span class="badge b-n">'+r+'</span>';
+}
+
+function sBadge(s){
+  if(s==='Concluído'||s==='Entregue') return '<span class="badge b-ok"><span class="dot d-g"></span>'+s+'</span>';
+  if(s==='Pendente') return '<span class="badge b-w"><span class="dot d-y"></span>Pendente</span>';
+  return '<span class="badge b-n"><span class="dot d-n"></span>'+s+'</span>';
+}
+
+function tipoBadge(t){
+  if(t==='COMERCIO') return '<span class="tp-badge tp-c">Comércio</span>';
+  if(t==='SERVICO') return '<span class="tp-badge tp-s">Serviço</span>';
+  if(t==='MISTO') return '<span class="tp-badge tp-m">Misto</span>';
+  return '<span class="tp-badge tp-c">—</span>';
+}
+
+function alBadge(a){
+  if(!a||a==='-') return '<span class="badge b-n">—</span>';
+  if(a.includes('3ª')||a.includes('superior')) return '<span class="badge b-e">⚠ Atenção</span>';
+  return '<span class="badge b-ok">Tranquilo</span>';
+}
+
+// Build acumulado from monthly data
+function getAcum(nome) {
+  const c = CLIENTS[nome]; if(!c) return 0;
+  let s = 0;
+  MESES.forEach(m => {
+    const d = c.meses[m];
+    if(!d) return;
+    if(c.regime==='MEI') s += (d.fat||0);
+    else s += (d.total||d.vendas||d.servicos||0);
+  });
+  return s;
+}
+
+function getLastMonth(nome) {
+  const c = CLIENTS[nome]; if(!c) return {mes:'Sem movimento',fat:0,imp:0,status:'Pendente'};
+  let lastMes='Sem movimento', lastFat=0, lastImp=0, lastStatus='Pendente';
+  MESES.forEach(m => {
+    const d = c.meses[m]; if(!d) return;
+    const fat = c.regime==='MEI' ? d.fat : (d.total||0);
+    const imp = c.regime==='MEI' ? d.das : (c.regime==='Lucro Presumido' ? ((d.iss||0)+(d.pis||0)+(d.cofins||0)) : (d.das||0));
+    if(fat > 0 || imp > 0) {
+      lastMes = m; lastFat = fat; lastImp = imp; lastStatus = d.status||'Pendente';
+    }
+  });
+  return {mes:lastMes, fat:lastFat, imp:lastImp, status:lastStatus};
+}
+
+function getAllClients() {
+  return Object.keys(CLIENTS).map(nome => {
+    const c = CLIENTS[nome];
+    const {mes,fat,imp,status} = getLastMonth(nome);
+    const acum = getAcum(nome);
+    const p = PAINEL[nome]||{};
+    return {nome, regime:c.regime, tipo:c.tipo, mes, fat, imp, acum, status, cert:p.cert||'—'};
+  });
+}
+
+// Sidebar
+function buildSidebar() {
+  const list = document.getElementById('cl-list');
+  const rcls = {MEI:'rb-mei','Simples Nacional':'rb-sn','Lucro Presumido':'rb-lp'};
+  const rsh = {MEI:'MEI','Simples Nacional':'SN','Lucro Presumido':'LP'};
+  list.innerHTML = Object.keys(CLIENTS).map(n => {
+    const r = CLIENTS[n].regime;
+    return `<div class="ni" onclick="showDetalhe('${esc(n)}')" title="${n}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <span style="overflow:hidden;text-overflow:ellipsis;flex:1">${n}</span>
+      <span class="rb ${rcls[r]||'rb-sn'}">${rsh[r]||'SN'}</span>
+    </div>`;
+  }).join('');
+
+  const sel = document.getElementById('f-cl');
+  sel.innerHTML = '<option value="">Selecione o cliente</option>' +
+    Object.keys(CLIENTS).map(n=>`<option value="${n}">${n} (${CLIENTS[n].regime})</option>`).join('');
+}
+
+// Dashboard KPIs
+function buildKPIs() {
+  const all = getAllClients();
+  const fatTotal = all.reduce((s,c)=>s+c.acum,0);
+  const impTotal = all.reduce((s,c)=>s+c.imp,0);
+  const concl = all.filter(c=>c.status==='Concluído'||c.status==='Entregue').length;
+  const pend = all.filter(c=>c.status==='Pendente'&&c.mes!=='Sem movimento').length;
+  const semMov = all.filter(c=>c.mes==='Sem movimento').length;
+
+  document.getElementById('dash-kpis').innerHTML = `
+    <div class="card"><div class="ct">Total de Clientes</div><div class="cv">${all.length}</div><div class="cs">${all.length - semMov} com movimento em 2026</div></div>
+    <div class="card"><div class="ct">Fat. Acumulado Jan–Mar</div><div class="cv" style="font-size:20px">${fmt(fatTotal)}</div><div style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;margin-top:5px;background:var(--oks);color:var(--ok)">3 meses 2026</div></div>
+    <div class="card"><div class="ct">Impostos Apurados</div><div class="cv" style="font-size:20px">${fmt(impTotal)}</div><div class="cs">Carga média: ${fatTotal>0?((impTotal/fatTotal)*100).toFixed(1):0}%</div></div>
+    <div class="card"><div class="ct">Status do Mês</div><div class="cv" style="color:var(--ok)">${concl}</div><div class="cs" style="display:flex;gap:6px;align-items:center"><span style="color:var(--warn);font-weight:500">${pend} pendentes</span> · <span style="color:var(--txt3)">${semMov} sem mov.</span></div><div class="pb"><div class="pf" style="width:${Math.round(concl/all.length*100)}%"></div></div></div>`;
+}
+
+function buildBarChart() {
+  const mFat = {JANEIRO:0,FEVEREIRO:0,MARÇO:0};
+  Object.values(CLIENTS).forEach(c => {
+    MESES.slice(0,3).forEach(m => {
+      const d = c.meses[m]; if(!d) return;
+      const v = c.regime==='MEI' ? (d.fat||0) : (d.total||0);
+      mFat[m] = (mFat[m]||0) + v;
+    });
+  });
+  const vals = [mFat.JANEIRO, mFat.FEVEREIRO, mFat.MARÇO];
+  const max = Math.max(...vals)||1;
+  const labels = ['Jan','Fev','Mar'];
+  document.getElementById('bc-mensal').innerHTML = labels.map((l,i)=>{
+    const h = Math.round(vals[i]/max*100);
+    const v = vals[i]>=1000 ? (vals[i]/1000).toFixed(0)+'k' : vals[i].toFixed(0);
+    return `<div class="bi"><div class="bf" style="height:${h}%" title="${fmt(vals[i])}"><span class="bv">${v}</span></div><span class="bl">${l}</span></div>`;
+  }).join('');
+}
+
+function buildRegDist() {
+  const cnt = {MEI:0,'Simples Nacional':0,'Lucro Presumido':0};
+  Object.values(CLIENTS).forEach(c=>cnt[c.regime]=(cnt[c.regime]||0)+1);
+  const tot = Object.values(cnt).reduce((a,b)=>a+b,0);
+  const clr = {MEI:'var(--warn)','Simples Nacional':'var(--accent)','Lucro Presumido':'#7c3aed'};
+  document.getElementById('reg-dist').innerHTML = Object.entries(cnt).map(([r,n])=>{
+    const p = Math.round(n/tot*100);
+    return `<div><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:13px">${r}</span><span style="font-size:13px;font-weight:500">${n} <span style="color:var(--txt3)">(${p}%)</span></span></div><div class="pb"><div class="pf" style="width:${p}%;background:${clr[r]}"></div></div></div>`;
+  }).join('');
+}
+
+let sfFilter = 'todos';
+function buildDashTable(f='todos') {
+  sfFilter = f;
+  let data = getAllClients();
+  const q = document.getElementById('srch-input').value.toLowerCase();
+  if(q) data = data.filter(c=>c.nome.toLowerCase().includes(q));
+  if(f==='sem') data = data.filter(c=>c.mes==='Sem movimento');
+  else if(f==='Concluído') data = data.filter(c=>(c.status==='Concluído'||c.status==='Entregue')&&c.mes!=='Sem movimento');
+  else if(f==='Pendente') data = data.filter(c=>c.status==='Pendente'&&c.mes!=='Sem movimento');
+
+  document.getElementById('dash-tbody').innerHTML = data.map(c=>`
+    <tr style="cursor:pointer" onclick="showDetalhe('${esc(c.nome)}')">
+      <td><div style="display:flex;align-items:center;gap:9px"><div style="width:30px;height:30px;border-radius:7px;background:${getColor(c.nome)};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0">${getAv(c.nome)}</div><span style="font-weight:500">${c.nome}</span></div></td>
+      <td>${tipoBadge(c.tipo)}</td>
+      <td>${rBadge(c.regime)}</td>
+      <td style="font-weight:500;color:var(--txt2)">${c.mes==='Sem movimento'?'—':c.mes.charAt(0)+c.mes.slice(1).toLowerCase()}</td>
+      <td class="tm">${c.fat>0?fmt(c.fat):'—'}</td>
+      <td class="tm">${c.imp>0?fmt(c.imp):'—'}</td>
+      <td class="tm">${c.acum>0?fmt(c.acum):'—'}</td>
+      <td>${sBadge(c.mes==='Sem movimento'?'Sem movimento':c.status)}</td>
+      <td>${alBadge(c.acum>3600000?'Na 3ª Faixa ou superior':'Tranquilo')}</td>
+    </tr>`).join('');
+}
+
+function setSF(f,el){ document.querySelectorAll('#sf .ft').forEach(t=>t.classList.remove('active')); el.classList.add('active'); buildDashTable(f); }
+
+let rfFilter = 'todos';
+function buildClientesTable(r='todos'){
+  rfFilter=r;
+  let data = getAllClients();
+  if(r!=='todos') data=data.filter(c=>c.regime===r);
+  const q = document.getElementById('srch-input').value.toLowerCase();
+  if(q) data=data.filter(c=>c.nome.toLowerCase().includes(q));
+  document.getElementById('cl-tbody').innerHTML = data.map(c=>`
+    <tr>
+      <td><div style="display:flex;align-items:center;gap:9px"><div style="width:30px;height:30px;border-radius:7px;background:${getColor(c.nome)};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0">${getAv(c.nome)}</div><span style="font-weight:500;color:var(--pl);cursor:pointer" onclick="showDetalhe('${esc(c.nome)}')">${c.nome}</span></div></td>
+      <td>${tipoBadge(c.tipo)}</td>
+      <td>${rBadge(c.regime)}</td>
+      <td>${sBadge(c.status)}</td>
+      <td class="tm">${c.fat>0?fmt(c.fat):'—'}</td>
+      <td style="font-size:11px;color:var(--txt2)">${c.cert}</td>
+      <td><button class="btn btn-g" style="height:27px;padding:0 10px;font-size:12px" onclick="showDetalhe('${esc(c.nome)}')">Ver</button></td>
+    </tr>`).join('');
+}
+
+function setRF(r,el){ document.querySelectorAll('#rf .ft').forEach(t=>t.classList.remove('active')); el.classList.add('active'); buildClientesTable(r); }
+
+// Lançamentos
+let lancData = [];
+function buildLanc(){
+  lancData=[];
+  const order = {JANEIRO:0,FEVEREIRO:1,MARÇO:2};
+  Object.entries(CLIENTS).forEach(([nome,c])=>{
+    MESES.slice(0,3).forEach(m=>{
+      const d=c.meses[m]; if(!d) return;
+      const fat = c.regime==='MEI'?(d.fat||0):(d.total||0);
+      const das = c.regime==='MEI'?(d.das||0):(c.regime==='Lucro Presumido'?((d.iss||0)+(d.pis||0)+(d.cofins||0)):(d.das||0));
+      const inss = d.inss||0;
+      if(fat>0||das>0||inss>0){
+        lancData.push({nome,mes:m,regime:c.regime,tipo:c.tipo,vendas:d.vendas||d.fat||0,servicos:d.servicos||0,total:fat,das,inss,status:d.status||'Pendente',ord:order[m]||99});
+      }
+    });
+  });
+  lancData.sort((a,b)=>a.ord-b.ord);
+  renderLanc();
+}
+
+function renderLanc(){
+  const mf = document.getElementById('mf').value;
+  let d = lancData;
+  if(mf!=='todos') d=d.filter(l=>l.mes===mf);
+  document.getElementById('lanc-tbody').innerHTML = d.map(l=>`
+    <tr>
+      <td style="font-weight:500">${l.nome}</td>
+      <td style="font-weight:500;color:var(--txt2)">${l.mes.charAt(0)+l.mes.slice(1).toLowerCase()}</td>
+      <td>${tipoBadge(l.tipo)}</td>
+      <td>${rBadge(l.regime)}</td>
+      <td class="tm">${l.vendas>0?fmt(l.vendas):'—'}</td>
+      <td class="tm">${l.servicos>0?fmt(l.servicos):'—'}</td>
+      <td class="tm" style="font-weight:500">${fmt(l.total)}</td>
+      <td class="tm">${l.das>0?fmt(l.das):'—'}</td>
+      <td class="tm">${l.inss>0?fmt(l.inss):'—'}</td>
+      <td>${sBadge(l.status)}</td>
+    </tr>`).join('');
+}
+
+// Simples Nacional Tables
+function buildSNTable(anexo, elId){
+  const tab = SN[anexo];
+  const hdr = `<div class="faixa-hdr-row" style="display:grid;grid-template-columns:36px 1fr 110px 110px 80px 90px;gap:0;padding:8px 10px;background:var(--bg);border-bottom:1px solid var(--bdr)">
+    <span style="font-size:11px;font-weight:600;color:var(--txt3)">Fx</span>
+    <span style="font-size:11px;font-weight:600;color:var(--txt3)">Faixa RBT12</span>
+    <span style="font-size:11px;font-weight:600;color:var(--txt3)">Alíq. Nom.</span>
+    <span style="font-size:11px;font-weight:600;color:var(--txt3)">Dedução</span>
+    <span style="font-size:11px;font-weight:600;color:var(--txt3)">Ef. 300k</span>
+    <span style="font-size:11px;font-weight:600;color:var(--txt3)">Ef. 2,4M</span>
+  </div>`;
+  const rows = tab.map(f=>{
+    const ef300 = f.f===1 ? f.aliq : (((300000*f.aliq/100)-f.ded)/300000*100);
+    const ef2400 = (((2400000*f.aliq/100)-f.ded)/2400000*100);
+    return `<div style="display:grid;grid-template-columns:36px 1fr 110px 110px 80px 90px;gap:0;padding:9px 10px;border-bottom:1px solid var(--bdr);font-size:12px;">
+      <span><span class="faixa-num">${f.f}</span></span>
+      <span style="color:var(--txt2)">${f.desc}</span>
+      <span class="tm" style="color:var(--primary);font-weight:600">${f.aliq}%</span>
+      <span class="tm">${f.ded>0?fmt(f.ded):'—'}</span>
+      <span class="tm" style="color:var(--ok)">${ef300.toFixed(2)}%</span>
+      <span class="tm" style="color:var(--warn)">${f.f<=5?ef2400.toFixed(2)+'%':'—'}</span>
+    </div>`;
+  }).join('');
+  document.getElementById(elId).innerHTML = hdr + rows;
+}
+
+function buildSNClientTable(){
+  const snClients = getAllClients().filter(c=>c.regime==='Simples Nacional');
+  document.getElementById('sn-cl-tbody').innerHTML = snClients.map(c=>{
+    const acum = getAcum(c.nome);
+    const tipo = SN_TYPES[c.nome]||'COMERCIO';
+    let tab = tipo==='SERVICO' ? SN.III : SN.I;
+    const {faixa, aliq, ded, efetiva} = getAliqEfetiva(tab, acum);
+    const {imp} = getLastMonth(c.nome);
+    return `<tr>
+      <td><span style="font-weight:500;cursor:pointer;color:var(--pl)" onclick="showDetalhe('${esc(c.nome)}')">${c.nome}</span></td>
+      <td>${tipoBadge(tipo)}</td>
+      <td class="tm">${fmt(acum)}</td>
+      <td>${faixa?`<span class="faixa-num">${faixa.f}</span>`:'-'}</td>
+      <td class="tm" style="font-weight:600;color:var(--primary)">${aliq}%</td>
+      <td class="tm">${ded>0?fmt(ded):'—'}</td>
+      <td class="tm" style="font-weight:600;color:var(--ok)">${efetiva.toFixed(2)}%</td>
+      <td class="tm">${imp>0?fmt(imp):'—'}</td>
+      <td>${acum>3600000?'<span class="badge b-e">⚠ Atenção</span>':acum>1800000?'<span class="badge b-w">Monitorar</span>':'<span class="badge b-ok">Tranquilo</span>'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function calcSN(){
+  const tipo = document.getElementById('calc-tipo').value;
+  const rbt12 = parseFloat(document.getElementById('calc-rbt12').value)||0;
+  const fat = parseFloat(document.getElementById('calc-fat').value)||0;
+  if(!rbt12||!fat){ document.getElementById('calc-result').innerHTML=''; return; }
+
+  let tabI = SN.I, tabIII = SN.III;
+  let res;
+  if(tipo==='MISTO'){
+    const rI = getAliqEfetiva(tabI, rbt12);
+    const rIII = getAliqEfetiva(tabIII, rbt12);
+    res = {efetiva:(rI.efetiva+rIII.efetiva)/2, faixa:rI.faixa, das:(fat*rI.efetiva/100+fat*rIII.efetiva/100)/2};
+  } else {
+    const tab = tipo==='SERVICO'?tabIII:tabI;
+    const r = getAliqEfetiva(tab, rbt12);
+    res = {...r, das: fat*r.efetiva/100};
+  }
+
+  const {faixa, efetiva, das} = res;
+  document.getElementById('calc-result').innerHTML = `
+    <div class="aliq-box">
+      <div class="aliq-title">Resultado do Cálculo — ${tipo==='COMERCIO'?'Comércio (Anexo I)':tipo==='SERVICO'?'Serviços (Anexo III)':'Misto'}</div>
+      <div class="aliq-grid">
+        <div class="aliq-item"><div class="aliq-label">Faixa</div><div class="aliq-value">${faixa?faixa.f:'—'}ª Faixa</div></div>
+        <div class="aliq-item"><div class="aliq-label">Alíquota Nominal</div><div class="aliq-value">${faixa?faixa.aliq:0}%</div></div>
+        <div class="aliq-item"><div class="aliq-label">Alíquota Efetiva</div><div class="aliq-value">${efetiva.toFixed(3)}%</div></div>
+        <div class="aliq-item"><div class="aliq-label">DAS do Mês</div><div class="aliq-value">${fmt(das)}</div></div>
+      </div>
+    </div>`;
+}
+
+// Visão Geral
+function buildVisao(){
+  const all = getAllClients();
+  const fatT = all.reduce((s,c)=>s+c.acum,0);
+  const impT = all.reduce((s,c)=>s+c.imp,0);
+  const concl = all.filter(c=>c.status==='Concluído'||c.status==='Entregue').length;
+  const sem = all.filter(c=>c.mes==='Sem movimento').length;
+
+  document.getElementById('vg-kpis').innerHTML = `
+    <div class="card"><div class="ct">Fat. Acumulado 2026</div><div class="cv" style="font-size:18px">${fmt(fatT)}</div></div>
+    <div class="card"><div class="ct">Impostos Apurados</div><div class="cv" style="font-size:18px">${fmt(impT)}</div></div>
+    <div class="card"><div class="ct">Concluídos</div><div class="cv" style="color:var(--ok)">${concl}</div></div>
+    <div class="card"><div class="ct">Sem Movimento</div><div class="cv" style="color:var(--txt3)">${sem}</div></div>`;
+
+  const mFat = {JANEIRO:{},FEVEREIRO:{},MARÇO:{}};
+  Object.entries(CLIENTS).forEach(([nome,c])=>{
+    MESES.slice(0,3).forEach(m=>{
+      const d=c.meses[m]; if(!d) return;
+      mFat[m][nome] = c.regime==='MEI'?(d.fat||0):(d.total||0);
+    });
+  });
+
+  document.getElementById('vg-tbody').innerHTML = all.map((c,i)=>`
+    <tr style="cursor:pointer" onclick="showDetalhe('${esc(c.nome)}')">
+      <td style="color:var(--txt3);font-size:12px">${i+1}</td>
+      <td style="font-weight:500">${c.nome}</td>
+      <td>${tipoBadge(c.tipo)}</td>
+      <td>${rBadge(c.regime)}</td>
+      <td class="tm">${mFat.JANEIRO[c.nome]>0?fmt(mFat.JANEIRO[c.nome]):'—'}</td>
+      <td class="tm">${mFat.FEVEREIRO[c.nome]>0?fmt(mFat.FEVEREIRO[c.nome]):'—'}</td>
+      <td class="tm">${mFat.MARÇO[c.nome]>0?fmt(mFat.MARÇO[c.nome]):'—'}</td>
+      <td class="tm" style="font-weight:600">${c.acum>0?fmt(c.acum):'—'}</td>
+      <td class="tm">${c.imp>0?fmt(c.imp):'—'}</td>
+      <td>${alBadge(c.acum>3600000?'Na 3ª Faixa ou superior':c.acum>0?'Tranquilo':'-')}</td>
+    </tr>`).join('');
+}
+
+// Cliente Detalhe
+function showDetalhe(nome) {
+  const c = CLIENTS[nome]; if(!c) return;
+  showPage('detalhe');
+  document.getElementById('pg-title').textContent = nome;
+  document.getElementById('pg-sub').textContent = c.regime + ' • Detalhe do Cliente';
+
+  const color = getColor(nome);
+  const p = PAINEL[nome]||{};
+  const acum = getAcum(nome);
+  const {mes:lastMes, fat:lastFat, imp:lastImp, status:lastStatus} = getLastMonth(nome);
+
+  // SN faixa info
+  let faixaBlock = '';
+  if(c.regime==='Simples Nacional'){
+    const tipo = c.tipo||'COMERCIO';
+    const tab = tipo==='SERVICO'?SN.III:SN.I;
+    const {faixa,aliq,ded,efetiva} = getAliqEfetiva(tab, acum);
+    const anexo = tipo==='SERVICO'?'III (Serviços)':tipo==='MISTO'?'I+III (Misto)':'I (Comércio)';
+    faixaBlock = `
+    <div class="aliq-box mb20">
+      <div class="aliq-title">Simples Nacional 2026 — Anexo ${anexo} — Faixa baseada no acumulado 12 meses</div>
+      <div class="aliq-grid">
+        <div class="aliq-item"><div class="aliq-label">Faixa Atual</div><div class="aliq-value">${faixa?faixa.f:'—'}ª Faixa</div></div>
+        <div class="aliq-item"><div class="aliq-label">Alíquota Nominal</div><div class="aliq-value">${aliq.toFixed(2)}%</div></div>
+        <div class="aliq-item"><div class="aliq-label">Dedução</div><div class="aliq-value">${ded>0?fmt(ded):'—'}</div></div>
+        <div class="aliq-item"><div class="aliq-label">Alíquota Efetiva (est.)</div><div class="aliq-value">${efetiva.toFixed(3)}%</div></div>
+      </div>
+    </div>`;
+  }
+
+  // Monthly table columns
+  let mCols='', mRows='';
+  if(c.regime==='MEI'){
+    mCols='<th>Faturamento</th><th>DAS MEI</th><th>INSS</th><th>Folha Líq.</th><th>Pró-Labore</th><th>Status DAS</th>';
+    mRows = MESES.map((m,i)=>{
+      const d=c.meses[m]; const past=i<3;
+      if(!d) return `<tr style="opacity:.4"><td style="font-weight:500">${MESES_PT[i]}</td><td colspan="6" style="color:var(--txt3)">Aguardando</td></tr>`;
+      return `<tr style="${!past?'opacity:.4':''}"><td style="font-weight:500">${MESES_PT[i]}</td><td class="tm">${d.fat>0?fmt(d.fat):'—'}</td><td class="tm">${d.das>0?fmt(d.das):'—'}</td><td class="tm">${d.inss>0?fmt(d.inss):'—'}</td><td class="tm">${d.folha>0?fmt(d.folha):'—'}</td><td class="tm">${d.prolabore>0?fmt(d.prolabore):'—'}</td><td>${sBadge(d.status||'Pendente')}</td></tr>`;
+    }).join('');
+  } else if(c.regime==='Simples Nacional'){
+    mCols='<th>Vendas</th><th>Serviços</th><th>Total</th><th>DAS</th><th>INSS</th><th>Folha Líq.</th><th>Pró-Labore</th><th>Status</th>';
+    mRows = MESES.map((m,i)=>{
+      const d=c.meses[m]; const past=i<3;
+      if(!d) return `<tr style="opacity:.4"><td style="font-weight:500">${MESES_PT[i]}</td><td colspan="8" style="color:var(--txt3)">Aguardando</td></tr>`;
+      return `<tr style="${!past?'opacity:.4':''}"><td style="font-weight:500">${MESES_PT[i]}</td><td class="tm">${d.vendas>0?fmt(d.vendas):'—'}</td><td class="tm">${d.servicos>0?fmt(d.servicos):'—'}</td><td class="tm" style="font-weight:600">${d.total>0?fmt(d.total):'—'}</td><td class="tm">${d.das>0?fmt(d.das):'—'}</td><td class="tm">${d.inss>0?fmt(d.inss):'—'}</td><td class="tm">${d.folha>0?fmt(d.folha):'—'}</td><td class="tm">${d.prolabore>0?fmt(d.prolabore):'—'}</td><td>${sBadge(d.status||'Pendente')}</td></tr>`;
+    }).join('');
+  } else {
+    mCols='<th>Serviços</th><th>Vendas</th><th>Total</th><th>ISS</th><th>PIS</th><th>COFINS</th><th>INSS</th><th>Status</th>';
+    mRows = MESES.map((m,i)=>{
+      const d=c.meses[m]; const past=i<3;
+      if(!d) return `<tr style="opacity:.4"><td style="font-weight:500">${MESES_PT[i]}</td><td colspan="8" style="color:var(--txt3)">Aguardando</td></tr>`;
+      return `<tr style="${!past?'opacity:.4':''}"><td style="font-weight:500">${MESES_PT[i]}</td><td class="tm">${d.servicos>0?fmt(d.servicos):'—'}</td><td class="tm">${d.vendas>0?fmt(d.vendas):'—'}</td><td class="tm" style="font-weight:600">${d.total>0?fmt(d.total):'—'}</td><td class="tm">${d.iss>0?fmt(d.iss):'—'}</td><td class="tm">${d.pis>0?fmt(d.pis):'—'}</td><td class="tm">${d.cofins>0?fmt(d.cofins):'—'}</td><td class="tm">${d.inss>0?fmt(d.inss):'—'}</td><td>${sBadge(d.status||'Pendente')}</td></tr>`;
+    }).join('');
+  }
+
+  // Limit MEI
+  let limiteBlock = '';
+  if(c.regime==='MEI'){
+    const lim = 81000;
+    const pct = Math.min(Math.round(acum/lim*100),100);
+    limiteBlock = `<div class="card mb20"><div class="ct">Limite Anual MEI — R$ 81.000</div><div class="cv" style="font-size:18px;margin-bottom:8px">${fmt(acum)}</div><div class="pb"><div class="pf" style="width:${pct}%;background:${pct>80?'var(--err)':pct>60?'var(--warn)':'var(--ok)'}"></div></div><div style="font-size:12px;color:var(--txt3);margin-top:4px">${pct}% do limite anual utilizado</div></div>`;
+  }
+
+  document.getElementById('detalhe-content').innerHTML = `
+    <div class="ch">
+      <div class="cav" style="background:${color}">${getAv(nome)}</div>
+      <div style="flex:1">
+        <div class="cn">${nome}</div>
+        <div class="cm">
+          ${rBadge(c.regime)}
+          ${tipoBadge(c.tipo)}
+          ${sBadge(lastMes==='Sem movimento'?'Sem movimento':lastStatus)}
+          <span style="font-size:12px;color:var(--txt2)">Cert.: ${p.cert||'—'}</span>
+        </div>
+      </div>
+      <button class="btn btn-p" onclick="openModal('${esc(nome)}')">+ Lançamento</button>
+    </div>
+    <div class="g4 mb20">
+      <div class="card"><div class="ct">Últ. Mês Lançado</div><div class="cv" style="font-size:19px">${lastMes==='Sem movimento'?'—':lastMes.charAt(0)+lastMes.slice(1).toLowerCase()}</div></div>
+      <div class="card"><div class="ct">Fat. Último Mês</div><div class="cv" style="font-size:18px">${lastFat>0?fmt(lastFat):'—'}</div></div>
+      <div class="card"><div class="ct">Impostos Últ. Mês</div><div class="cv" style="font-size:18px">${lastImp>0?fmt(lastImp):'—'}</div></div>
+      <div class="card"><div class="ct">Acumulado 2026</div><div class="cv" style="font-size:18px">${acum>0?fmt(acum):'R$ 0,00'}</div></div>
+    </div>
+    ${limiteBlock}
+    ${faixaBlock}
+    <div class="card">
+      <div class="sh mb14"><div class="st">Controle Mensal 2026</div></div>
+      <div class="tw"><table><thead><tr><th>Mês</th>${mCols}</tr></thead><tbody>${mRows}</tbody></table></div>
+    </div>`;
+}
+
+// Page routing
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  const titles={dashboard:'Dashboard',clientes:'Clientes',lancamentos:'Lançamentos',simples:'Tabela Simples Nacional 2026',visao:'Visão Geral 2026',detalhe:'Cliente'};
+  const subs={dashboard:'Visão executiva — 2026',clientes:'Gestão da carteira de clientes',lancamentos:'Lançamentos mensais',simples:'Tabela de alíquotas e cálculos Simples 2026',visao:'Painel consolidado anual'};
+  if(titles[name]) document.getElementById('pg-title').textContent=titles[name];
+  if(subs[name]) document.getElementById('pg-sub').textContent=subs[name];
+  const navMap={dashboard:"showPage('dashboard')",clientes:"showPage('clientes')",lancamentos:"showPage('lancamentos')",simples:"showPage('simples')",visao:"showPage('visao')"};
+  if(navMap[name]) document.querySelectorAll('.ni').forEach(n=>{if(n.getAttribute('onclick')===navMap[name])n.classList.add('active');});
+  if(name==='lancamentos') buildLanc();
+  if(name==='simples'){ buildSNTable('I','sn-ane1'); buildSNTable('III','sn-ane3'); buildSNClientTable(); calcSN(); }
+  if(name==='visao') buildVisao();
+  if(name==='clientes') buildClientesTable(rfFilter);
+}
+
+// Search
+function onSearch(){
+  const cur = document.querySelector('.page.active').id;
+  if(cur==='page-dashboard') buildDashTable(sfFilter);
+  if(cur==='page-clientes') buildClientesTable(rfFilter);
+}
+
+// Modal
+function openModal(cl=''){
+  document.getElementById('mover').classList.add('open');
+  if(cl) document.getElementById('f-cl').value=cl;
+  updateForm();
+}
+function closeM(){ document.getElementById('mover').classList.remove('open'); }
+function closeMOut(e){ if(e.target===document.getElementById('mover')) closeM(); }
+
+function updateForm(){
+  const cl = document.getElementById('f-cl').value;
+  const r = cl ? (CLIENTS[cl]?.regime||'Simples Nacional') : 'Simples Nacional';
+  const tp = cl ? (CLIENTS[cl]?.tipo||'COMERCIO') : 'COMERCIO';
+  document.getElementById('form-regime-lbl').textContent = 'Dados de Faturamento — '+r+(r==='Simples Nacional'?' ('+tp+')':'');
+  let f='';
+  if(r==='MEI') f=`<div class="fr"><div class="fg"><div class="fl">Faturamento Bruto (R$)</div><input type="number" id="f-fat" placeholder="0,00" step="0.01"></div><div class="fg"><div class="fl">DAS MEI (R$)</div><input type="number" id="f-das" placeholder="86,05" step="0.01" value="86.05"></div></div>`;
+  else if(r==='Simples Nacional') f=`<div class="fr"><div class="fg"><div class="fl">Vendas (R$)</div><input type="number" id="f-vend" placeholder="0,00" step="0.01"></div><div class="fg"><div class="fl">Serviços (R$)</div><input type="number" id="f-serv" placeholder="0,00" step="0.01"></div></div><div class="fr"><div class="fg"><div class="fl">Total Faturado (R$)</div><input type="number" id="f-tot" placeholder="0,00" step="0.01"></div><div class="fg"><div class="fl">DAS (R$)</div><input type="number" id="f-das" placeholder="0,00" step="0.01"></div></div>`;
+  else f=`<div class="fr"><div class="fg"><div class="fl">Serviços (R$)</div><input type="number" id="f-serv" placeholder="0,00" step="0.01"></div><div class="fg"><div class="fl">Vendas (R$)</div><input type="number" id="f-vend" placeholder="0,00" step="0.01"></div></div><div class="fr3"><div class="fg"><div class="fl">ISS (R$)</div><input type="number" id="f-iss" placeholder="0,00" step="0.01"></div><div class="fg"><div class="fl">PIS (R$)</div><input type="number" id="f-pis" placeholder="0,00" step="0.01"></div><div class="fg"><div class="fl">COFINS (R$)</div><input type="number" id="f-cof" placeholder="0,00" step="0.01"></div></div>`;
+  document.getElementById('form-fields').innerHTML=f;
+}
+
+function salvar(){
+  const cl=document.getElementById('f-cl').value;
+  const mes=document.getElementById('f-mes').value;
+  if(!cl||!mes){alert('Preencha o cliente e o mês.');return;}
+  const c=CLIENTS[cl];
+  const status=document.getElementById('f-status').value;
+  const inss=parseFloat(document.getElementById('f-inss').value)||0;
+  const fgts=parseFloat(document.getElementById('f-fgts').value)||0;
+  const pl=parseFloat(document.getElementById('f-pl').value)||0;
+  const folha=parseFloat(document.getElementById('f-folha').value)||0;
+
+  if(!c.meses[mes]) c.meses[mes]={};
+  const d=c.meses[mes];
+  d.status=status; d.inss=inss; d.fgts=fgts; d.prolabore=pl; d.folha=folha;
+  if(c.regime==='MEI'){d.fat=parseFloat(document.getElementById('f-fat')?.value)||d.fat||0; d.das=parseFloat(document.getElementById('f-das')?.value)||d.das||0;}
+  else if(c.regime==='Simples Nacional'){d.vendas=parseFloat(document.getElementById('f-vend')?.value)||d.vendas||0; d.servicos=parseFloat(document.getElementById('f-serv')?.value)||d.servicos||0; d.total=parseFloat(document.getElementById('f-tot')?.value)||(d.vendas+d.servicos); d.das=parseFloat(document.getElementById('f-das')?.value)||d.das||0;}
+  else{d.servicos=parseFloat(document.getElementById('f-serv')?.value)||d.servicos||0; d.vendas=parseFloat(document.getElementById('f-vend')?.value)||d.vendas||0; d.total=d.servicos+d.vendas; d.iss=parseFloat(document.getElementById('f-iss')?.value)||d.iss||0; d.pis=parseFloat(document.getElementById('f-pis')?.value)||d.pis||0; d.cofins=parseFloat(document.getElementById('f-cof')?.value)||d.cofins||0;}
+
+  closeM();
+  buildKPIs(); buildDashTable(sfFilter); buildBarChart();
+  const t=document.createElement('div'); t.className='toast'; t.textContent='Lançamento salvo!';
+  document.body.appendChild(t); setTimeout(()=>t.remove(),2500);
+}
+
+function esc(s){ return s.replace(/'/g,"\\'"); }
+
+function init(){
+  buildSidebar(); buildKPIs(); buildBarChart(); buildRegDist(); buildDashTable('todos');
+}
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,2367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sempre Assessoria Contábil – Sistema 2026</title>
+  <meta name="description"
+    content="Sistema interno de gestão contábil da Sempre Assessoria – controle de clientes, MEI, Simples Nacional e Lucro Presumido." />
+
+  <!-- Google Fonts: Playfair Display + DM Sans (matches site) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+    /* ── CSS Variables — Sempre Assessoria Brand ─────────────────── */
+    :root {
+      --navy: #001C38;
+      --navy-mid: #002a54;
+      --navy-light: #003166;
+      --navy-card: #001d3d;
+      --gold: #D18E46;
+      --gold-light: #E8A85C;
+      --gold-dark: #B8762F;
+      --bg: #000e1f;
+      --surface: #001428;
+      --surface2: #001e35;
+      --border: rgba(209, 142, 70, .18);
+      --border-soft: rgba(255, 255, 255, .07);
+      --text: #e2e8f0;
+      --text-muted: #7a9ab8;
+      --text-dim: #3d6080;
+      --radius: 14px;
+    }
+
+    /* ── Reset + Base ────────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* ── Scrollbar ───────────────────────────────────────────────── */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(209, 142, 70, .35);
+      border-radius: 99px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--gold);
+    }
+
+    /* ── Sidebar ─────────────────────────────────────────────────── */
+    #sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: var(--navy);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 30;
+    }
+
+    /* Sidebar logo */
+    .sidebar-logo {
+      padding: 18px 16px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-logo-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--navy);
+      box-shadow: 0 4px 12px rgba(209, 142, 70, .4);
+      flex-shrink: 0;
+    }
+
+    .sidebar-logo-text p:first-child {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .sidebar-logo-text p:last-child {
+      font-size: 10px;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .sidebar-logo-badge {
+      font-size: 9px;
+      color: var(--text-dim);
+      margin-top: 6px;
+      letter-spacing: .5px;
+    }
+
+    /* Nav links */
+    #mainNav {
+      padding: 12px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 11px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all .2s;
+      text-align: left;
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      background: rgba(209, 142, 70, .1);
+      color: var(--gold-light);
+    }
+
+    .nav-link.active {
+      background: rgba(209, 142, 70, .15);
+      color: var(--gold);
+      border-left: 3px solid var(--gold);
+      padding-left: 8px;
+    }
+
+    .nav-link svg {
+      flex-shrink: 0;
+    }
+
+    /* Sidebar section label */
+    .sidebar-section-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-dim);
+      font-weight: 700;
+      padding: 4px 12px 4px;
+      margin-top: 4px;
+    }
+
+    /* Client accordion container */
+    #clientSection {
+      padding: 0 10px 8px;
+    }
+
+    /* Regime folder */
+    .regime-folder {
+      margin-bottom: 2px;
+    }
+
+    .regime-folder-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid var(--border-soft);
+      cursor: pointer;
+      transition: all .2s;
+      color: var(--text);
+    }
+
+    .regime-folder-btn:hover {
+      background: rgba(209, 142, 70, .1);
+      border-color: var(--border);
+    }
+
+    .regime-folder-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .regime-icon {
+      font-size: 13px;
+    }
+
+    .regime-name {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .regime-count {
+      font-size: 9px;
+      background: rgba(209, 142, 70, .2);
+      color: var(--gold);
+      padding: 1px 5px;
+      border-radius: 20px;
+      margin-left: 4px;
+      font-weight: 700;
+    }
+
+    .folder-chevron {
+      width: 12px;
+      height: 12px;
+      color: var(--text-muted);
+      transition: transform .25s;
+      flex-shrink: 0;
+    }
+
+    .folder-chevron.open {
+      transform: rotate(180deg);
+    }
+
+    /* Client list inside folder */
+    .client-list {
+      display: none;
+      padding: 4px 0 4px 8px;
+      max-height: 240px;
+      overflow-y: auto;
+      border-left: 2px solid rgba(209, 142, 70, .2);
+      margin-left: 14px;
+      margin-top: 2px;
+    }
+
+    .client-list.open {
+      display: block;
+    }
+
+    .client-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 5px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all .15s;
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+    }
+
+    .client-item:hover {
+      color: var(--gold-light);
+      background: rgba(209, 142, 70, .08);
+    }
+
+    .client-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: .5;
+      flex-shrink: 0;
+    }
+
+    /* Sidebar footer */
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 12px 14px;
+      border-top: 1px solid var(--border);
+      font-size: 10px;
+      color: var(--text-dim);
+    }
+
+    #dbStatus {
+      margin-top: 3px;
+      font-size: 10px;
+    }
+
+    /* ── Main content ─────────────────────────────────────────────── */
+    main {
+      flex: 1;
+      min-height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top bar */
+    #topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(0, 14, 31, .85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #pageTitle {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    #pageSubtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    select.filter-select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 12px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      outline: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    select.filter-select:focus {
+      border-color: var(--gold);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all .2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      box-shadow: 0 4px 14px rgba(209, 142, 70, .4);
+    }
+
+    /* ── Panels ──────────────────────────────────────────────────── */
+    .panel {
+      display: none;
+      padding: 24px;
+      animation: fadeIn .3s ease both;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── KPI Cards ───────────────────────────────────────────────── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      transition: all .25s;
+      cursor: default;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(209, 142, 70, .12);
+      border-color: var(--border);
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 8px;
+    }
+
+    .kpi-value {
+      font-size: 26px;
+      font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .kpi-value.gold {
+      color: var(--gold);
+    }
+
+    .kpi-value.white {
+      color: #fff;
+    }
+
+    .kpi-value.red {
+      color: #f87171;
+    }
+
+    .kpi-value.amber {
+      color: #fbbf24;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    /* ── Chart cards ─────────────────────────────────────────────── */
+    .chart-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    }
+
+    .chart-wrap {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Section cards (generic) ─────────────────────────────────── */
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .section-card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    /* ── Tables ──────────────────────────────────────────────────── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .data-table thead th {
+      text-align: left;
+      padding: 10px 16px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--text-dim);
+      background: rgba(0, 0, 0, .25);
+      border-bottom: 1px solid var(--border-soft);
+      font-weight: 600;
+    }
+
+    .data-table thead th:not(:first-child) {
+      text-align: right;
+    }
+
+    .data-table thead th.center {
+      text-align: center;
+    }
+
+    .data-table tbody td {
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+    }
+
+    .data-table tbody td:not(:first-child) {
+      text-align: right;
+    }
+
+    .data-table tbody td.center {
+      text-align: center;
+    }
+
+    .data-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tbody tr:hover td {
+      background: rgba(209, 142, 70, .04);
+    }
+
+    .data-table-wrap {
+      overflow-x: auto;
+      max-height: 520px;
+      overflow-y: auto;
+    }
+
+    /* ── Badges ──────────────────────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    .badge-concluido {
+      background: rgba(74, 222, 128, .12);
+      color: #4ade80;
+    }
+
+    .badge-pendente {
+      background: rgba(148, 163, 184, .1);
+      color: #94a3b8;
+    }
+
+    .badge-entregue {
+      background: rgba(167, 139, 250, .12);
+      color: #a78bfa;
+    }
+
+    .badge-cancelado {
+      background: rgba(248, 113, 113, .1);
+      color: #f87171;
+    }
+
+    .chip {
+      display: inline-block;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .chip-mei {
+      background: rgba(167, 139, 250, .15);
+      color: #c4b5fd;
+    }
+
+    .chip-sn {
+      background: rgba(56, 189, 248, .12);
+      color: #7dd3fc;
+    }
+
+    .chip-lp {
+      background: rgba(209, 142, 70, .2);
+      color: var(--gold-light);
+    }
+
+    /* ── MEI Cards ───────────────────────────────────────────────── */
+    .mei-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .mei-card {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 18px;
+      transition: all .25s;
+    }
+
+    .mei-card:hover {
+      box-shadow: 0 8px 28px rgba(209, 142, 70, .1);
+      border-color: var(--border);
+    }
+
+    .progress-track {
+      background: rgba(255, 255, 255, .08);
+      border-radius: 99px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      border-radius: 99px;
+      transition: width .6s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .progress-green {
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+    }
+
+    .progress-amber {
+      background: linear-gradient(90deg, #fbbf24, #d97706);
+    }
+
+    .progress-red {
+      background: linear-gradient(90deg, #f87171, #dc2626);
+    }
+
+    .month-pips {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 3px;
+    }
+
+    .month-pip {
+      height: 6px;
+      border-radius: 2px;
+    }
+
+    /* ── Simples Nacional / Lucro Presumido panels ───────────────── */
+    .regime-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .regime-panel-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .regime-panel-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Obligation tiles (for SN / LP) */
+    .obrig-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .obrig-tile {
+      background: var(--surface2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .obrig-name {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .obrig-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .obrig-sub {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 3px;
+    }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .filter-bar input,
+    .filter-bar select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 12px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .filter-bar input:focus,
+    .filter-bar select:focus {
+      border-color: var(--gold);
+    }
+
+    .filter-bar input {
+      width: 200px;
+    }
+
+    /* Section heading with divider */
+    .section-heading {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .section-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-soft);
+    }
+
+    /* ── Vault cards ─────────────────────────────────────────────── */
+    .vault-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .vault-card {
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 18px;
+      transition: all .25s;
+    }
+
+    .vault-card:hover {
+      border-color: var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .3);
+    }
+
+    /* ── Modal ───────────────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, .75);
+      backdrop-filter: blur(6px);
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 520px;
+      margin: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+      animation: fadeIn .25s ease both;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      padding: 2px;
+      transition: color .2s;
+    }
+
+    .modal-close:hover {
+      color: var(--gold);
+    }
+
+    .modal-body {
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .modal-footer {
+      padding: 0 22px 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 13px;
+      padding: 9px 12px;
+      border-radius: 9px;
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color .2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    textarea.form-group {
+      resize: none;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── Toast ───────────────────────────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .4);
+      display: none;
+      animation: fadeIn .3s ease both;
+      max-width: 320px;
+    }
+
+    #toast.ok {
+      background: var(--navy-light);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+    }
+
+    #toast.error {
+      background: #2d0a0a;
+      border: 1px solid #7f1d1d;
+      color: #f87171;
+    }
+
+    /* ── Table panel search/filter row ───────────────────────────── */
+    .table-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* ── Pass dots ───────────────────────────────────────────────── */
+    .pass-hidden {
+      letter-spacing: .22em;
+      color: var(--text-muted);
+    }
+
+    /* ── Responsive tweaks ───────────────────────────────────────── */
+    @media (max-width: 1200px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+
+      .mei-grid,
+      .vault-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .obrig-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+
+      .kpi-grid,
+      .chart-grid,
+      .mei-grid,
+      .vault-grid,
+      .obrig-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* button invisible (used inside tables) */
+    .tbl-btn {
+      background: none;
+      border: 1px solid transparent;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .tbl-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(209, 142, 70, .06);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════  SIDEBAR  ═══════════════════════ -->
+  <aside id="sidebar">
+
+    <!-- Logo -->
+    <div class="sidebar-logo">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="sidebar-logo-icon">S</div>
+        <div class="sidebar-logo-text">
+          <p>Sempre</p>
+          <p>Assessoria Contábil</p>
+        </div>
+      </div>
+      <p class="sidebar-logo-badge">Sistema de Gestão 2026</p>
+    </div>
+
+    <!-- Main Nav -->
+    <nav id="mainNav">
+      <button id="nav-dashboard" class="nav-link active" onclick="showPanel('dashboard')">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4" />
+        </svg>
+        Dashboard
+      </button>
+      <button id="nav-mei" class="nav-link" onclick="showPanel('mei')">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+        Painel MEI
+      </button>
+      <button id="nav-sn" class="nav-link" onclick="showPanel('sn')">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+        </svg>
+        Simples Nacional
+      </button>
+      <button id="nav-lp" class="nav-link" onclick="showPanel('lp')">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        </svg>
+        Lucro Presumido
+      </button>
+      <button id="nav-table" class="nav-link" onclick="showPanel('table')">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 10h18M3 14h18M10 4v16M3 4h18a1 1 0 011 1v14a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z" />
+        </svg>
+        Tabela Geral
+      </button>
+      <button id="nav-vault" class="nav-link" onclick="showPanel('vault')">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+        Cofre de Senhas
+      </button>
+    </nav>
+
+    <!-- Clients accordion by regime -->
+    <div class="sidebar-section-label">Clientes por Regime</div>
+    <div id="clientSection">
+      <!-- folders injected by JS -->
+    </div>
+
+    <!-- Footer -->
+    <div class="sidebar-footer">
+      <p>© 2026 Sempre Assessoria</p>
+      <p id="dbStatus" style="color:var(--gold)">Carregando dados…</p>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════  MAIN  ═══════════════════════ -->
+  <main>
+
+    <!-- Top bar -->
+    <header id="topbar">
+      <div>
+        <p id="pageTitle">Dashboard</p>
+        <p id="pageSubtitle">Visão geral – 2026</p>
+      </div>
+      <div class="topbar-actions">
+        <select id="globalMonthFilter" class="filter-select">
+          <option value="ALL">Todos os meses</option>
+          <option value="JANEIRO">Janeiro</option>
+          <option value="FEVEREIRO">Fevereiro</option>
+          <option value="MARÇO">Março</option>
+          <option value="ABRIL">Abril</option>
+          <option value="MAIO">Maio</option>
+          <option value="JUNHO">Junho</option>
+          <option value="JULHO">Julho</option>
+          <option value="AGOSTO">Agosto</option>
+          <option value="SETEMBRO">Setembro</option>
+          <option value="OUTUBRO">Outubro</option>
+          <option value="NOVEMBRO">Novembro</option>
+          <option value="DEZEMBRO">Dezembro</option>
+        </select>
+        <button class="btn-primary" id="btn-new-entry" onclick="openEntryModal()">
+          <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+          </svg>
+          Lançamento
+        </button>
+        <button class="btn-primary" id="btn-new-client" onclick="openNovoClienteModal()"
+          style="background:var(--navy-mid);border:1px solid var(--border)">
+          <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+          Novo Cliente
+        </button>
+      </div>
+    </header>
+
+    <!-- ── DASHBOARD ── -->
+    <section id="panel-dashboard" class="panel active">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <p class="kpi-label">Total de Clientes</p>
+          <p class="kpi-value white" id="kpi-total-clients">–</p>
+          <p class="kpi-sub">empresas cadastradas</p>
+        </div>
+        <div class="kpi-card">
+          <p class="kpi-label">Faturamento Total</p>
+          <p class="kpi-value gold" id="kpi-total-fat">–</p>
+          <p class="kpi-sub" id="kpi-fat-label">no período</p>
+        </div>
+        <div class="kpi-card">
+          <p class="kpi-label">Total DAS / Tributos</p>
+          <p class="kpi-value amber" id="kpi-total-das">–</p>
+          <p class="kpi-sub" id="kpi-das-label">no período</p>
+        </div>
+        <div class="kpi-card">
+          <p class="kpi-label">Clientes Pendentes</p>
+          <p class="kpi-value red" id="kpi-pendentes">–</p>
+          <p class="kpi-sub">no mês selecionado</p>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <p class="card-title"><span class="card-title-dot"></span>Faturamento por Regime</p>
+          <div class="chart-wrap"><canvas id="chartRegime"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <p class="card-title"><span class="card-title-dot"></span>Status dos Clientes</p>
+          <div class="chart-wrap"><canvas id="chartStatus"></canvas></div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-card-header">
+          <p class="card-title" style="margin:0"><span class="card-title-dot"></span>Top 10 – Maior Faturamento</p>
+        </div>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="text-align:left">Cliente</th>
+                <th style="text-align:left">Regime</th>
+                <th>Faturamento</th>
+                <th>DAS / Tributos</th>
+              </tr>
+            </thead>
+            <tbody id="topClientsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── MEI PANEL ── -->
+    <section id="panel-mei" class="panel">
+      <div class="regime-panel-header">
+        <div>
+          <p class="regime-panel-title">Painel MEI</p>
+          <p class="regime-panel-subtitle">Limite anual 2026: R$ 81.000,00 &nbsp;·&nbsp; Mensal: R$ 6.750,00</p>
+        </div>
+        <div
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 16px;text-align:center;">
+          <p style="font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--text-dim)">DAS Mensal Padrão
+          </p>
+          <p style="font-size:14px;font-weight:700;color:var(--gold)">R$ 87,05</p>
+        </div>
+      </div>
+      <div class="mei-grid" id="meiCards"></div>
+    </section>
+
+    <!-- ── SIMPLES NACIONAL PANEL ── -->
+    <section id="panel-sn" class="panel">
+      <div class="regime-panel-header">
+        <div>
+          <p class="regime-panel-title">Simples Nacional</p>
+          <p class="regime-panel-subtitle">Empresas optantes pelo Simples Nacional – controle de DAS e obrigações</p>
+        </div>
+        <div class="filter-bar">
+          <input id="sn-search" type="text" placeholder="Buscar cliente…" oninput="renderSN()" />
+          <select id="sn-tipo" class="filter-select" onchange="renderSN()">
+            <option value="">Todos os tipos</option>
+            <option value="COMERCIO">Comércio</option>
+            <option value="SERVICO">Serviço</option>
+            <option value="MISTO">Misto</option>
+          </select>
+          <select id="sn-status" class="filter-select" onchange="renderSN()">
+            <option value="">Todo status</option>
+            <option value="Concluído">Concluído</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Entregue">Entregue</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- KPIs do grupo -->
+      <div class="obrig-grid" id="sn-kpis"></div>
+
+      <div class="section-card">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="text-align:left">Cliente</th>
+                <th style="text-align:left">Tipo</th>
+                <th>Faturamento</th>
+                <th>Vendas</th>
+                <th>Serviços</th>
+                <th>DAS</th>
+                <th>INSS</th>
+                <th>FGTS</th>
+                <th class="center">Status</th>
+                <th class="center">Ação</th>
+              </tr>
+            </thead>
+            <tbody id="snTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── LUCRO PRESUMIDO PANEL ── -->
+    <section id="panel-lp" class="panel">
+      <div class="regime-panel-header">
+        <div>
+          <p class="regime-panel-title">Lucro Presumido</p>
+          <p class="regime-panel-subtitle">Empresas no Lucro Presumido – controle de ISS, PIS, COFINS e obrigações</p>
+        </div>
+        <div class="filter-bar">
+          <input id="lp-search" type="text" placeholder="Buscar cliente…" oninput="renderLP()" />
+          <select id="lp-status" class="filter-select" onchange="renderLP()">
+            <option value="">Todo status</option>
+            <option value="Concluído">Concluído</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Entregue">Entregue</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- KPIs do grupo -->
+      <div class="obrig-grid" id="lp-kpis"></div>
+
+      <div class="section-card">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="text-align:left">Cliente</th>
+                <th>Faturamento</th>
+                <th>ISS</th>
+                <th>PIS</th>
+                <th>COFINS</th>
+                <th>INSS</th>
+                <th>FGTS</th>
+                <th class="center">Status</th>
+                <th class="center">Ação</th>
+              </tr>
+            </thead>
+            <tbody id="lpTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TABELA GERAL ── -->
+    <section id="panel-table" class="panel">
+      <div class="table-panel-header">
+        <p style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff">Tabela Geral de
+          Clientes</p>
+        <div class="filter-bar">
+          <input id="tableSearch" type="text" placeholder="Buscar cliente…"
+            oninput="renderTable(document.getElementById('globalMonthFilter').value)" />
+          <select id="tableRegimeFilter" class="filter-select"
+            onchange="renderTable(document.getElementById('globalMonthFilter').value)">
+            <option value="">Todos os regimes</option>
+            <option value="MEI">MEI</option>
+            <option value="Simples Nacional">Simples Nacional</option>
+            <option value="Lucro Presumido">Lucro Presumido</option>
+          </select>
+        </div>
+      </div>
+      <div class="section-card">
+        <div class="data-table-wrap">
+          <table class="data-table" id="mainTable">
+            <thead>
+              <tr>
+                <th style="text-align:left">Cliente</th>
+                <th style="text-align:left">Regime</th>
+                <th style="text-align:left">Tipo</th>
+                <th>Faturamento</th>
+                <th>DAS / Trib.</th>
+                <th>INSS</th>
+                <th>FGTS</th>
+                <th class="center">Status</th>
+                <th class="center">Ação</th>
+              </tr>
+            </thead>
+            <tbody id="mainTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── COFRE DE SENHAS ── -->
+    <section id="panel-vault" class="panel">
+      <div class="table-panel-header">
+        <p style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff">🔐 Cofre de Senhas
+          &amp; Certificados</p>
+        <button class="btn-primary" onclick="openPasswordModal()">
+          <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+          </svg>
+          Nova Senha
+        </button>
+      </div>
+      <div class="vault-grid" id="vaultGrid"></div>
+      <div id="vaultEmpty" style="display:none;text-align:center;padding:64px 0;color:var(--text-dim)">
+        <p style="font-size:14px">Nenhuma senha cadastrada.</p>
+        <p style="font-size:12px;margin-top:6px">Clique em "Nova Senha" para adicionar.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══  MODAL LANÇAMENTO  ═══ -->
+  <div id="entryModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <p class="modal-title">Novo Lançamento</p>
+        <button class="modal-close" onclick="closeEntryModal()"><svg width="18" height="18" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>Cliente *</label>
+            <select id="entry-client" onchange="onEntryClientChange()">
+              <option value="">Selecione…</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mês *</label>
+            <select id="entry-month">
+              <option value="JANEIRO">Janeiro</option>
+              <option value="FEVEREIRO">Fevereiro</option>
+              <option value="MARÇO">Março</option>
+              <option value="ABRIL">Abril</option>
+              <option value="MAIO">Maio</option>
+              <option value="JUNHO">Junho</option>
+              <option value="JULHO">Julho</option>
+              <option value="AGOSTO">Agosto</option>
+              <option value="SETEMBRO">Setembro</option>
+              <option value="OUTUBRO">Outubro</option>
+              <option value="NOVEMBRO">Novembro</option>
+              <option value="DEZEMBRO">Dezembro</option>
+            </select>
+          </div>
+        </div>
+        <div id="entry-fields" class="form-grid-2"></div>
+        <div class="form-group">
+          <label>Status</label>
+          <select id="entry-status">
+            <option value="Pendente">Pendente</option>
+            <option value="Concluído">Concluído</option>
+            <option value="Entregue">Entregue</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeEntryModal()">Cancelar</button>
+        <button class="btn-primary" onclick="saveEntry()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══  MODAL SENHA  ═══ -->
+  <div id="passwordModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <p class="modal-title">Nova Entrada – Cofre</p>
+        <button class="modal-close" onclick="closePasswordModal()"><svg width="18" height="18" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group"><label>Título / Portal *</label><input id="pw-title" type="text"
+            placeholder="ex: e-CAC, PGMEI, Simples Nacional…" /></div>
+        <div class="form-group"><label>Cliente / Empresa</label><input id="pw-client" type="text"
+            placeholder="Nome do cliente" /></div>
+        <div class="form-grid-2">
+          <div class="form-group"><label>Login / CNPJ / CPF</label><input id="pw-login" type="text" /></div>
+          <div class="form-group"><label>Senha / Código</label><input id="pw-password" type="text" /></div>
+        </div>
+        <div class="form-group"><label>Observações</label><textarea id="pw-notes" rows="2"
+            style="resize:none"></textarea></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closePasswordModal()">Cancelar</button>
+        <button class="btn-primary" onclick="savePassword()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══  MODAL NOVO CLIENTE  ═══ -->
+  <div id="novoClienteModal" class="modal-overlay">
+    <div class="modal-box" style="max-width:680px;overflow-y:auto;max-height:92vh">
+      <div class="modal-header" style="position:sticky;top:0;background:var(--navy);z-index:1">
+        <p class="modal-title">Novo Cliente</p>
+        <button class="modal-close" onclick="closeNovoClienteModal()"><svg width="18" height="18" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg></button>
+      </div>
+      <div class="modal-body">
+        <p
+          style="font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--gold);font-weight:700;margin-bottom:4px">
+          🏢 Identificação</p>
+        <div class="form-grid-2">
+          <div class="form-group"><label>Nome do Cliente *</label><input id="nc-nome" type="text"
+              placeholder="Apelido usado no sistema" /></div>
+          <div class="form-group"><label>Razão Social</label><input id="nc-razao" type="text"
+              placeholder="Razão Social completa" /></div>
+          <div style="margin-bottom: 15px;">
+            <button type="button" onclick="importarCertificado()"
+              class="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600 transition-all shadow-md">
+              ✨ Importar do Certificado (.pfx)
+            </button>
+          </div>
+          <div class="form-group"><label>CNPJ</label><input id="nc-cnpj" type="text" placeholder="00.000.000/0001-00" />
+          </div>
+          <div class="form-group"><label>Regime *</label>
+            <select id="nc-regime">
+              <option value="MEI">MEI</option>
+              <option value="Simples Nacional">Simples Nacional</option>
+              <option value="Lucro Presumido">Lucro Presumido</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Tipo</label>
+            <select id="nc-tipo">
+              <option value="COMERCIO">Comércio</option>
+              <option value="SERVICO">Serviço</option>
+              <option value="MISTO">Misto</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Inscrição Municipal</label><input id="nc-im" type="text"
+              placeholder="Nº Insc. Municipal" /></div>
+          <div class="form-group"><label>Inscrição Estadual</label><input id="nc-ie" type="text"
+              placeholder="Nº Insc. Estadual" /></div>
+        </div>
+        <p
+          style="font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--gold);font-weight:700;margin-bottom:4px;margin-top:8px">
+          👤 Responsável</p>
+        <div class="form-grid-2">
+          <div class="form-group"><label>Nome do Responsável</label><input id="nc-resp" type="text"
+              placeholder="Nome completo" /></div>
+          <div class="form-group"><label>CPF do Responsável</label><input id="nc-cpf" type="text"
+              placeholder="000.000.000-00" /></div>
+        </div>
+        <p
+          style="font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--gold);font-weight:700;margin-bottom:4px;margin-top:8px">
+          🔑 Acessos e Senhas</p>
+        <div class="form-grid-2">
+          <div class="form-group"><label>Senha SEFAZ</label><input id="nc-sefaz" type="text"
+              placeholder="Senha da SEFAZ" /></div>
+          <div class="form-group"><label>Senha Prefeitura</label><input id="nc-pref" type="text"
+              placeholder="Senha da Prefeitura" /></div>
+          <div class="form-group"><label>Senha GOV.br</label><input id="nc-govbr" type="text"
+              placeholder="Senha GOV.br" /></div>
+          <div class="form-group"><label>Código Simples Nacional</label><input id="nc-codsn" type="text"
+              placeholder="Código de acesso" /></div>
+        </div>
+        <p
+          style="font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--gold);font-weight:700;margin-bottom:4px;margin-top:8px">
+          📜 Certificado Digital</p>
+        <div class="form-group">
+          <label>Arquivo do Certificado (.pfx / .cer / .p12)</label>
+          <input id="nc-cert" type="file" accept=".pfx,.cer,.p12,.pem"
+            style="background:var(--surface2);border:1px dashed rgba(209,142,70,.4);color:var(--text-muted);padding:8px 12px;border-radius:9px;width:100%;cursor:pointer" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeNovoClienteModal()">Cancelar</button>
+        <button class="btn-primary" onclick="saveNovoCliente()">Criar Cliente</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══  MODAL FICHA DO CLIENTE  ═══ -->
+  <div id="fichaModal" class="modal-overlay">
+    <div class="modal-box" style="max-width:680px;overflow-y:auto;max-height:92vh">
+      <div class="modal-header" style="position:sticky;top:0;background:var(--navy);z-index:1">
+        <div>
+          <p class="modal-title" id="fichaTitle">Ficha do Cliente</p>
+          <p style="font-size:11px;color:var(--text-muted);margin-top:2px" id="fichaMeta"></p>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button id="fichaEditBtn" class="btn-secondary" onclick="toggleFichaEdit()"
+            style="font-size:11px;padding:6px 12px">Editar</button>
+          <button class="modal-close" onclick="closeFichaModal()"><svg width="18" height="18" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg></button>
+        </div>
+      </div>
+      <div class="modal-body" id="fichaBody"></div>
+      <div class="modal-footer" id="fichaFooter" style="display:none">
+        <button class="btn-secondary" onclick="toggleFichaEdit()">Cancelar</button>
+        <button class="btn-primary" onclick="saveFichaEdit()">Salvar Alterações</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast"></div>
+
+  <!-- ═══════════════════════  JAVASCRIPT  ═══════════════════════ -->
+  <script>
+    // ── State ─────────────────────────────────────────────────────────────
+    const API = 'http://localhost:3000/api';
+    let DB = { clients: {}, passwords: [] };
+    let chartRegime = null, chartStatus = null;
+    const MESES = ['JANEIRO', 'FEVEREIRO', 'MARÇO', 'ABRIL', 'MAIO', 'JUNHO', 'JULHO', 'AGOSTO', 'SETEMBRO', 'OUTUBRO', 'NOVEMBRO', 'DEZEMBRO'];
+    const MEI_LIMIT = 81000;
+
+    // ── Init ──────────────────────────────────────────────────────────────
+    async function init() {
+      try {
+        const r = await fetch(`${API}/data`);
+        if (!r.ok) throw new Error('offline');
+        DB = await r.json();
+        const n = Object.keys(DB.clients).length;
+        document.getElementById('dbStatus').textContent = `${n} clientes carregados.`;
+        document.getElementById('dbStatus').style.color = '#4ade80';
+      } catch (e) {
+        document.getElementById('dbStatus').textContent = '⚠ Backend offline';
+        document.getElementById('dbStatus').style.color = '#f87171';
+        showToast('Servidor não encontrado. Rode: node server.js', 'error');
+        return;
+      }
+      buildClientFolders();
+      buildEntryClientSelect();
+      renderAll();
+    }
+
+    // ── Render All ────────────────────────────────────────────────────────
+    function renderAll() {
+      const month = document.getElementById('globalMonthFilter').value;
+      renderDashboard(month);
+      renderMEI();
+      renderSN();
+      renderLP();
+      renderTable(month);
+      renderVault();
+    }
+    document.getElementById('globalMonthFilter').addEventListener('change', renderAll);
+
+    // ── Helpers ───────────────────────────────────────────────────────────
+    const fmt = v => (v == null ? 'R$ 0,00' : v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+    const fmtShort = v => {
+      if (v >= 1e6) return `R$ ${(v / 1e6).toFixed(1)}M`;
+      if (v >= 1e3) return `R$ ${(v / 1e3).toFixed(1)}K`;
+      return fmt(v);
+    };
+
+    function clientRevenue(client, month) {
+      if (month === 'ALL') return Object.values(client.meses).reduce((s, m) => s + (m.fat || m.total || 0), 0);
+      const m = client.meses[month]; return m ? (m.fat || m.total || 0) : 0;
+    }
+    function clientTax(client, month) {
+      if (month === 'ALL') return Object.values(client.meses).reduce((s, m) => s + (m.das || (m.iss || 0) + (m.pis || 0) + (m.cofins || 0) || 0), 0);
+      const m = client.meses[month]; if (!m) return 0;
+      return m.das || ((m.iss || 0) + (m.pis || 0) + (m.cofins || 0));
+    }
+    function clientStatus(client, month) {
+      if (month === 'ALL') {
+        const keys = MESES.filter(k => client.meses[k]);
+        for (let i = keys.length - 1; i >= 0; i--) {
+          const s = client.meses[keys[i]].status;
+          if (s && s !== 'Pendente') return s;
+        }
+        return 'Pendente';
+      }
+      return (client.meses[month] || {}).status || 'Pendente';
+    }
+    function badgeHTML(status) {
+      const map = { 'Concluído': 'badge-concluido', 'Pendente': 'badge-pendente', 'Entregue': 'badge-entregue' };
+      return `<span class="badge ${map[status] || 'badge-pendente'}">${status}</span>`;
+    }
+    function chipRegime(regime) {
+      const map = { 'MEI': 'chip-mei', 'Simples Nacional': 'chip-sn', 'Lucro Presumido': 'chip-lp' };
+      const abbr = { 'MEI': 'MEI', 'Simples Nacional': 'S.N.', 'Lucro Presumido': 'L.P.' };
+      return `<span class="chip ${map[regime] || ''}">${abbr[regime] || regime}</span>`;
+    }
+
+    // ── Sidebar: Regime Folders ───────────────────────────────────────────
+    function buildClientFolders() {
+      const container = document.getElementById('clientSection');
+      container.innerHTML = '';
+
+      const regimes = [
+        { key: 'MEI', icon: '🟣', cls: 'chip-mei' },
+        { key: 'Simples Nacional', icon: '🔵', cls: 'chip-sn' },
+        { key: 'Lucro Presumido', icon: '🟠', cls: 'chip-lp' },
+      ];
+
+      regimes.forEach(({ key, icon }) => {
+        const clients = Object.entries(DB.clients)
+          .filter(([, c]) => c.regime === key)
+          .sort((a, b) => a[0].localeCompare(b[0]));
+
+        if (clients.length === 0) return;
+
+        const folderId = `folder-${key.replace(/\s/g, '_')}`;
+        const listId = `list-${key.replace(/\s/g, '_')}`;
+        const chevId = `chev-${key.replace(/\s/g, '_')}`;
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'regime-folder';
+        wrapper.innerHTML = `
+      <button class="regime-folder-btn" onclick="toggleFolder('${folderId}','${chevId}')">
+        <div class="regime-folder-left">
+          <span class="regime-icon">${icon}</span>
+          <span class="regime-name">${key}</span>
+          <span class="regime-count">${clients.length}</span>
+        </div>
+        <svg id="${chevId}" class="folder-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div id="${folderId}" class="client-list">
+        ${clients.map(([name]) => `
+          <button class="client-item" data-client="${name.replace(/"/g, '&quot;')}" onclick="openFichaCliente(this.dataset.client)">
+            <span class="client-dot"></span>
+            <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${name}</span>
+          </button>`).join('')}
+      </div>`;
+        container.appendChild(wrapper);
+      });
+    }
+
+    function toggleFolder(folderId, chevId) {
+      document.getElementById(folderId).classList.toggle('open');
+      document.getElementById(chevId).classList.toggle('open');
+    }
+
+    // ── Panel Navigation ──────────────────────────────────────────────────
+    const PANEL_META = {
+      dashboard: { title: 'Dashboard', subtitle: 'Visão geral – 2026' },
+      mei: { title: 'Painel MEI', subtitle: 'Controle de limite anual dos MEIs' },
+      sn: { title: 'Simples Nacional', subtitle: 'Obrigações e faturamento – Simples Nacional' },
+      lp: { title: 'Lucro Presumido', subtitle: 'Obrigações e faturamento – Lucro Presumido' },
+      table: { title: 'Tabela Geral', subtitle: 'Todos os clientes e lançamentos' },
+      vault: { title: 'Cofre de Senhas', subtitle: 'Senhas e certificados dos clientes' },
+    };
+
+    function showPanel(id) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+      document.getElementById(`panel-${id}`).classList.add('active');
+      document.getElementById(`nav-${id}`)?.classList.add('active');
+      const info = PANEL_META[id] || {};
+      document.getElementById('pageTitle').textContent = info.title || id;
+      document.getElementById('pageSubtitle').textContent = info.subtitle || '';
+    }
+
+    // ── Dashboard ─────────────────────────────────────────────────────────
+    function renderDashboard(month) {
+      const entries = Object.entries(DB.clients);
+      let totalFat = 0, totalDas = 0, pendentes = 0;
+      const regimeMap = {}, statusMap = { Concluído: 0, Pendente: 0, Entregue: 0 };
+
+      const ranked = entries.map(([name, c]) => {
+        const fat = clientRevenue(c, month);
+        const das = clientTax(c, month);
+        const st = clientStatus(c, month);
+        totalFat += fat; totalDas += das;
+        if (st === 'Pendente') pendentes++;
+        regimeMap[c.regime] = (regimeMap[c.regime] || 0) + fat;
+        statusMap[st] = (statusMap[st] || 0) + 1;
+        return { name, regime: c.regime, fat, das };
+      }).sort((a, b) => b.fat - a.fat).slice(0, 10);
+
+      const monthLabel = month === 'ALL' ? 'em 2026' : 'em ' + month.charAt(0) + month.slice(1).toLowerCase();
+      document.getElementById('kpi-total-clients').textContent = entries.length;
+      document.getElementById('kpi-total-fat').textContent = fmtShort(totalFat);
+      document.getElementById('kpi-total-das').textContent = fmtShort(totalDas);
+      document.getElementById('kpi-pendentes').textContent = pendentes;
+      document.getElementById('kpi-fat-label').textContent = monthLabel;
+      document.getElementById('kpi-das-label').textContent = monthLabel;
+
+      const TICK_COLOR = '#3d6080';
+      const GRID_COLOR = 'rgba(255,255,255,.05)';
+      const LEGEND_COLOR = '#7a9ab8';
+
+      if (chartRegime) chartRegime.destroy();
+      chartRegime = new Chart(document.getElementById('chartRegime'), {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(regimeMap),
+          datasets: [{
+            data: Object.values(regimeMap),
+            backgroundColor: ['#c4b5fd', '#7dd3fc', '#D18E46', '#4ade80'],
+            borderWidth: 0, hoverOffset: 8
+          }]
+        },
+        options: {
+          cutout: '68%',
+          plugins: {
+            legend: { labels: { color: LEGEND_COLOR, font: { size: 11, family: 'DM Sans' } } },
+            tooltip: { callbacks: { label: ctx => ` ${fmt(ctx.raw)}` } }
+          }
+        }
+      });
+
+      if (chartStatus) chartStatus.destroy();
+      chartStatus = new Chart(document.getElementById('chartStatus'), {
+        type: 'bar',
+        data: {
+          labels: Object.keys(statusMap),
+          datasets: [{
+            label: 'Clientes', data: Object.values(statusMap),
+            backgroundColor: ['rgba(74,222,128,.7)', 'rgba(148,163,184,.4)', 'rgba(167,139,250,.7)'],
+            borderRadius: 6, borderSkipped: false
+          }]
+        },
+        options: {
+          scales: {
+            y: { grid: { color: GRID_COLOR }, ticks: { color: TICK_COLOR } },
+            x: { grid: { display: false }, ticks: { color: TICK_COLOR } }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: ctx => ` ${ctx.raw} clientes` } }
+          }
+        }
+      });
+
+      document.getElementById('topClientsBody').innerHTML = ranked.map(c => `
+    <tr>
+      <td style="color:#fff;font-weight:600;text-align:left">${c.name}</td>
+      <td style="text-align:left">${chipRegime(c.regime)}</td>
+      <td style="color:var(--gold);font-weight:700">${fmt(c.fat)}</td>
+      <td style="color:#fbbf24">${fmt(c.das)}</td>
+    </tr>`).join('');
+    }
+
+    // ── MEI Panel ─────────────────────────────────────────────────────────
+    function renderMEI() {
+      const container = document.getElementById('meiCards');
+      container.innerHTML = '';
+      const meis = Object.entries(DB.clients).filter(([, c]) => c.regime === 'MEI');
+      if (!meis.length) { container.innerHTML = '<p style="color:var(--text-dim)">Nenhum MEI encontrado.</p>'; return; }
+
+      meis.sort((a, b) => a[0].localeCompare(b[0])).forEach(([name, client]) => {
+        const totalFat = Object.values(client.meses).reduce((s, m) => s + (m.fat || 0), 0);
+        const pct = Math.min(100, (totalFat / MEI_LIMIT) * 100);
+        const barCls = pct >= 90 ? 'progress-red' : pct >= 70 ? 'progress-amber' : 'progress-green';
+        const pctColor = pct >= 90 ? '#f87171' : pct >= 70 ? '#fbbf24' : '#4ade80';
+        const monthsWithData = MESES.filter(m => client.meses[m] && client.meses[m].fat > 0).length;
+
+        const card = document.createElement('div');
+        card.className = 'mei-card';
+        card.innerHTML = `
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px">
+        <div>
+          <p style="font-weight:700;color:#fff;font-size:13px">${name}</p>
+          <p style="font-size:11px;color:var(--text-muted);margin-top:2px">${client.tipo}</p>
+        </div>
+        <span class="chip chip-mei">MEI</span>
+      </div>
+      <div style="margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:5px">
+          <span style="color:var(--text-muted)">Faturamento Anual</span>
+          <span style="color:${pctColor};font-weight:700">${pct.toFixed(1)}%</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar ${barCls}" style="width:${pct}%"></div></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:12px">
+        <div><p style="color:var(--text-muted)">Acumulado</p><p style="font-weight:700;color:#fff">${fmt(totalFat)}</p></div>
+        <div style="text-align:right"><p style="color:var(--text-muted)">Restante</p><p style="font-weight:700;color:#fff">${fmt(Math.max(0, MEI_LIMIT - totalFat))}</p></div>
+      </div>
+      <div class="month-pips">
+        ${MESES.map(m => {
+          const md = client.meses[m];
+          const has = md && md.fat > 0;
+          const col = has ? (md.status === 'Concluído' ? '#22c55e' : '#fbbf24') : 'rgba(255,255,255,.1)';
+          return `<div class="month-pip" title="${m}: ${has ? fmt(md.fat) : 'Sem dado'}" style="background:${col}"></div>`;
+        }).join('')}
+      </div>
+      <p style="font-size:10px;color:var(--text-dim);margin-top:6px">${monthsWithData} de 12 meses lançados</p>`;
+        container.appendChild(card);
+      });
+    }
+
+    // ── Simples Nacional Panel ────────────────────────────────────────────
+    function renderSN() {
+      const month = document.getElementById('globalMonthFilter').value;
+      const search = document.getElementById('sn-search').value.toLowerCase();
+      const tipo = document.getElementById('sn-tipo').value;
+      const stF = document.getElementById('sn-status').value;
+
+      let rows = Object.entries(DB.clients).filter(([, c]) => c.regime === 'Simples Nacional');
+      if (tipo) rows = rows.filter(([, c]) => c.tipo === tipo);
+      if (search) rows = rows.filter(([n]) => n.toLowerCase().includes(search));
+
+      // KPIs
+      let totFat = 0, totDas = 0, totInss = 0, totFgts = 0;
+      rows.forEach(([, c]) => {
+        const months = month === 'ALL' ? MESES : [month];
+        months.forEach(m => {
+          const md = c.meses[m]; if (!md) return;
+          totFat += (md.total || 0);
+          totDas += (md.das || 0);
+          totInss += (md.inss || 0);
+          totFgts += (md.fgts || 0);
+        });
+      });
+      document.getElementById('sn-kpis').innerHTML = `
+    <div class="obrig-tile"><p class="obrig-name">Empresas SN</p><p class="obrig-value">${rows.length}</p><p class="obrig-sub">clientes ativos</p></div>
+    <div class="obrig-tile"><p class="obrig-name">Faturamento</p><p class="obrig-value" style="font-size:16px">${fmtShort(totFat)}</p><p class="obrig-sub">total acumulado</p></div>
+    <div class="obrig-tile"><p class="obrig-name">DAS Total</p><p class="obrig-value" style="font-size:16px">${fmtShort(totDas)}</p><p class="obrig-sub">impostos Simples</p></div>
+    <div class="obrig-tile"><p class="obrig-name">INSS + FGTS</p><p class="obrig-value" style="font-size:16px">${fmtShort(totInss + totFgts)}</p><p class="obrig-sub">encargos trabalhistas</p></div>`;
+
+      // Table
+      const tbody = document.getElementById('snTableBody');
+      tbody.innerHTML = '';
+      let visible = [];
+      rows.sort((a, b) => a[0].localeCompare(b[0])).forEach(([name, client]) => {
+        const months = month === 'ALL' ? MESES : [month];
+        months.forEach(m => {
+          const md = client.meses[m]; if (!md) return;
+          const fat = md.total || 0, das = md.das || 0, inss = md.inss || 0, fgts = md.fgts || 0;
+          const st = md.status || 'Pendente';
+          if (stF && st !== stF) return;
+          visible.push({ name, m, client, fat, das, inss, fgts, st, month });
+        });
+      });
+      if (!visible.length) {
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
+        return;
+      }
+      visible.forEach(({ name, m, client, fat, das, inss, fgts, st, month: mo }) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+      <td style="color:#fff;font-weight:600;text-align:left">${name}${mo === 'ALL' ? `<span style="display:block;font-size:10px;color:var(--text-dim)">${m}</span>` : ''}</td>
+      <td style="text-align:left"><span style="font-size:11px;color:var(--text-muted)">${client.tipo}</span></td>
+      <td>${fmt(fat)}</td>
+      <td>${fmt(client.meses[m]?.vendas || 0)}</td>
+      <td>${fmt(client.meses[m]?.servicos || 0)}</td>
+      <td style="color:#fbbf24">${fmt(das)}</td>
+      <td>${fmt(inss)}</td>
+      <td>${fmt(fgts)}</td>
+      <td class="center">${badgeHTML(st)}</td>
+      <td class="center"><button class="tbl-btn" onclick="openEntryModalFor('${name.replace(/'/g, "\\'")}','${m}')">Editar</button></td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ── Lucro Presumido Panel ─────────────────────────────────────────────
+    function renderLP() {
+      const month = document.getElementById('globalMonthFilter').value;
+      const search = document.getElementById('lp-search').value.toLowerCase();
+      const stF = document.getElementById('lp-status').value;
+
+      let rows = Object.entries(DB.clients).filter(([, c]) => c.regime === 'Lucro Presumido');
+      if (search) rows = rows.filter(([n]) => n.toLowerCase().includes(search));
+
+      // KPIs
+      let totFat = 0, totIss = 0, totPis = 0, totCofins = 0;
+      rows.forEach(([, c]) => {
+        const months = month === 'ALL' ? MESES : [month];
+        months.forEach(m => {
+          const md = c.meses[m]; if (!md) return;
+          totFat += (md.total || 0);
+          totIss += (md.iss || 0);
+          totPis += (md.pis || 0);
+          totCofins += (md.cofins || 0);
+        });
+      });
+      document.getElementById('lp-kpis').innerHTML = `
+    <div class="obrig-tile"><p class="obrig-name">Empresas LP</p><p class="obrig-value">${rows.length}</p><p class="obrig-sub">clientes ativos</p></div>
+    <div class="obrig-tile"><p class="obrig-name">Faturamento</p><p class="obrig-value" style="font-size:16px">${fmtShort(totFat)}</p><p class="obrig-sub">total acumulado</p></div>
+    <div class="obrig-tile"><p class="obrig-name">ISS Total</p><p class="obrig-value" style="font-size:16px">${fmtShort(totIss)}</p><p class="obrig-sub">Imposto Sobre Serviços</p></div>
+    <div class="obrig-tile"><p class="obrig-name">PIS + COFINS</p><p class="obrig-value" style="font-size:16px">${fmtShort(totPis + totCofins)}</p><p class="obrig-sub">contribuições federais</p></div>`;
+
+      // Table
+      const tbody = document.getElementById('lpTableBody');
+      tbody.innerHTML = '';
+      let visible = [];
+      rows.sort((a, b) => a[0].localeCompare(b[0])).forEach(([name, client]) => {
+        const months = month === 'ALL' ? MESES : [month];
+        months.forEach(m => {
+          const md = client.meses[m]; if (!md) return;
+          const fat = md.total || 0, iss = md.iss || 0, pis = md.pis || 0, cofins = md.cofins || 0;
+          const inss = md.inss || 0, fgts = md.fgts || 0;
+          const st = md.status || 'Pendente';
+          if (stF && st !== stF) return;
+          visible.push({ name, m, fat, iss, pis, cofins, inss, fgts, st, mo: month });
+        });
+      });
+      if (!visible.length) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
+        return;
+      }
+      visible.forEach(({ name, m, fat, iss, pis, cofins, inss, fgts, st, mo }) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+      <td style="color:#fff;font-weight:600;text-align:left">${name}${mo === 'ALL' ? `<span style="display:block;font-size:10px;color:var(--text-dim)">${m}</span>` : ''}</td>
+      <td>${fmt(fat)}</td>
+      <td style="color:var(--gold)">${fmt(iss)}</td>
+      <td>${fmt(pis)}</td>
+      <td>${fmt(cofins)}</td>
+      <td>${fmt(inss)}</td>
+      <td>${fmt(fgts)}</td>
+      <td class="center">${badgeHTML(st)}</td>
+      <td class="center"><button class="tbl-btn" onclick="openEntryModalFor('${name.replace(/'/g, "\\'")}','${m}')">Editar</button></td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ── Tabela Geral ──────────────────────────────────────────────────────
+    function renderTable(month) {
+      const search = document.getElementById('tableSearch').value.toLowerCase();
+      const regimeF = document.getElementById('tableRegimeFilter').value;
+      const tbody = document.getElementById('mainTableBody');
+      tbody.innerHTML = '';
+
+      let rows = Object.entries(DB.clients);
+      if (regimeF) rows = rows.filter(([, c]) => c.regime === regimeF);
+      if (search) rows = rows.filter(([n]) => n.toLowerCase().includes(search));
+      rows.sort((a, b) => a[0].localeCompare(b[0]));
+
+      let count = 0;
+      rows.forEach(([name, client]) => {
+        const months = month === 'ALL' ? MESES : [month];
+        months.forEach(m => {
+          const md = client.meses[m]; if (!md) return;
+          const fat = md.fat || md.total || 0;
+          const das = md.das || ((md.iss || 0) + (md.pis || 0) + (md.cofins || 0));
+          const inss = md.inss || 0, fgts = md.fgts || 0;
+          const st = md.status || 'Pendente';
+          count++;
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+        <td style="color:#fff;font-weight:600;text-align:left">${name}${month === 'ALL' ? `<span style="display:block;font-size:10px;color:var(--text-dim)">${m}</span>` : ''}</td>
+        <td style="text-align:left">${chipRegime(client.regime)}</td>
+        <td style="text-align:left;font-size:11px;color:var(--text-muted)">${client.tipo}</td>
+        <td style="color:var(--gold);font-weight:600">${fmt(fat)}</td>
+        <td style="color:#fbbf24">${fmt(das)}</td>
+        <td>${fmt(inss)}</td>
+        <td>${fmt(fgts)}</td>
+        <td class="center">${badgeHTML(st)}</td>
+        <td class="center"><button class="tbl-btn" onclick="openEntryModalFor('${name.replace(/'/g, "\\'")}','${m}')">Editar</button></td>`;
+          tbody.appendChild(tr);
+        });
+      });
+
+      if (count === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
+      }
+    }
+
+    document.getElementById('tableSearch').addEventListener('input', () => renderTable(document.getElementById('globalMonthFilter').value));
+    document.getElementById('tableRegimeFilter').addEventListener('change', () => renderTable(document.getElementById('globalMonthFilter').value));
+
+    function focusClientTable(name) {
+      showPanel('table');
+      document.getElementById('tableSearch').value = name;
+      renderTable(document.getElementById('globalMonthFilter').value);
+    }
+
+    // ── Vault ─────────────────────────────────────────────────────────────
+    function renderVault() {
+      const passwords = DB.passwords || [];
+      const grid = document.getElementById('vaultGrid');
+      const empty = document.getElementById('vaultEmpty');
+      grid.innerHTML = '';
+
+      if (!passwords.length) { empty.style.display = 'block'; return; }
+      empty.style.display = 'none';
+
+      passwords.forEach(pw => {
+        const card = document.createElement('div');
+        card.className = 'vault-card';
+        card.innerHTML = `
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px">
+        <div>
+          <p style="font-weight:700;color:#fff;font-size:13px">${pw.title || '—'}</p>
+          <p style="font-size:11px;color:var(--text-muted);margin-top:2px">${pw.client || ''}</p>
+        </div>
+        <button onclick="deletePw(${pw.id})" style="background:none;border:none;color:var(--text-dim);cursor:pointer;padding:2px;transition:color .2s" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='var(--text-dim)'">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+        </button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:12px">
+        ${pw.login ? `<div style="display:flex;gap:8px"><span style="color:var(--text-dim);width:44px;flex-shrink:0">Login</span><span style="color:var(--text);font-family:monospace">${pw.login}</span></div>` : ''}
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="color:var(--text-dim);width:44px;flex-shrink:0">Senha</span>
+          <span id="pw-display-${pw.id}" class="pass-hidden" style="cursor:pointer;font-family:monospace" onclick="toggleReveal('${pw.id}','${(pw.password || '').replace(/'/g, "\\'")}')">●●●●●●●●</span>
+        </div>
+        ${pw.notes ? `<div style="color:var(--text-dim);font-style:italic;margin-top:4px;font-size:11px">${pw.notes}</div>` : ''}
+      </div>`;
+        grid.appendChild(card);
+      });
+    }
+
+    function toggleReveal(id, pass) {
+      const el = document.getElementById(`pw-display-${id}`);
+      if (el.textContent === '●●●●●●●●') {
+        el.textContent = pass || '(vazio)'; el.classList.remove('pass-hidden');
+        el.style.color = 'var(--gold-light)';
+      } else {
+        el.textContent = '●●●●●●●●'; el.classList.add('pass-hidden');
+        el.style.color = '';
+      }
+    }
+
+    async function deletePw(id) {
+      if (!confirm('Remover esta entrada do cofre?')) return;
+      try {
+        await fetch(`${API}/data/passwords/${id}`, { method: 'DELETE' });
+        DB.passwords = (DB.passwords || []).filter(p => p.id !== id);
+        renderVault(); showToast('Senha removida.');
+      } catch (e) { showToast('Erro ao remover.', 'error'); }
+    }
+
+    // ── Modal Lançamento ──────────────────────────────────────────────────
+    function buildEntryClientSelect() {
+      const sel = document.getElementById('entry-client');
+      sel.innerHTML = '<option value="">Selecione…</option>';
+      Object.keys(DB.clients).sort().forEach(name => {
+        const opt = document.createElement('option');
+        opt.value = name; opt.textContent = name;
+        sel.appendChild(opt);
+      });
+    }
+
+    function openEntryModal() {
+      document.getElementById('entry-fields').innerHTML = '';
+      document.getElementById('entryModal').classList.add('open');
+    }
+    function openEntryModalFor(clientName, month) {
+      document.getElementById('entry-client').value = clientName;
+      document.getElementById('entry-month').value = month;
+      onEntryClientChange();
+      const m = DB.clients[clientName]?.meses[month];
+      if (m) {
+        setTimeout(() => {
+          document.querySelectorAll('#entry-fields input').forEach(inp => {
+            if (m[inp.name] !== undefined) inp.value = m[inp.name];
+          });
+          if (m.status) document.getElementById('entry-status').value = m.status;
+        }, 50);
+      }
+      document.getElementById('entryModal').classList.add('open');
+    }
+    function closeEntryModal() { document.getElementById('entryModal').classList.remove('open'); }
+
+    function onEntryClientChange() {
+      const name = document.getElementById('entry-client').value;
+      const container = document.getElementById('entry-fields');
+      container.innerHTML = '';
+      if (!name || !DB.clients[name]) return;
+      const regime = DB.clients[name].regime;
+      const LABELS = { fat: 'Faturamento', das: 'DAS', inss: 'INSS', fgts: 'FGTS', folha: 'Folha', prolabore: 'Pró-labore', vendas: 'Vendas', servicos: 'Serviços', total: 'Total', iss: 'ISS', pis: 'PIS', cofins: 'COFINS' };
+      const fieldMap = {
+        'MEI': ['fat', 'das'],
+        'Lucro Presumido': ['servicos', 'vendas', 'iss', 'pis', 'cofins', 'inss', 'fgts', 'folha', 'prolabore'],
+        'Simples Nacional': ['vendas', 'servicos', 'das', 'inss', 'fgts', 'folha', 'prolabore'],
+      };
+      (fieldMap[regime] || []).forEach(f => {
+        const div = document.createElement('div');
+        div.className = 'form-group';
+        div.innerHTML = `<label>${LABELS[f] || f}</label><input type="number" step="0.01" name="${f}" placeholder="0,00" />`;
+        container.appendChild(div);
+      });
+    }
+
+    async function saveEntry() {
+      const clientName = document.getElementById('entry-client').value;
+      const month = document.getElementById('entry-month').value;
+      if (!clientName || !month) { showToast('Selecione cliente e mês.', 'error'); return; }
+      const payload = {};
+      document.querySelectorAll('#entry-fields input[name]').forEach(inp => {
+        if (inp.value !== '') payload[inp.name] = parseFloat(inp.value) || 0;
+      });
+      payload.status = document.getElementById('entry-status').value;
+      try {
+        const r = await fetch(`${API}/data/client/${encodeURIComponent(clientName)}/month/${encodeURIComponent(month)}`, {
+          method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+        });
+        if (!r.ok) throw new Error();
+        const data = await r.json();
+        DB.clients[clientName].meses[month] = data.data;
+        renderAll(); closeEntryModal();
+        showToast(`Lançamento de ${clientName} – ${month} salvo!`);
+      } catch (e) { showToast('Erro ao salvar lançamento.', 'error'); }
+    }
+
+    // ── Modal Senha ───────────────────────────────────────────────────────
+    function openPasswordModal() {
+      ['pw-title', 'pw-client', 'pw-login', 'pw-password', 'pw-notes'].forEach(id => {
+        const el = document.getElementById(id); if (el) el.value = '';
+      });
+      document.getElementById('passwordModal').classList.add('open');
+    }
+    function closePasswordModal() { document.getElementById('passwordModal').classList.remove('open'); }
+
+    async function savePassword() {
+      const title = document.getElementById('pw-title').value.trim();
+      if (!title) { showToast('Informe o título.', 'error'); return; }
+      const entry = {
+        title, client: document.getElementById('pw-client').value.trim(),
+        login: document.getElementById('pw-login').value.trim(),
+        password: document.getElementById('pw-password').value.trim(),
+        notes: document.getElementById('pw-notes').value.trim(),
+      };
+      try {
+        const r = await fetch(`${API}/data/passwords`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(entry) });
+        const data = await r.json();
+        if (!DB.passwords) DB.passwords = [];
+        DB.passwords.push(data.entry);
+        renderVault(); closePasswordModal(); showToast('Senha salva no cofre!');
+      } catch (e) { showToast('Erro ao salvar.', 'error'); }
+    }
+
+    // ── Toast ─────────────────────────────────────────────────────────────
+    let toastTimer;
+    function showToast(msg, type = 'ok') {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.className = type;
+      t.style.display = 'block';
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { t.style.display = 'none'; }, 3500);
+    }
+
+    // ── Close modals on overlay click / ESC ──────────────────────────────
+    document.getElementById('entryModal').addEventListener('click', function (e) { if (e.target === this) closeEntryModal(); });
+    document.getElementById('passwordModal').addEventListener('click', function (e) { if (e.target === this) closePasswordModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeEntryModal(); closePasswordModal(); } });
+
+    // ── Novo Cliente ─────────────────────────────────────────────────────
+    function openNovoClienteModal() {
+      ['nc-nome', 'nc-razao', 'nc-cnpj', 'nc-im', 'nc-ie', 'nc-resp', 'nc-cpf', 'nc-sefaz', 'nc-pref', 'nc-govbr', 'nc-codsn', 'nc-cert'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+      document.getElementById('nc-regime').value = 'MEI';
+      document.getElementById('nc-tipo').value = 'COMERCIO';
+      document.getElementById('novoClienteModal').classList.add('open');
+    }
+    function closeNovoClienteModal() { document.getElementById('novoClienteModal').classList.remove('open'); }
+
+    async function saveNovoCliente() {
+      const nome = document.getElementById('nc-nome').value.trim();
+      const regime = document.getElementById('nc-regime').value;
+      if (!nome) { showToast('Informe o nome do cliente.', 'error'); return; }
+      if (!regime) { showToast('Selecione o regime.', 'error'); return; }
+      const payload = {
+        nome, regime,
+        tipo: document.getElementById('nc-tipo').value,
+        cadastro: {
+          razaoSocial: document.getElementById('nc-razao').value.trim(),
+          cnpj: document.getElementById('nc-cnpj').value.trim(),
+          inscMunicipal: document.getElementById('nc-im').value.trim(),
+          inscEstadual: document.getElementById('nc-ie').value.trim(),
+          responsavel: document.getElementById('nc-resp').value.trim(),
+          cpfResponsavel: document.getElementById('nc-cpf').value.trim(),
+          sefaz: document.getElementById('nc-sefaz').value.trim(),
+          prefeitura: document.getElementById('nc-pref').value.trim(),
+          govbr: document.getElementById('nc-govbr').value.trim(),
+          codigoSimples: document.getElementById('nc-codsn').value.trim(),
+          certificado: '',
+        },
+      };
+      try {
+        const r = await fetch(`${API}/clients`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+        const data = await r.json();
+        if (!r.ok) { showToast(data.error || 'Erro ao criar cliente.', 'error'); return; }
+        DB.clients[nome] = data.client;
+        // upload certificate if selected
+        const certFile = document.getElementById('nc-cert')?.files[0];
+        if (certFile) {
+          const fd = new FormData();
+          fd.append('certificado', certFile);
+          try {
+            const cr = await fetch(`${API}/clients/${encodeURIComponent(nome)}/certificado`, { method: 'POST', body: fd });
+            if (cr.ok) { const cd = await cr.json(); DB.clients[nome].cadastro.certificado = cd.filename; }
+          } catch (_) { /* silently ignore cert upload error */ }
+        }
+        buildClientFolders();
+        buildEntryClientSelect();
+        closeNovoClienteModal();
+        showToast(`Cliente "${nome}" criado com sucesso!`);
+      } catch (e) { showToast('Erro de conexão ao criar cliente.', 'error'); }
+    }
+
+    // ── Ficha do Cliente ──────────────────────────────────────────────────
+    let _fichaClient = null;
+    let _fichaEditing = false;
+
+    function openFichaCliente(name) {
+      if (!DB.clients[name]) { focusClientTable(name); return; }
+      _fichaClient = name;
+      _fichaEditing = false;
+      renderFicha();
+      document.getElementById('fichaModal').classList.add('open');
+    }
+    function closeFichaModal() { document.getElementById('fichaModal').classList.remove('open'); _fichaClient = null; }
+
+    function toggleFichaEdit() {
+      _fichaEditing = !_fichaEditing;
+      renderFicha();
+    }
+
+    function renderFicha() {
+      const name = _fichaClient;
+      const c = DB.clients[name]; if (!c) return;
+      const cad = c.cadastro || {};
+      document.getElementById('fichaTitle').textContent = name;
+      document.getElementById('fichaMeta').textContent = `${c.regime} · ${c.tipo}`;
+      document.getElementById('fichaEditBtn').textContent = _fichaEditing ? 'Cancelar' : '✏ Editar';
+      document.getElementById('fichaFooter').style.display = _fichaEditing ? 'flex' : 'none';
+
+      const safe = v => (v || '').toString().replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      const row = (label, val, id, mono = false) => {
+        if (_fichaEditing) return `<div class="form-group"><label>${label}</label><input id="fe-${id}" type="text" value="${safe(val)}" /></div>`;
+        const empty = !val;
+        const copy = !empty ? `<button onclick="navigator.clipboard.writeText('${safe(val)}').then(()=>showToast('Copiado!'))" style="background:none;border:1px solid rgba(255,255,255,.1);padding:2px 8px;border-radius:5px;font-size:10px;color:var(--text-dim);cursor:pointer;margin-left:auto;flex-shrink:0">Copiar</button>` : '';
+        return `<div style="display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="font-size:11px;color:var(--text-dim);width:150px;flex-shrink:0;font-weight:600">${label}</span><span style="font-size:13px;${mono ? 'font-family:monospace;' : ''}${empty ? 'color:var(--text-dim);font-style:italic;' : ''}">${val || '—'}</span>${copy}</div>`;
+      };
+      const section = (title, rows) => `<div style="margin-bottom:16px"><p style="font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--gold);font-weight:700;margin-bottom:8px">${title}</p>${_fichaEditing ? `<div class="form-grid-2">${rows}</div>` : rows}</div>`;
+
+      document.getElementById('fichaBody').innerHTML =
+        section('🏢 Dados da Empresa',
+          row('Razão Social', cad.razaoSocial, 'razao') +
+          row('CNPJ', cad.cnpj, 'cnpj', true) +
+          row('Insc. Municipal', cad.inscMunicipal, 'im') +
+          row('Insc. Estadual', cad.inscEstadual, 'ie')) +
+        section('👤 Responsável',
+          row('Nome', cad.responsavel, 'resp') +
+          row('CPF', cad.cpfResponsavel, 'cpf', true)) +
+        section('🔑 Acessos e Senhas',
+          row('SEFAZ', cad.sefaz, 'sefaz', true) +
+          row('Prefeitura', cad.prefeitura, 'pref', true) +
+          row('GOV.br', cad.govbr, 'govbr', true) +
+          row('Cód. Simples', cad.codigoSimples, 'codsn', true)) +
+        (cad.certificado ? section('📜 Certificado', `<span style="font-size:12px;color:var(--text-muted)">📁 ${safe(cad.certificado)}</span><button onclick="window.open('/api/certificados/${encodeURIComponent(cad.certificado || '')}')" style="background:none;border:1px solid var(--border);padding:3px 10px;border-radius:6px;font-size:11px;color:var(--gold);cursor:pointer;margin-left:12px">Baixar</button>`) : '');
+    }
+
+    async function saveFichaEdit() {
+      const name = _fichaClient;
+      const g = id => document.getElementById(`fe-${id}`)?.value.trim() || '';
+      const cadastro = {
+        razaoSocial: g('razao'), cnpj: g('cnpj'),
+        inscMunicipal: g('im'), inscEstadual: g('ie'),
+        responsavel: g('resp'), cpfResponsavel: g('cpf'),
+        sefaz: g('sefaz'), prefeitura: g('pref'),
+        govbr: g('govbr'), codigoSimples: g('codsn'),
+      };
+      try {
+        const r = await fetch(`${API}/clients/${encodeURIComponent(name)}/cadastro`, {
+          method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(cadastro)
+        });
+        if (!r.ok) throw new Error();
+        const data = await r.json();
+        if (!DB.clients[name].cadastro) DB.clients[name].cadastro = {};
+        Object.assign(DB.clients[name].cadastro, data.cadastro);
+        _fichaEditing = false; renderFicha();
+        showToast('Cadastro salvo!');
+      } catch { showToast('Erro ao salvar cadastro.', 'error'); }
+    }
+
+    // ── Start ─────────────────────────────────────────────────────────────
+    init();
+    async function importarCertificado() {
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = '.pfx';
+
+      fileInput.onchange = async (e) => {
+        const file = e.target.files[0];
+        const senha = prompt("Digite a senha do certificado digital:");
+        if (!senha) return;
+
+        const formData = new FormData();
+        formData.append('certificado', file);
+        formData.append('password', senha);
+
+        try {
+          const response = await fetch('/ler-certificado', { method: 'POST', body: formData });
+          const data = await response.json();
+
+          if (data.sucesso) {
+            document.getElementById('nc-razao').value = data.razaoSocial;
+            document.getElementById('nc-cnpj').value = data.cnpj;
+            alert("✅ Dados importados com sucesso!");
+          } else {
+            alert("❌ Erro: " + data.erro);
+          }
+        } catch (error) {
+          alert("❌ Erro: Verifique se a tela preta (terminal) está ligada.");
+        }
+      };
+      fileInput.click();
+    }
+
+    // Liga o sistema visual
+    init();
+  </script>
+</body>
+
+</html>

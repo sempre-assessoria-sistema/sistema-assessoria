@@ -1,0 +1,7208 @@
+{
+  "clients": {
+    "ABRAAO": {
+      "regime": "MEI",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "fat": 5000,
+          "das": 87.05,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "fat": 18100,
+          "das": 87.05,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "ALGODAO DOCES": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 16003.91,
+          "servicos": 0,
+          "total": 16003.91,
+          "das": 640.01,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 22668.45,
+          "servicos": 0,
+          "total": 22668.45,
+          "das": 906.75,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 27821.86,
+          "servicos": 0,
+          "total": 27821.86,
+          "das": 1112.88,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "ANA": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 7350.85,
+          "servicos": 0,
+          "total": 7350.85,
+          "das": 294.03,
+          "inss": 488.77,
+          "fgts": 319.2,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 8282.4,
+          "servicos": 0,
+          "total": 8282.4,
+          "das": 331.3,
+          "inss": 488.77,
+          "fgts": 319.2,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 9855.2,
+          "servicos": 0,
+          "total": 9855.2,
+          "das": 394.21,
+          "inss": 616.52,
+          "fgts": 455.47,
+          "folha": 4499.22,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "BIG PARTNER": {
+      "regime": "Simples Nacional",
+      "tipo": "SERVICO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 468000,
+          "total": 468000,
+          "das": 63059,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 236285.82,
+          "total": 236285.82,
+          "das": 28872.62,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "C PRECISA": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 525.95,
+          "servicos": 0,
+          "total": 525.95,
+          "das": 20.26,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 1464.25,
+          "servicos": 0,
+          "total": 1464.25,
+          "das": 53.32,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "CHAVEIRO": {
+      "regime": "Simples Nacional",
+      "tipo": "MISTO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 1980,
+          "servicos": 60,
+          "total": 2040,
+          "das": 82.81,
+          "inss": 121.57,
+          "fgts": 129.68,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 980,
+          "servicos": 1556,
+          "total": 2536,
+          "das": 132.57,
+          "inss": 121.57,
+          "fgts": 129.68,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 121.57,
+          "fgts": 129.68,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "CONTROL": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 20361.71,
+          "servicos": 0,
+          "total": 20361.71,
+          "das": 1300.13,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 17870.45,
+          "servicos": 0,
+          "total": 17870.45,
+          "das": 1165.42,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 13392.3,
+          "servicos": 0,
+          "total": 13392.3,
+          "das": 827.41,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "DEBORA": {
+      "regime": "Simples Nacional",
+      "tipo": "SERVICO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 17097.54,
+          "total": 17097.54,
+          "das": 1034.01,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 47339.43,
+          "total": 47339.43,
+          "das": 2895.3,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "ELCIO": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "ESTILLOS": {
+      "regime": "Simples Nacional",
+      "tipo": "MISTO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 35858,
+          "servicos": 7530,
+          "total": 43388,
+          "das": 3698.73,
+          "inss": 77.7,
+          "fgts": 150.72,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 9105,
+          "servicos": 42585.42,
+          "total": 51690.42,
+          "das": 5259.5,
+          "inss": 77.7,
+          "fgts": 150.72,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 26888,
+          "servicos": 12496.67,
+          "total": 39384.67,
+          "das": 3352.33,
+          "inss": 77.7,
+          "fgts": 150.72,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "EVERTON": {
+      "regime": "Lucro Presumido",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "servicos": 1800,
+          "vendas": 385.5,
+          "total": 2185.5,
+          "iss": 90,
+          "pis": 14.21,
+          "cofins": 65.56,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "servicos": 1150,
+          "vendas": 1002.5,
+          "total": 2152.5,
+          "iss": 57.5,
+          "pis": 13.99,
+          "cofins": 64.58,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "GROW YOUR": {
+      "regime": "Lucro Presumido",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "servicos": 197647.07,
+          "vendas": 0,
+          "total": 197647.07,
+          "iss": 9882.35,
+          "pis": 1284.71,
+          "cofins": 5929.41,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Entregue"
+        },
+        "FEVEREIRO": {
+          "servicos": 253742.66,
+          "vendas": 0,
+          "total": 253742.66,
+          "iss": 12687.13,
+          "pis": 1649.33,
+          "cofins": 7612.28,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Entregue"
+        },
+        "MARÇO": {
+          "servicos": 197647.07,
+          "vendas": 0,
+          "total": 197647.07,
+          "iss": 9882.35,
+          "pis": 1284.71,
+          "cofins": 5929.41,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "LL AUDIO": {
+      "regime": "Simples Nacional",
+      "tipo": "SERVICO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 40210,
+          "total": 40210,
+          "das": 2690.76,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 51911,
+          "total": 51911,
+          "das": 3853.46,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "IFART": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 7293.8,
+          "servicos": 0,
+          "total": 7293.8,
+          "das": 291.76,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 4995.6,
+          "servicos": 0,
+          "total": 4995.6,
+          "das": 199.83,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "IMPORTS MASTER": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "JCARLOS": {
+      "regime": "Lucro Presumido",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "servicos": 7827.25,
+          "vendas": 0,
+          "total": 7827.25,
+          "iss": 391.36,
+          "pis": 50.88,
+          "cofins": 234.82,
+          "inss": 175.6,
+          "fgts": 259.36,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Entregue"
+        },
+        "FEVEREIRO": {
+          "servicos": 6260,
+          "vendas": 0,
+          "total": 6260,
+          "iss": 331,
+          "pis": 187.8,
+          "cofins": 40.69,
+          "inss": 1060.66,
+          "fgts": 259.36,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Entregue"
+        },
+        "MARÇO": {
+          "servicos": 2383,
+          "vendas": 0,
+          "total": 2383,
+          "iss": 119.15,
+          "pis": 15.49,
+          "cofins": 71.49,
+          "inss": 1060.66,
+          "fgts": 259.36,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Entregue"
+        },
+        "ABRIL": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "JOSUE": {
+      "regime": "MEI",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "fat": 345,
+          "das": 86.05,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "fat": 595,
+          "das": 86.05,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "fat": 1073,
+          "das": 86.05,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "JULIO CESAR": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 15904.46,
+          "servicos": 0,
+          "total": 15904.46,
+          "das": 719.41,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 50097.57,
+          "servicos": 0,
+          "total": 50097.57,
+          "das": 1866.08,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "KAUAN": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 5983.42,
+          "servicos": 0,
+          "total": 5983.42,
+          "das": 261.71,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 7528.22,
+          "servicos": 0,
+          "total": 7528.22,
+          "das": 319.97,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "LG MOTOS": {
+      "regime": "Simples Nacional",
+      "tipo": "MISTO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 5684.65,
+          "servicos": 0,
+          "total": 5684.65,
+          "das": 227.4,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 6780.3,
+          "servicos": 1864,
+          "total": 8644.3,
+          "das": 383.05,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 2528,
+          "servicos": 5407,
+          "total": 7935,
+          "das": 425.53,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "LINDINALVA": {
+      "regime": "MEI",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "fat": 0,
+          "das": 86.05,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "fat": 0,
+          "das": 86.05,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "fat": 0,
+          "das": 86.05,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "M B CONFC": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "M G UENOBO": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 5105.7,
+          "servicos": 0,
+          "total": 5105.7,
+          "das": 299.05,
+          "inss": 403.54,
+          "fgts": 169.12,
+          "folha": 1948.06,
+          "prolabore": 2160,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 6680.75,
+          "servicos": 0,
+          "total": 6680.75,
+          "das": 299.05,
+          "inss": 403.54,
+          "fgts": 169.12,
+          "folha": 1948.06,
+          "prolabore": 2160,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 7744.8,
+          "servicos": 0,
+          "total": 7744.8,
+          "das": 291.63,
+          "inss": 403.54,
+          "fgts": 169.12,
+          "folha": 1948.06,
+          "prolabore": 2160,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "M. V. CAMA": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 552.9,
+          "servicos": 0,
+          "total": 552.9,
+          "das": 222.12,
+          "inss": 403.54,
+          "fgts": 169.12,
+          "folha": 1948.06,
+          "prolabore": 2160,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 9747.52,
+          "servicos": 0,
+          "total": 9747.52,
+          "das": 387.25,
+          "inss": 403.54,
+          "fgts": 169.12,
+          "folha": 1948.06,
+          "prolabore": 2160,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 11993.36,
+          "servicos": 0,
+          "total": 11993.36,
+          "das": 476.44,
+          "inss": 403.54,
+          "fgts": 169.12,
+          "folha": 1948.06,
+          "prolabore": 2160,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "MARCIA FERREIRA": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 1621,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "MARISA": {
+      "regime": "Simples Nacional",
+      "tipo": "MISTO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 23100,
+          "servicos": 1000,
+          "total": 24100,
+          "das": 1322.68,
+          "inss": 927.08,
+          "fgts": 522.86,
+          "folha": 0,
+          "prolabore": 3242,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 20850,
+          "servicos": 8200,
+          "total": 29050,
+          "das": 1795.09,
+          "inss": 877.57,
+          "fgts": 499.33,
+          "folha": 0,
+          "prolabore": 3242,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 1004.97,
+          "fgts": 623.25,
+          "folha": 6768.41,
+          "prolabore": 3242,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "MERC ARRUDA": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "MITIKO": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 10235.1,
+          "servicos": 0,
+          "total": 10235.1,
+          "das": 419.63,
+          "inss": 165.94,
+          "fgts": 169.12,
+          "folha": 1948.06,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 10209.8,
+          "servicos": 0,
+          "total": 10209.8,
+          "das": 408.74,
+          "inss": 165.94,
+          "fgts": 169.12,
+          "folha": 1948.06,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 13566.3,
+          "servicos": 0,
+          "total": 13566.3,
+          "das": 0,
+          "inss": 542.65,
+          "fgts": 169.12,
+          "folha": 1948.06,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "N&L CARDOSO": {
+      "regime": "Simples Nacional",
+      "tipo": "SERVICO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 13400,
+          "total": 13400,
+          "das": 804,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 9345,
+          "total": 9345,
+          "das": 560.69,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "NANDO": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "NEW SEVEN": {
+      "regime": "Simples Nacional",
+      "tipo": "SERVICO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 2434.8,
+          "total": 2434.8,
+          "das": 273.64,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 12153.24,
+          "total": 12153.24,
+          "das": 1308.71,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 129588.94,
+          "total": 129588.94,
+          "das": 9163.39,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "NH MAT": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "OSMAR": {
+      "regime": "MEI",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "fat": 0,
+          "das": 86.06,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "fat": 0,
+          "das": 86.06,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "POLO RETIFICA": {
+      "regime": "Simples Nacional",
+      "tipo": "SERVICO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 712.82,
+          "fgts": 543.05,
+          "folha": 2760.93,
+          "prolabore": 1621,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 1300,
+          "total": 1300,
+          "das": 78,
+          "inss": 356.83,
+          "fgts": 531.11,
+          "folha": 4107.68,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 5985.87,
+          "prolabore": 1621,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "REGIANE": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 34358.12,
+          "servicos": 0,
+          "total": 34358.12,
+          "das": 971.77,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 47934.6,
+          "servicos": 0,
+          "total": 47934.6,
+          "das": 1463.07,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 51746.8,
+          "servicos": 0,
+          "total": 51746.8,
+          "das": 1641.14,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "RF IMPORTS": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "RICARDO - ZERO BALA": {
+      "regime": "Simples Nacional",
+      "tipo": "MISTO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 7325,
+          "servicos": 0,
+          "total": 7325,
+          "das": 293.04,
+          "inss": 427.21,
+          "fgts": 264.48,
+          "folha": 3057.1,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 7990.35,
+          "servicos": 0,
+          "total": 7990.35,
+          "das": 319.62,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 3057.1,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 8960.65,
+          "servicos": 150,
+          "total": 9110.65,
+          "das": 367.42,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 3057.1,
+          "prolabore": 1621,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "RICARDO FRETA": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "ROSILENE": {
+      "regime": "Lucro Presumido",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "SABRINA": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "SEMPRE CONTA": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 4779.49,
+          "servicos": 0,
+          "total": 4779.49,
+          "das": 190.97,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "FEVEREIRO": {
+          "vendas": 11162.81,
+          "servicos": 0,
+          "total": 11162.81,
+          "das": 446.51,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "SIMONE": {
+      "regime": "MEI",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "fat": 7000,
+          "das": 87.05,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "fat": 12500,
+          "das": 87.05,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "fat": 0,
+          "das": 87.05,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "fat": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "SIMONE PERUA": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "SOM EXPRESS": {
+      "regime": "Lucro Presumido",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "TELHADO GAMA": {
+      "regime": "MEI",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "fat": 0,
+          "das": 75.6,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "fat": 0,
+          "das": 75.6,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "fat": 0,
+          "das": 75.6,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "fat": 0,
+          "das": 75.6,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "fat": 0,
+          "das": 75.6,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "fat": 0,
+          "das": 75.6,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "fat": 0,
+          "das": 75.6,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "fat": 0,
+          "das": 75.6,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "fat": 0,
+          "das": 75.6,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "fat": 0,
+          "das": 75.6,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "fat": 0,
+          "das": 75.6,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "fat": 0,
+          "das": 75.6,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "TIME ENG": {
+      "regime": "Lucro Presumido",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "TIME OBRAS": {
+      "regime": "Lucro Presumido",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "VERO": {
+      "regime": "Lucro Presumido",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "servicos": 0,
+          "vendas": 0,
+          "total": 0,
+          "iss": 0,
+          "pis": 0,
+          "cofins": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "VITAL": {
+      "regime": "Simples Nacional",
+      "tipo": "SERVICO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 600,
+          "total": 600,
+          "das": 57.07,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 2600,
+          "total": 2600,
+          "das": 243.5,
+          "inss": 178.31,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Concluído"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      }
+    },
+    "ADEGA DO JORJAO": {
+      "regime": "Simples Nacional",
+      "tipo": "COMERCIO",
+      "meses": {
+        "JANEIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "FEVEREIRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MARÇO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "ABRIL": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "MAIO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JUNHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "JULHO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "AGOSTO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "SETEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "OUTUBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "NOVEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        },
+        "DEZEMBRO": {
+          "vendas": 0,
+          "servicos": 0,
+          "total": 0,
+          "das": 0,
+          "inss": 0,
+          "fgts": 0,
+          "folha": 0,
+          "prolabore": 0,
+          "status": "Pendente"
+        }
+      },
+      "cadastro": {
+        "razaoSocial": "51 455 993 FELIPE ALVES DE OLIVEIRA",
+        "cnpj": "51455993000127",
+        "inscMunicipal": "",
+        "inscEstadual": "",
+        "responsavel": "FELIPE",
+        "cpfResponsavel": "",
+        "sefaz": "",
+        "prefeitura": "",
+        "govbr": "",
+        "codigoSimples": "",
+        "certificado": ""
+      }
+    }
+  },
+  "painel": {
+    "ABRAAO": {
+      "cert": "2027-02-06",
+      "regime": "MEI",
+      "senha": ""
+    },
+    "ALGODAO DOCES": {
+      "cert": "2026-11-15",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "ANA": {
+      "cert": "2029-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "BIG PARTNER": {
+      "cert": "2030-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "C PRECISA": {
+      "cert": "2031-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "CHAVEIRO": {
+      "cert": "2032-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "CONTROL": {
+      "cert": "2033-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "DEBORA": {
+      "cert": "2034-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "ELCIO": {
+      "cert": "2035-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "ESTILLOS": {
+      "cert": "2036-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "EVERTON": {
+      "cert": "2037-02-06",
+      "regime": "Lucro Presumido",
+      "senha": ""
+    },
+    "GROW YOUR": {
+      "cert": "2038-02-06",
+      "regime": "Lucro Presumido",
+      "senha": ""
+    },
+    "IFART": {
+      "cert": "2040-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "IMPORTS MASTER": {
+      "cert": "2041-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "JCARLOS": {
+      "cert": "2042-02-06",
+      "regime": "Lucro Presumido",
+      "senha": ""
+    },
+    "JOSUE": {
+      "cert": "2043-02-06",
+      "regime": "MEI",
+      "senha": ""
+    },
+    "JULIO CESAR": {
+      "cert": "2044-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "KAUAN": {
+      "cert": "2045-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "LG MOTOS": {
+      "cert": "2046-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "LINDINALVA": {
+      "cert": "2047-02-06",
+      "regime": "MEI",
+      "senha": ""
+    },
+    "M B CONFC": {
+      "cert": "2048-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "M G UENOBO": {
+      "cert": "2049-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "M. V. CAMA": {
+      "cert": "2050-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "MARCIA FERREIRA": {
+      "cert": "2051-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "MARISA": {
+      "cert": "2052-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "MERC ARRUDA": {
+      "cert": "2053-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "MITIKO": {
+      "cert": "2054-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "N&L CARDOSO": {
+      "cert": "2055-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "NANDO": {
+      "cert": "2056-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "NEW SEVEN": {
+      "cert": "2057-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "NH MAT": {
+      "cert": "2058-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "OSMAR": {
+      "cert": "2059-02-06",
+      "regime": "MEI",
+      "senha": ""
+    },
+    "POLO RETIFICA": {
+      "cert": "2060-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "REGIANE": {
+      "cert": "2061-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "RF IMPORTS": {
+      "cert": "2062-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "RICARDO - ZERO BALA": {
+      "cert": "2063-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "RICARDO FRETA": {
+      "cert": "2064-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "ROSILENE": {
+      "cert": "2065-02-06",
+      "regime": "Lucro Presumido",
+      "senha": ""
+    },
+    "SABRINA": {
+      "cert": "2065-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "SEMPRE CONTA": {
+      "cert": "2066-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "SIMONE": {
+      "cert": "2067-02-06",
+      "regime": "MEI",
+      "senha": ""
+    },
+    "SIMONE PERUA": {
+      "cert": "2068-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    },
+    "SOM EXPRESS": {
+      "cert": "2069-02-06",
+      "regime": "Lucro Presumido",
+      "senha": ""
+    },
+    "TELHADO GAMA": {
+      "cert": "2070-02-06",
+      "regime": "MEI",
+      "senha": ""
+    },
+    "TIME ENG": {
+      "cert": "2071-02-06",
+      "regime": "Lucro Presumido",
+      "senha": ""
+    },
+    "TIME OBRAS": {
+      "cert": "2072-02-06",
+      "regime": "Lucro Presumido",
+      "senha": ""
+    },
+    "VERO": {
+      "cert": "2073-02-06",
+      "regime": "Lucro Presumido",
+      "senha": ""
+    },
+    "VITAL": {
+      "cert": "2074-02-06",
+      "regime": "Simples Nacional",
+      "senha": ""
+    }
+  },
+  "cofre": []
+}
