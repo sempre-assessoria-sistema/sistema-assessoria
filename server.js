@@ -2,13 +2,19 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+const forge = require('node-forge');
 
 const app = express();
-const PORT = 3000;
+// Usa a porta automática do Render ou a 3000 no seu computador
+const PORT = process.env.PORT || 3000; 
 const DB_PATH = path.join(__dirname, 'database.json');
 const CERT_DIR = path.join(__dirname, 'certificados');
 
-// Create /certificados dir if needed
+// 🔐 CREDENCIAIS DE ACESSO DO SISTEMA (Você pode mudar depois)
+const EMAIL_ACESSO = 'admin@sempreassessoria.com.br';
+const SENHA_ACESSO = 'sempre2026';
+
+// Cria pasta /certificados se não existir
 if (!fs.existsSync(CERT_DIR)) fs.mkdirSync(CERT_DIR, { recursive: true });
 
 // ─── Multer (optional – only used when multer is installed) ──────────────────
@@ -32,15 +38,57 @@ try {
     },
   });
 } catch (_) {
-  console.warn('⚠  multer não instalado — rota de certificado desabilitada. Rode: npm install multer');
+  console.warn('⚠  multer não instalado — rota de certificado desabilitada.');
 }
 
-// ─── Middleware ───────────────────────────────────────────────────────────────
+// ─── Middleware Base ─────────────────────────────────────────────────────────
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
+
+// 🛡️ O GUARDA-COSTAS (Middleware de Autenticação)
+app.use((req, res, next) => {
+  // 1. Deixa a pessoa acessar a tela de login e a verificação de senha livremente
+  if (req.path === '/login.html' || req.path === '/api/login') {
+    return next();
+  }
+
+  // 2. Procura o "crachá" nos cookies do navegador
+  const cookies = req.headers.cookie || '';
+  const temCracha = cookies.includes('auth_sempre=autorizado');
+
+  // 3. Se NÃO tem crachá e tentou abrir o painel principal, chuta pro login
+  if (!temCracha && (req.path === '/' || req.path === '/index.html')) {
+    return res.redirect('/login.html');
+  }
+
+  // 4. Se NÃO tem crachá e tentou acessar os dados da API por trás, bloqueia
+  if (!temCracha && req.path.startsWith('/api/')) {
+    return res.status(401).json({ error: 'Acesso negado. Faça login.' });
+  }
+
+  // 5. Se tem crachá, abre a porta e deixa passar!
+  next();
+});
+
+// 📂 Permite ler os arquivos visuais (PRECISA FICAR ABAIXO DO GUARDA-COSTAS)
 app.use(express.static(__dirname));
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+// ─── Rotas de Autenticação ───────────────────────────────────────────────────
+
+// 🚪 ROTA DE LOGIN (Onde a chave é testada)
+app.post('/api/login', (req, res) => {
+  const { email, password } = req.body;
+
+  if (email === EMAIL_ACESSO && password === SENHA_ACESSO) {
+    // Cria o crachá no navegador com duração de 1 dia
+    res.cookie('auth_sempre', 'autorizado', { maxAge: 86400000, httpOnly: true });
+    return res.json({ message: "Acesso Liberado" });
+  } else {
+    return res.status(401).json({ message: "E-mail ou senha inválidos." });
+  }
+});
+
+// ─── Helpers do Banco de Dados ───────────────────────────────────────────────
 function readDB() {
   try { return JSON.parse(fs.readFileSync(DB_PATH, 'utf8')); }
   catch { return { clients: {}, passwords: [] }; }
@@ -64,12 +112,10 @@ function emptyMeses(regime) {
   return meses;
 }
 
-// ─── Routes ───────────────────────────────────────────────────────────────────
+// ─── Routes da API ───────────────────────────────────────────────────────────
 
-// GET /api/data – full DB
 app.get('/api/data', (_req, res) => res.json(readDB()));
 
-// POST /api/data – overwrite full DB
 app.post('/api/data', (req, res) => {
   try {
     const d = req.body;
@@ -79,7 +125,6 @@ app.post('/api/data', (req, res) => {
   } catch (e) { res.status(500).json({ error: 'Erro interno.' }); }
 });
 
-// POST /api/clients – create new client with full cadastro
 app.post('/api/clients', (req, res) => {
   try {
     const db = readDB();
@@ -92,29 +137,16 @@ app.post('/api/clients', (req, res) => {
       tipo: tipo || 'COMERCIO',
       meses: emptyMeses(regime),
       cadastro: {
-        razaoSocial: '',
-        cnpj: '',
-        inscMunicipal: '',
-        inscEstadual: '',
-        responsavel: '',
-        cpfResponsavel: '',
-        sefaz: '',
-        prefeitura: '',
-        govbr: '',
-        codigoSimples: '',
-        certificado: '',
-        ...(cadastro || {}),
+        razaoSocial: '', cnpj: '', inscMunicipal: '', inscEstadual: '',
+        responsavel: '', cpfResponsavel: '', sefaz: '', prefeitura: '',
+        govbr: '', codigoSimples: '', certificado: '', ...(cadastro || {}),
       },
     };
     writeDB(db);
     res.json({ ok: true, client: db.clients[nome] });
-  } catch (e) {
-    console.error(e);
-    res.status(500).json({ error: 'Erro interno.' });
-  }
+  } catch (e) { res.status(500).json({ error: 'Erro interno.' }); }
 });
 
-// PUT /api/clients/:name/cadastro – update cadastro fields
 app.put('/api/clients/:name/cadastro', (req, res) => {
   try {
     const db = readDB();
@@ -127,7 +159,6 @@ app.put('/api/clients/:name/cadastro', (req, res) => {
   } catch (e) { res.status(500).json({ error: 'Erro interno.' }); }
 });
 
-// DELETE /api/clients/:name – remove client
 app.delete('/api/clients/:name', (req, res) => {
   try {
     const db = readDB();
@@ -139,7 +170,6 @@ app.delete('/api/clients/:name', (req, res) => {
   } catch (e) { res.status(500).json({ error: 'Erro interno.' }); }
 });
 
-// PATCH /api/data/client/:name/month/:month – update one month
 app.patch('/api/data/client/:name/month/:month', (req, res) => {
   try {
     const { name, month } = req.params;
@@ -153,7 +183,6 @@ app.patch('/api/data/client/:name/month/:month', (req, res) => {
   } catch (e) { res.status(500).json({ error: 'Erro interno.' }); }
 });
 
-// POST /api/clients/:name/certificado – upload certificate (requires multer)
 if (upload) {
   app.post('/api/clients/:name/certificado', upload.single('certificado'), (req, res) => {
     try {
@@ -169,17 +198,15 @@ if (upload) {
   });
 } else {
   app.post('/api/clients/:name/certificado', (_req, res) =>
-    res.status(503).json({ error: 'multer não instalado. Rode: npm install multer' }));
+    res.status(503).json({ error: 'multer não instalado.' }));
 }
 
-// GET /api/certificados/:filename – download certificate
 app.get('/api/certificados/:filename', (req, res) => {
   const fp = path.join(CERT_DIR, path.basename(req.params.filename));
   if (!fs.existsSync(fp)) return res.status(404).json({ error: 'Arquivo não encontrado.' });
   res.download(fp);
 });
 
-// Passwords
 app.get('/api/data/passwords', (_req, res) => res.json(readDB().passwords || []));
 
 app.post('/api/data/passwords', (req, res) => {
@@ -203,13 +230,7 @@ app.delete('/api/data/passwords/:id', (req, res) => {
   } catch (e) { res.status(500).json({ error: 'Erro interno.' }); }
 });
 
-// ─── Start ────────────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`\n✅  Sempre Assessoria – Servidor rodando em http://localhost:${PORT}\n`);
-});
 // CÓDIGO PARA LER O CERTIFICADO
-const forge = require('node-forge');
-
 const uploadMemoria = require('multer')({ storage: require('multer').memoryStorage() });
 app.post('/ler-certificado', uploadMemoria.single('certificado'), async (req, res) => {
   try {
@@ -229,14 +250,14 @@ app.post('/ler-certificado', uploadMemoria.single('certificado'), async (req, re
       cnpj: subject.match(/\d{14}/) ? subject.match(/\d{14}/)[0] : ""
     });
   } catch (err) {
-    console.log("🕵️‍♂️ DETETIVE REVELA O ERRO:", err.message || err);
     res.status(500).json({ sucesso: false, erro: "Senha incorreta ou certificado inválido." });
   }
 });
-// --- LIGA O MOTOR DO SISTEMA ---
-app.listen(3005, () => {
+
+// ─── Start ────────────────────────────────────────────────────────────────────
+app.listen(PORT, () => {
   console.log('##############################################');
-  console.log('🚀 SISTEMA SEMPRE ASSESSORIA: ONLINE');
-  console.log('🌍 ACESSE: http://localhost:3005');
+  console.log('🚀 SISTEMA SEMPRE ASSESSORIA: ONLINE COM SEGURANÇA');
+  console.log(`🌍 ACESSE: http://localhost:${PORT}`);
   console.log('##############################################');
 });
