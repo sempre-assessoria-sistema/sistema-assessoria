@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SEMPRE Assessoria Contábil</title>
+    <style>
+        /* 🎨 PALETA DE CORES INSPIRADA NA SUA IMAGEM (Visa 2026) */
+        :root {
+            --azul-escuro: #22316C;    /* Fundo do cabeçalho principal */
+            --branco: #FFFFFF;         /* Fundo do cartão de login */
+            --cinza-fundo: #F4F6F9;    /* Fundo da página inteira (menos poluído) */
+            --texto-principal: #22316C; /* Títulos em azul escuro */
+            --texto-secundario: #6C757D;/* Descrições em cinza */
+            --destaque-laranja: #FF8A00;/* Cor do botão (do raio de prêmios) */
+            --borda: #E1E5EB;          /* Cor das linhas dos campos */
+            --sombra: rgba(0, 0, 0, 0.08); /* Sombra suave do cartão */
+        }
+
+        /* 📐 CONFIGURAÇÕES GERAIS DE LAYOUT */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body {
+            background-color: var(--cinza-fundo); /* Fundo limpo */
+            display: flex;
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center;    /* Centraliza verticalmente */
+            min-height: 100vh;      /* Ocupa a altura toda da tela */
+        }
+
+        /* ◽ O CARTÃO DE LOGIN (O "formato" da sua imagem) */
+        .login-card {
+            background-color: var(--branco);
+            width: 400px;
+            max-width: 90%; /* Responsivo para celular */
+            border-radius: 12px; /* Bordas arredondadas */
+            box-shadow: 0 10px 30px var(--sombra); /* Sombra elegante */
+            overflow: hidden; /* Garante que o cabeçalho não saia do arredondado */
+        }
+
+        /* 🔵 O CABEÇALHO AZUL (Estilo "VISA 2026") */
+        .card-header {
+            background-color: var(--azul-escuro);
+            padding: 30px;
+            text-align: center;
+            color: var(--branco);
+        }
+
+        .card-header h1 { font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .card-header p { font-size: 13px; opacity: 0.8; margin-top: 4px; font-weight: 300; }
+
+        /* 📝 O CORPO DO FORMULÁRIO (Parte Branca) */
+        .card-body { padding: 40px; }
+        .card-body h2 {
+            color: var(--texto-principal);
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* ⌨️ ESTILIZAÇÃO DOS CAMPOS DE DIGITAÇÃO */
+        .input-group { margin-bottom: 20px; }
+        .input-group label {
+            display: block;
+            color: var(--texto-secundario);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--borda);
+            border-radius: 8px; /* Bordas arredondadas nos campos */
+            font-size: 14px;
+            color: var(--texto-principal);
+            transition: border-color 0.2s;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--azul-escuro); /* Borda fica azul ao clicar */
+            box-shadow: 0 0 0 3px rgba(34, 49, 108, 0.1); /* Efeito de foco */
+        }
+
+        /* 🚀 O BOTÃO DE AÇÃO (Estilo Destaque) */
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--destaque-laranja); /* Cor vibrante */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+            margin-top: 10px;
+        }
+        .login-btn:hover { background-color: #E67E00; /* Laranja um pouco mais escuro no hover */ }
+        .login-btn:active { transform: scale(0.98); /* Efeito de clique */ }
+
+        /* Mensagem de erro (invisível por padrão) */
+        #error-message {
+            color: #D93025; /* Vermelho erro do Google */
+            font-size: 13px;
+            text-align: center;
+            margin-top: 15px;
+            display: none; /* Escondido até haver erro */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-card">
+            
+            <div class="card-header">
+                <h1>SEMPRE</h1>
+                <p>Assessoria Contábil</p>
+            </div>
+
+            <div class="card-body">
+                <h2>Acesse o Sistema Financeiro</h2>
+
+                <form id="login-form">
+                    <div class="input-group">
+                        <label>E-MAIL PROFISSIONAL</label>
+                        <input type="email" id="email" required placeholder="seu.nome@sempreassessoria.com.br">
+                    </div>
+
+                    <div class="input-group">
+                        <label>SENHA DE ACESSO</label>
+                        <input type="password" id="password" required placeholder="••••••••••••">
+                    </div>
+
+                    <button type="submit" class="login-btn">Entrar</button>
+                    <p id="error-message">E-mail ou senha inválidos.</p>
+                </form>
+            </div>
+        </div>
+        </div>
+
+    <script>
+        // O CÓDIGO DO MOTOR DO LOGIN (FRONTEND)
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault(); // Impede a página de recarregar
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('error-message');
+
+            try {
+                // Envia os dados para o servidor usando caminho relativo (como aprendemos!)
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // SE DER CERTO: Redireciona para a tela principal (seu index.html)
+                    // (Mais pra frente adicionaremos o crachá invisível aqui)
+                    window.location.href = '/index.html'; 
+                } else {
+                    // SE DER ERRO: Mostra a mensagem vermelha
+                    errorMsg.innerText = data.message || 'Erro ao logar.';
+                    errorMsg.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                errorMsg.innerText = 'Servidor offline ou erro na rede.';
+                errorMsg.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
