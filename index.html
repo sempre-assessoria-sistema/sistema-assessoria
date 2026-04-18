@@ -499,7 +499,7 @@
       document.getElementById('topClientsBody').innerHTML = ranked.map(c => `<tr><td style="color:var(--navy);font-weight:700">${c.name}</td><td>${chipRegime(c.regime)}</td><td style="color:var(--navy);font-weight:700">${fmt(c.fat)}</td><td style="color:#f57c00">${fmt(c.das)}</td></tr>`).join('');
     }
 
-    // ── IMPORTAÇÃO DO ASAAS E RENDER DO FINANCEIRO ──
+    // ── IMPORTAÇÃO DO ASAAS (CORRIGIDA PARA VÍRGULA E PONTO E VÍRGULA) ──
     async function handleAsaasUpload(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -510,25 +510,32 @@
             const lines = csvText.split('\n').filter(l => l.trim());
             if (lines.length < 2) { showToast("Planilha vazia ou inválida.", "error"); return; }
             
-            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            // NOVO: Deteta automaticamente se o Excel usou vírgula ou ponto e vírgula
+            const separador = lines[0].includes(';') ? ';' : ',';
+            
+            const headers = lines[0].split(separador).map(h => h.trim().replace(/"/g, ''));
             const idxNome = headers.indexOf('Nome');
             const idxVencido = headers.indexOf('Valor vencido');
             const idxPago = headers.indexOf('Valor pago');
             const idxAVencer = headers.indexOf('Valor a vencer');
 
             if (idxNome === -1 || idxVencido === -1 || idxPago === -1 || idxAVencer === -1) {
-                showToast("Erro: Colunas obrigatórias do Asaas não encontradas.", "error");
+                showToast("Erro: Colunas obrigatórias do Asaas não encontradas. Verifique o ficheiro.", "error");
                 return;
             }
 
             const parsedData = [];
+            // Regex inteligente para separar respeitando as aspas, independentemente do separador
+            const regex = new RegExp(`\\${separador}(?=(?:(?:[^"]*"){2})*[^"]*$)`);
+            
             for (let i = 1; i < lines.length; i++) {
-                const row = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                const row = lines[i].split(regex);
                 if (row.length < headers.length) continue;
                 
                 const nome = row[idxNome]?.replace(/"/g, '').trim();
                 if (!nome) continue;
 
+                // Limpa o dinheiro (tira R$, pontos, converte vírgula decimal em ponto)
                 const parseMoney = (val) => {
                     if (!val) return 0;
                     return parseFloat(val.replace(/"/g, '').replace('R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0;
@@ -549,7 +556,7 @@
                 renderFinanceiro();
                 showToast(`Sucesso! ${parsedData.length} cobranças importadas.`);
             } catch(err) {
-                showToast("Erro ao salvar no banco de dados.", "error");
+                showToast("Erro ao guardar na base de dados.", "error");
             }
         };
         reader.readAsText(file);
