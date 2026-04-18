@@ -47,40 +47,27 @@ app.use(express.json({ limit: '10mb' }));
 
 // 🛡️ O GUARDA-COSTAS (Middleware de Autenticação)
 app.use((req, res, next) => {
-  // 1. Deixa a pessoa acessar a tela de login e a verificação de senha livremente
   if (req.path === '/login.html' || req.path === '/api/login') {
     return next();
   }
-
-  // 2. Procura o "crachá" nos cookies do navegador
   const cookies = req.headers.cookie || '';
   const temCracha = cookies.includes('auth_sempre=autorizado');
 
-  // 3. Se NÃO tem crachá e tentou abrir o painel principal, chuta pro login
   if (!temCracha && (req.path === '/' || req.path === '/index.html')) {
     return res.redirect('/login.html');
   }
-
-  // 4. Se NÃO tem crachá e tentou acessar os dados da API por trás, bloqueia
   if (!temCracha && req.path.startsWith('/api/')) {
     return res.status(401).json({ error: 'Acesso negado. Faça login.' });
   }
-
-  // 5. Se tem crachá, abre a porta e deixa passar!
   next();
 });
 
-// 📂 Permite ler os arquivos visuais (PRECISA FICAR ABAIXO DO GUARDA-COSTAS)
 app.use(express.static(__dirname));
 
 // ─── Rotas de Autenticação ───────────────────────────────────────────────────
-
-// 🚪 ROTA DE LOGIN (Onde a chave é testada)
 app.post('/api/login', (req, res) => {
   const { email, password } = req.body;
-
   if (email === EMAIL_ACESSO && password === SENHA_ACESSO) {
-    // Cria o crachá no navegador com duração de 1 dia
     res.cookie('auth_sempre', 'autorizado', { maxAge: 86400000, httpOnly: true });
     return res.json({ message: "Acesso Liberado" });
   } else {
@@ -91,7 +78,8 @@ app.post('/api/login', (req, res) => {
 // ─── Helpers do Banco de Dados ───────────────────────────────────────────────
 function readDB() {
   try { return JSON.parse(fs.readFileSync(DB_PATH, 'utf8')); }
-  catch { return { clients: {}, passwords: [] }; }
+  // 👇 AQUI ESTÁ A GAVETA DE HONORÁRIOS CRIADA 👇
+  catch { return { clients: {}, passwords: [], honorarios: [] }; }
 }
 function writeDB(data) {
   fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), 'utf8');
@@ -228,6 +216,18 @@ app.delete('/api/data/passwords/:id', (req, res) => {
     writeDB(db);
     res.json({ ok: true });
   } catch (e) { res.status(500).json({ error: 'Erro interno.' }); }
+});
+
+// 👇 NOVAS ROTAS DO FINANCEIRO (ASAAS) 👇
+app.get('/api/honorarios', (_req, res) => res.json(readDB().honorarios || []));
+
+app.post('/api/honorarios/importar', (req, res) => {
+  try {
+    const db = readDB();
+    db.honorarios = req.body; 
+    writeDB(db);
+    res.json({ ok: true, total: req.body.length });
+  } catch (e) { res.status(500).json({ error: 'Erro ao importar.' }); }
 });
 
 // CÓDIGO PARA LER O CERTIFICADO
