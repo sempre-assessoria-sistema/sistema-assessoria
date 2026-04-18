@@ -175,7 +175,7 @@
     </nav>
     <div class="sidebar-section-label">Clientes por Regime</div>
     <div id="clientSection"></div>
-    <div class="sidebar-footer"><p>© 2026 Sempre Assessoria</p><p id="dbStatus" style="color:var(--gold)">Carregando dados…</p></div>
+    <div class="sidebar-footer"><p>© 2026 Sempre Assessoria</p><p id="dbStatus" style="color:var(--gold)">A carregar dados…</p></div>
   </aside>
 
   <main>
@@ -222,9 +222,13 @@
       <div class="regime-panel-header">
         <div>
            <p class="regime-panel-title">Honorários (Integração Asaas)</p>
-           <p class="regime-panel-subtitle">Controle de cobranças, recebimentos e inadimplência</p>
+           <p class="regime-panel-subtitle">Controlo de cobranças, recebimentos e emissão automática</p>
         </div>
-        <div>
+        <div style="display:flex; gap:10px;">
+           <button class="btn-primary" style="background:var(--navy);" onclick="openEmissaoModal()">
+              <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+              Emitir Honorário Automático
+           </button>
            <input type="file" id="asaasFileInput" accept=".csv" style="display:none;" onchange="handleAsaasUpload(event)">
            <button class="btn-primary" style="background:#4CAF50;" onclick="document.getElementById('asaasFileInput').click()">
               <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
@@ -269,9 +273,9 @@
 
     <section id="panel-sn" class="panel">
       <div class="regime-panel-header">
-        <div><p class="regime-panel-title">Simples Nacional</p><p class="regime-panel-subtitle">Empresas optantes pelo Simples Nacional – controle de DAS e obrigações</p></div>
+        <div><p class="regime-panel-title">Simples Nacional</p><p class="regime-panel-subtitle">Empresas optantes pelo Simples Nacional – controlo de DAS e obrigações</p></div>
         <div class="filter-bar">
-          <input id="sn-search" type="text" placeholder="Buscar cliente…" oninput="renderSN()" />
+          <input id="sn-search" type="text" placeholder="Procurar cliente…" oninput="renderSN()" />
           <select id="sn-tipo" class="filter-select" onchange="renderSN()"><option value="">Todos os tipos</option><option value="COMERCIO">Comércio</option><option value="SERVICO">Serviço</option><option value="MISTO">Misto</option></select>
           <select id="sn-status" class="filter-select" onchange="renderSN()"><option value="">Todo status</option><option value="Concluído">Concluído</option><option value="Pendente">Pendente</option><option value="Entregue">Entregue</option></select>
         </div>
@@ -289,8 +293,8 @@
 
     <section id="panel-lp" class="panel">
       <div class="regime-panel-header">
-        <div><p class="regime-panel-title">Lucro Presumido</p><p class="regime-panel-subtitle">Empresas no Lucro Presumido – controle de ISS, PIS, COFINS e obrigações</p></div>
-        <div class="filter-bar"><input id="lp-search" type="text" placeholder="Buscar cliente…" oninput="renderLP()" /><select id="lp-status" class="filter-select" onchange="renderLP()"><option value="">Todo status</option><option value="Concluído">Concluído</option><option value="Pendente">Pendente</option><option value="Entregue">Entregue</option></select></div>
+        <div><p class="regime-panel-title">Lucro Presumido</p><p class="regime-panel-subtitle">Empresas no Lucro Presumido – controlo de ISS, PIS, COFINS e obrigações</p></div>
+        <div class="filter-bar"><input id="lp-search" type="text" placeholder="Procurar cliente…" oninput="renderLP()" /><select id="lp-status" class="filter-select" onchange="renderLP()"><option value="">Todo status</option><option value="Concluído">Concluído</option><option value="Pendente">Pendente</option><option value="Entregue">Entregue</option></select></div>
       </div>
       <div class="obrig-grid" id="lp-kpis"></div>
       <div class="section-card">
@@ -307,7 +311,7 @@
       <div class="table-panel-header">
         <p style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy)">Tabela Geral de Clientes</p>
         <div class="filter-bar">
-          <input id="tableSearch" type="text" placeholder="Buscar cliente…" oninput="renderTable(document.getElementById('globalMonthFilter').value)" />
+          <input id="tableSearch" type="text" placeholder="Procurar cliente…" oninput="renderTable(document.getElementById('globalMonthFilter').value)" />
           <select id="tableRegimeFilter" class="filter-select" onchange="renderTable(document.getElementById('globalMonthFilter').value)"><option value="">Todos os regimes</option><option value="MEI">MEI</option><option value="Simples Nacional">Simples Nacional</option><option value="Lucro Presumido">Lucro Presumido</option></select>
         </div>
       </div>
@@ -330,6 +334,50 @@
       <div id="vaultEmpty" style="display:none;text-align:center;padding:64px 0;color:var(--text-dim)"><p style="font-size:14px">Nenhuma senha cadastrada.</p></div>
     </section>
   </main>
+
+  <div id="emissaoModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <p class="modal-title">Emitir Honorário (Asaas)</p>
+        <button class="modal-close" onclick="closeEmissaoModal()"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+           <label>Selecione o Cliente (Dados ao vivo do Asaas) *</label>
+           <select id="emissao-cliente">
+              <option value="">A carregar clientes...</option>
+           </select>
+        </div>
+        <div class="form-grid-2">
+           <div class="form-group">
+              <label>Valor (R$) *</label>
+              <input type="number" id="emissao-valor" placeholder="0.00" step="0.01">
+           </div>
+           <div class="form-group">
+              <label>Dia de Vencimento *</label>
+              <select id="emissao-vencimento">
+                 <option value="05">Dia 05</option>
+                 <option value="10">Dia 10</option>
+                 <option value="15">Dia 15</option>
+                 <option value="20">Dia 20</option>
+                 <option value="25">Dia 25</option>
+              </select>
+           </div>
+        </div>
+        <div class="form-group">
+           <label>Descrição na Fatura (Opcional)</label>
+           <input type="text" id="emissao-desc" placeholder="Honorários Contábeis" value="Honorários Contábeis">
+        </div>
+        <p style="font-size:10px;color:var(--text-muted);font-style:italic;margin-top:5px;">
+           * Ao clicar em "Gerar Cobrança", o boleto/PIX será emitido no Asaas e as notificações (E-mail/SMS/WhatsApp) serão disparadas automaticamente de acordo com as suas configurações no Asaas.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeEmissaoModal()">Cancelar</button>
+        <button class="btn-primary" style="background:var(--navy);" onclick="emitirCobranca()">Gerar Cobrança</button>
+      </div>
+    </div>
+  </div>
 
   <div id="entryModal" class="modal-overlay">
     <div class="modal-box">
@@ -499,43 +547,41 @@
       document.getElementById('topClientsBody').innerHTML = ranked.map(c => `<tr><td style="color:var(--navy);font-weight:700">${c.name}</td><td>${chipRegime(c.regime)}</td><td style="color:var(--navy);font-weight:700">${fmt(c.fat)}</td><td style="color:#f57c00">${fmt(c.das)}</td></tr>`).join('');
     }
 
-    // ── IMPORTAÇÃO DO ASAAS (CORRIGIDA PARA VÍRGULA E PONTO E VÍRGULA) ──
+    // ── IMPORTAÇÃO DO ASAAS (CORRIGIDA) ──
     async function handleAsaasUpload(event) {
         const file = event.target.files[0];
         if (!file) return;
 
         const reader = new FileReader();
         reader.onload = async function(e) {
-            const csvText = e.target.result;
-            const lines = csvText.split('\n').filter(l => l.trim());
+            // Remove quebras de linha defeituosas e lê o ficheiro
+            const csvText = e.target.result.replace(/\r/g, '');
+            const lines = csvText.split('\n').filter(l => l.trim() !== '');
             if (lines.length < 2) { showToast("Planilha vazia ou inválida.", "error"); return; }
             
-            // NOVO: Deteta automaticamente se o Excel usou vírgula ou ponto e vírgula
             const separador = lines[0].includes(';') ? ';' : ',';
+            const headers = lines[0].split(separador).map(h => h.trim().replace(/"/g, '').toLowerCase());
             
-            const headers = lines[0].split(separador).map(h => h.trim().replace(/"/g, ''));
-            const idxNome = headers.indexOf('Nome');
-            const idxVencido = headers.indexOf('Valor vencido');
-            const idxPago = headers.indexOf('Valor pago');
-            const idxAVencer = headers.indexOf('Valor a vencer');
+            // Busca flexível de colunas (ignora maiúsculas e minúsculas)
+            const idxNome = headers.findIndex(h => h.includes('nome') || h.includes('cliente'));
+            const idxVencido = headers.findIndex(h => h.includes('vencido'));
+            const idxPago = headers.findIndex(h => h.includes('pago'));
+            const idxAVencer = headers.findIndex(h => h.includes('vencer'));
 
             if (idxNome === -1 || idxVencido === -1 || idxPago === -1 || idxAVencer === -1) {
-                showToast("Erro: Colunas obrigatórias do Asaas não encontradas. Verifique o ficheiro.", "error");
+                showToast("Erro: Colunas obrigatórias não encontradas no ficheiro.", "error");
                 return;
             }
 
             const parsedData = [];
-            // Regex inteligente para separar respeitando as aspas, independentemente do separador
             const regex = new RegExp(`\\${separador}(?=(?:(?:[^"]*"){2})*[^"]*$)`);
             
             for (let i = 1; i < lines.length; i++) {
                 const row = lines[i].split(regex);
-                if (row.length < headers.length) continue;
                 
                 const nome = row[idxNome]?.replace(/"/g, '').trim();
                 if (!nome) continue;
 
-                // Limpa o dinheiro (tira R$, pontos, converte vírgula decimal em ponto)
                 const parseMoney = (val) => {
                     if (!val) return 0;
                     return parseFloat(val.replace(/"/g, '').replace('R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0;
@@ -549,6 +595,11 @@
                 });
             }
 
+            if(parsedData.length === 0) {
+                showToast("Nenhuma cobrança válida encontrada na planilha.", "error");
+                return;
+            }
+
             try {
                 const r = await fetch(`${API}/honorarios/importar`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsedData) });
                 if (!r.ok) throw new Error();
@@ -560,12 +611,12 @@
             }
         };
         reader.readAsText(file);
+        event.target.value = ''; // Limpa o botão para poder importar novamente
     }
 
     function renderFinanceiro() {
         const honorarios = DB.honorarios || [];
         const tbody = document.getElementById('financeiroTableBody');
-        
         let totalPago = 0, totalAVencer = 0, totalVencido = 0;
 
         if (honorarios.length === 0) {
@@ -573,30 +624,101 @@
         } else {
             tbody.innerHTML = '';
             honorarios.sort((a,b) => a.nome.localeCompare(b.nome)).forEach(h => {
-                totalPago += h.pago;
-                totalAVencer += h.avencer;
-                totalVencido += h.vencido;
-
+                totalPago += h.pago; totalAVencer += h.avencer; totalVencido += h.vencido;
                 let statusStr = "Pendente";
                 if (h.vencido > 0) statusStr = "Vencido";
                 else if (h.pago > 0 && h.avencer === 0) statusStr = "Concluído";
                 
                 const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td style="color:var(--navy);font-weight:700;text-align:left">${h.nome}</td>
-                    <td style="color:#4CAF50;font-weight:600">${fmt(h.pago)}</td>
-                    <td style="color:#FF9800;font-weight:600">${fmt(h.avencer)}</td>
-                    <td style="color:#F44336;font-weight:700">${fmt(h.vencido)}</td>
-                    <td class="center">${badgeHTML(statusStr)}</td>
-                `;
+                tr.innerHTML = `<td style="color:var(--navy);font-weight:700;text-align:left">${h.nome}</td><td style="color:#4CAF50;font-weight:600">${fmt(h.pago)}</td><td style="color:#FF9800;font-weight:600">${fmt(h.avencer)}</td><td style="color:#F44336;font-weight:700">${fmt(h.vencido)}</td><td class="center">${badgeHTML(statusStr)}</td>`;
                 tbody.appendChild(tr);
             });
         }
-
         document.getElementById('fin-kpi-pago').textContent = fmt(totalPago);
         document.getElementById('fin-kpi-avencer').textContent = fmt(totalAVencer);
         document.getElementById('fin-kpi-vencido').textContent = fmt(totalVencido);
     }
+
+    // ── EMISSÃO DE HONORÁRIOS VIA ASAAS API ──
+    async function openEmissaoModal() {
+        document.getElementById('emissaoModal').classList.add('open');
+        const sel = document.getElementById('emissao-cliente');
+        sel.innerHTML = '<option value="">A carregar os seus clientes do Asaas...</option>';
+        try {
+            const res = await fetch(API + '/asaas/clientes');
+            const data = await res.json();
+            if(data.data) {
+                sel.innerHTML = '<option value="">Selecione o cliente no Asaas...</option>';
+                data.data.sort((a, b) => a.name.localeCompare(b.name)).forEach(c => {
+                    sel.innerHTML += `<option value="${c.id}">${c.name} (${c.cpfCnpj || 'Sem NIF'})</option>`;
+                });
+            } else {
+                sel.innerHTML = '<option value="">Erro ao carregar clientes</option>';
+            }
+        } catch(e) {
+            sel.innerHTML = '<option value="">Erro de ligação à API</option>';
+        }
+    }
+
+    function closeEmissaoModal() {
+        document.getElementById('emissaoModal').classList.remove('open');
+        document.getElementById('emissao-cliente').value = '';
+        document.getElementById('emissao-valor').value = '';
+    }
+
+    async function emitirCobranca() {
+        const customerId = document.getElementById('emissao-cliente').value;
+        const valor = parseFloat(document.getElementById('emissao-valor').value);
+        const diaVencimento = parseInt(document.getElementById('emissao-vencimento').value);
+        const descricao = document.getElementById('emissao-desc').value;
+
+        if(!customerId || isNaN(valor) || valor <= 0 || isNaN(diaVencimento)) {
+            showToast("Preencha o cliente, o valor correto e o vencimento.", "error"); return;
+        }
+
+        const hoje = new Date();
+        let ano = hoje.getFullYear();
+        let mes = hoje.getMonth() + 1; 
+        
+        if (hoje.getDate() >= diaVencimento) {
+            mes++;
+            if (mes > 12) { mes = 1; ano++; }
+        }
+        
+        const dueDate = `${ano}-${String(mes).padStart(2, '0')}-${String(diaVencimento).padStart(2, '0')}`;
+
+        const payload = {
+            customer: customerId,
+            billingType: 'UNDEFINED',
+            value: valor,
+            dueDate: dueDate,
+            description: descricao || 'Honorários Contábeis'
+        };
+
+        const btn = document.querySelector('#emissaoModal .btn-primary');
+        btn.textContent = "A gerar..."; btn.disabled = true;
+
+        try {
+            const r = await fetch(API + '/asaas/cobrancas', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload)
+            });
+            const res = await r.json();
+            
+            if(res.ok) {
+                showToast("Cobrança gerada com sucesso no Asaas!");
+                closeEmissaoModal();
+            } else {
+                showToast(res.error || "Erro ao gerar cobrança no Asaas", "error");
+            }
+        } catch(e) {
+            showToast("Erro de ligação com o servidor.", "error");
+        } finally {
+            btn.textContent = "Gerar Cobrança"; btn.disabled = false;
+        }
+    }
+
 
     function renderMEI() {
       const container = document.getElementById('meiCards'); container.innerHTML = '';
@@ -639,7 +761,7 @@
           tbody.appendChild(tr);
         });
       });
-      if(tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
+      if(tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registo encontrado.</td></tr>';
     }
 
     function renderLP() {
@@ -666,7 +788,7 @@
           tbody.appendChild(tr);
         });
       });
-      if(tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
+      if(tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registo encontrado.</td></tr>';
     }
 
     function renderTable(month) {
@@ -687,7 +809,7 @@
           tbody.appendChild(tr);
         });
       });
-      if(tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
+      if(tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registo encontrado.</td></tr>';
     }
 
     function renderVault() {
