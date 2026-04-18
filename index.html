@@ -452,7 +452,6 @@
       return `<span class="chip ${map[regime] || ''}">${abbr[regime] || regime}</span>`;
     }
 
-    // ── O CÉREBRO: CÁLCULO DO RBT12 100% AUTOMÁTICO ──
     function getRBT12(client, currentMonthName) {
         if (!client || !currentMonthName || currentMonthName === 'ALL') return 0;
         const monthIndex = MESES.indexOf(currentMonthName);
@@ -521,16 +520,12 @@
       });
     }
 
-    // ── RENDER SN COM OS FILTROS REATIVADOS ──
     function renderSN() {
       const month = document.getElementById('globalMonthFilter').value;
       const search = document.getElementById('sn-search').value.toLowerCase();
       const tipo = document.getElementById('sn-tipo').value;
       const stF = document.getElementById('sn-status').value;
-
       let rows = Object.entries(DB.clients).filter(([, c]) => c.regime === 'Simples Nacional');
-      
-      // FILTROS APLICADOS AQUI
       if (tipo) rows = rows.filter(([, c]) => c.tipo === tipo);
       if (search) rows = rows.filter(([n]) => n.toLowerCase().includes(search));
 
@@ -544,8 +539,6 @@
         months.forEach(m => {
           const md = client.meses[m]; if (!md) return;
           const st = md.status || 'Pendente';
-          
-          // FILTRO DE STATUS
           if (stF && st !== stF) return; 
 
           const rbt12 = getRBT12(client, m);
@@ -560,15 +553,11 @@
       if(tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
     }
 
-    // ── RENDER LP COM OS FILTROS REATIVADOS ──
     function renderLP() {
       const month = document.getElementById('globalMonthFilter').value;
       const search = document.getElementById('lp-search').value.toLowerCase();
       const stF = document.getElementById('lp-status').value;
-
       let rows = Object.entries(DB.clients).filter(([, c]) => c.regime === 'Lucro Presumido');
-      
-      // FILTROS APLICADOS AQUI
       if (search) rows = rows.filter(([n]) => n.toLowerCase().includes(search));
 
       let totFat = 0, totIss = 0, totPis = 0, totCofins = 0;
@@ -581,8 +570,6 @@
         months.forEach(m => {
           const md = client.meses[m]; if (!md) return;
           const st = md.status || 'Pendente';
-          
-          // FILTRO DE STATUS
           if (stF && st !== stF) return; 
 
           const tr = document.createElement('tr');
@@ -593,14 +580,10 @@
       if(tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
     }
 
-    // ── RENDER TABLE GERAL COM OS FILTROS REATIVADOS ──
     function renderTable(month) {
       const search = document.getElementById('tableSearch').value.toLowerCase();
       const regimeF = document.getElementById('tableRegimeFilter').value;
-
       let rows = Object.entries(DB.clients);
-      
-      // FILTROS APLICADOS AQUI
       if (regimeF) rows = rows.filter(([, c]) => c.regime === regimeF);
       if (search) rows = rows.filter(([n]) => n.toLowerCase().includes(search));
 
@@ -629,24 +612,26 @@
     function toggleReveal(id, pass) { const el = document.getElementById(`pw-${id}`); if(el.textContent === '●●●●●●●●') { el.textContent = pass; el.classList.remove('pass-hidden'); } else { el.textContent = '●●●●●●●●'; el.classList.add('pass-hidden'); } }
     async function deletePw(id) { if(confirm('Remover?')) { await fetch(`${API}/data/passwords/${id}`, {method:'DELETE'}); DB.passwords = DB.passwords.filter(p=>p.id!==id); renderVault(); } }
 
-    // ── MODAL DE LANÇAMENTO ──
+    // ── MODAL DE LANÇAMENTO (AQUI ESTAVA O ERRO DE BUSCAR OS DADOS!) ──
     function buildEntryClientSelect() {
       const sel = document.getElementById('entry-client'); sel.innerHTML = '<option value="">Selecione…</option>';
       Object.keys(DB.clients).sort().forEach(name => { const opt = document.createElement('option'); opt.value = name; opt.textContent = name; sel.appendChild(opt); });
     }
-    function openEntryModal() { document.getElementById('entryModal').classList.add('open'); }
+    
+    function openEntryModal() { 
+      document.getElementById('entryModal').classList.add('open'); 
+      // Se já tiver algo selecionado, força a puxar os dados
+      if(document.getElementById('entry-client').value) {
+         onEntryClientChange();
+      }
+    }
+    
     function closeEntryModal() { document.getElementById('entryModal').classList.remove('open'); document.getElementById('entry-sn-header').style.display = 'none'; }
     
     function openEntryModalFor(clientName, month) {
-      document.getElementById('entry-client').value = clientName; document.getElementById('entry-month').value = month;
+      document.getElementById('entry-client').value = clientName; 
+      document.getElementById('entry-month').value = month;
       onEntryClientChange();
-      setTimeout(() => {
-        const m = DB.clients[clientName]?.meses[month];
-        if (m) {
-          document.querySelectorAll('#entry-fields input').forEach(inp => { if (m[inp.name] !== undefined) inp.value = m[inp.name]; });
-          if (m.status) document.getElementById('entry-status').value = m.status;
-        }
-      }, 50);
       openEntryModal();
     }
 
@@ -685,6 +670,20 @@
       } else {
          headerSN.style.display = 'none';
       }
+
+      // CORREÇÃO: AGORA O SISTEMA PUXA O QUE JÁ ESTAVA SALVO!
+      setTimeout(() => {
+        const m = DB.clients[name]?.meses[month];
+        if (m) {
+          document.querySelectorAll('#entry-fields input').forEach(inp => { 
+             // Se o valor existe e não é zero, preenche na tela!
+             if (m[inp.name] !== undefined && m[inp.name] !== 0) {
+                 inp.value = m[inp.name]; 
+             }
+          });
+          if (m.status) document.getElementById('entry-status').value = m.status;
+        }
+      }, 50);
     }
 
     async function saveEntry() {
@@ -704,7 +703,6 @@
       } catch (e) { showToast('Erro ao salvar.', 'error'); }
     }
 
-    // ── CADASTRO DE CLIENTE E FICHA ──
     function openNovoClienteModal() { document.getElementById('novoClienteModal').classList.add('open'); }
     function closeNovoClienteModal() { document.getElementById('novoClienteModal').classList.remove('open'); }
     async function saveNovoCliente() {
