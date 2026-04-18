@@ -79,7 +79,7 @@
     .kpi-card:hover, .mei-card:hover, .vault-card:hover { transform: translateY(-3px); border-color: var(--navy-light); }
     .kpi-label, .obrig-name { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; font-weight: 600; }
     .kpi-value { font-size: 26px; font-weight: 700; font-family: 'DM Sans', sans-serif; }
-    .kpi-value.white { color: var(--navy); } .kpi-value.gold { color: var(--gold); } .kpi-value.red { color: #d32f2f; } .kpi-value.amber { color: #f57c00; }
+    .kpi-value.white { color: var(--navy); } .kpi-value.gold { color: var(--gold); } .kpi-value.red { color: #d32f2f; } .kpi-value.amber { color: #f57c00; } .kpi-value.green { color: #4CAF50; }
     .obrig-value { font-size: 22px; font-weight: 700; color: var(--navy); }
     .chart-card { padding: 20px; }
     .card-title, .regime-panel-title { color: var(--navy); font-weight: 700; display: flex; align-items: center; gap: 8px; }
@@ -108,6 +108,7 @@
     .badge-concluido { background: #E8F5E9; color: #2E7D32; border: 1px solid #C8E6C9; }
     .badge-pendente { background: #FFF3E0; color: #E65100; border: 1px solid #FFE0B2; }
     .badge-entregue { background: #E3F2FD; color: #1565C0; border: 1px solid #BBDEFB; }
+    .badge-vencido { background: #FFEBEE; color: #C62828; border: 1px solid #FFCDD2; }
     .chip { display: inline-block; font-size: 10px; padding: 3px 10px; border-radius: 20px; font-weight: 700; }
     .chip-mei { background: #EDE7F6; color: #5E35B1; } .chip-sn { background: #E1F5FE; color: #0277BD; } .chip-lp { background: #FFF3E0; color: #E65100; }
     .progress-track { background: var(--border-soft); border-radius: 99px; height: 8px; overflow: hidden; }
@@ -144,8 +145,6 @@
     .pass-hidden { letter-spacing: .22em; color: var(--text-dim); }
     .tbl-btn { background: var(--surface2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; color: var(--navy); cursor: pointer; transition: all .15s; }
     .tbl-btn:hover { border-color: var(--navy); background: rgba(34, 49, 108, 0.05); }
-    
-    /* Box Alerta Sublimite */
     .alerta-sublimite { background: #FFEBEE; border: 1px solid #EF9A9A; color: #C62828; padding: 10px; border-radius: 8px; font-size: 12px; font-weight: 700; display: none; text-align: center; margin-top: 10px; }
   </style>
 </head>
@@ -165,6 +164,12 @@
       <button id="nav-mei" class="nav-link" onclick="showPanel('mei')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg> Painel MEI</button>
       <button id="nav-sn" class="nav-link" onclick="showPanel('sn')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" /></svg> Simples Nacional</button>
       <button id="nav-lp" class="nav-link" onclick="showPanel('lp')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg> Lucro Presumido</button>
+      
+      <button id="nav-financeiro" class="nav-link" onclick="showPanel('financeiro')">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        Financeiro (Asaas)
+      </button>
+
       <button id="nav-table" class="nav-link" onclick="showPanel('table')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18M10 4v16M3 4h18a1 1 0 011 1v14a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z" /></svg> Tabela Geral</button>
       <button id="nav-vault" class="nav-link" onclick="showPanel('vault')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg> Cofre de Senhas</button>
     </nav>
@@ -208,6 +213,47 @@
           <table class="data-table">
             <thead><tr><th style="text-align:left">Cliente</th><th style="text-align:left">Regime</th><th>Faturamento</th><th>DAS / Tributos</th></tr></thead>
             <tbody id="topClientsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-financeiro" class="panel">
+      <div class="regime-panel-header">
+        <div>
+           <p class="regime-panel-title">Honorários (Integração Asaas)</p>
+           <p class="regime-panel-subtitle">Controle de cobranças, recebimentos e inadimplência</p>
+        </div>
+        <div>
+           <input type="file" id="asaasFileInput" accept=".csv" style="display:none;" onchange="handleAsaasUpload(event)">
+           <button class="btn-primary" style="background:#4CAF50;" onclick="document.getElementById('asaasFileInput').click()">
+              <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+              Importar Planilha Asaas (.csv)
+           </button>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card"><p class="kpi-label">Total Recebido</p><p class="kpi-value green" id="fin-kpi-pago">R$ 0,00</p><p class="kpi-sub">Valor já pago</p></div>
+        <div class="kpi-card"><p class="kpi-label">A Receber</p><p class="kpi-value amber" id="fin-kpi-avencer">R$ 0,00</p><p class="kpi-sub">Valor a vencer</p></div>
+        <div class="kpi-card"><p class="kpi-label">Inadimplência</p><p class="kpi-value red" id="fin-kpi-vencido">R$ 0,00</p><p class="kpi-sub">Valor vencido (Atrasado)</p></div>
+      </div>
+
+      <div class="section-card">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="text-align:left">Cliente (Nome no Asaas)</th>
+                <th>Valor Pago</th>
+                <th>A Vencer</th>
+                <th>Vencido (Atraso)</th>
+                <th class="center">Status</th>
+              </tr>
+            </thead>
+            <tbody id="financeiroTableBody">
+               <tr><td colspan="5" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhuma planilha importada. Clique em "Importar Planilha Asaas" no topo.</td></tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -357,20 +403,15 @@
           <div style="margin-bottom: 15px; grid-column: span 2;"><button type="button" onclick="importarCertificado()" class="btn-primary" style="width:100%; justify-content:center; background: var(--navy)">✨ Importar do Certificado (.pfx)</button></div>
           <div class="form-group"><label>CNPJ</label><input id="nc-cnpj" type="text" /></div>
           <div class="form-group"><label>Regime *</label><select id="nc-regime"><option value="MEI">MEI</option><option value="Simples Nacional">Simples Nacional</option><option value="Lucro Presumido">Lucro Presumido</option></select></div>
-          
           <div class="form-group"><label>CNAE Principal</label><input id="nc-cnae" type="text" placeholder="Ex: 6204-0/00" /></div>
           <div class="form-group"><label>Anexo do Simples</label><select id="nc-anexo"><option value="-">Não se aplica</option><option value="Anexo I">Anexo I - Comércio</option><option value="Anexo II">Anexo II - Indústria</option><option value="Anexo III">Anexo III - Serviço</option><option value="Anexo IV">Anexo IV - Serviço</option><option value="Anexo V">Anexo V - Serviço</option></select></div>
-
           <div class="form-group"><label>Tipo</label><select id="nc-tipo"><option value="COMERCIO">Comércio</option><option value="SERVICO">Serviço</option><option value="MISTO">Misto</option></select></div>
           <div class="form-group"><label>Inscrição Municipal</label><input id="nc-im" type="text" /></div>
         </div>
-        
         <p style="font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--navy);font-weight:700;margin-top:8px;border-bottom:1px solid var(--border-soft);padding-bottom:5px">👤 Responsável</p>
         <div class="form-grid-2"><div class="form-group"><label>Nome</label><input id="nc-resp" type="text" /></div><div class="form-group"><label>CPF</label><input id="nc-cpf" type="text" /></div></div>
-        
         <p style="font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--navy);font-weight:700;margin-top:8px;border-bottom:1px solid var(--border-soft);padding-bottom:5px">🔑 Acessos</p>
         <div class="form-grid-2"><div class="form-group"><label>Senha SEFAZ</label><input id="nc-sefaz" type="text" /></div><div class="form-group"><label>Senha Prefeitura</label><input id="nc-pref" type="text" /></div><div class="form-group"><label>Senha GOV.br</label><input id="nc-govbr" type="text" /></div><div class="form-group"><label>Código Simples</label><input id="nc-codsn" type="text" /></div></div>
-        
         <p style="font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--navy);font-weight:700;margin-top:8px;border-bottom:1px solid var(--border-soft);padding-bottom:5px">📜 Certificado Digital</p>
         <div class="form-group"><input id="nc-cert" type="file" accept=".pfx,.cer,.p12,.pem" style="background:var(--surface2);padding:14px;border-radius:9px;width:100%;" /></div>
       </div>
@@ -393,7 +434,7 @@
 
   <script>
     const API = '/api'; 
-    let DB = { clients: {}, passwords: [] };
+    let DB = { clients: {}, passwords: [], honorarios: [] };
     let chartRegime = null, chartStatus = null;
     const MESES = ['JANEIRO', 'FEVEREIRO', 'MARÇO', 'ABRIL', 'MAIO', 'JUNHO', 'JULHO', 'AGOSTO', 'SETEMBRO', 'OUTUBRO', 'NOVEMBRO', 'DEZEMBRO'];
     const MEI_LIMIT = 81000;
@@ -404,6 +445,7 @@
         const r = await fetch(`${API}/data`);
         if (!r.ok) throw new Error('offline');
         DB = await r.json();
+        if (!DB.honorarios) DB.honorarios = [];
         document.getElementById('dbStatus').textContent = `${Object.keys(DB.clients).length} clientes carregados.`;
         document.getElementById('dbStatus').style.color = 'rgba(255,255,255,0.8)';
       } catch (e) {
@@ -416,90 +458,38 @@
 
     function renderAll() {
       const month = document.getElementById('globalMonthFilter').value;
-      renderDashboard(month); renderMEI(); renderSN(); renderLP(); renderTable(month); renderVault();
+      renderDashboard(month); renderMEI(); renderSN(); renderLP(); renderTable(month); renderVault(); renderFinanceiro();
     }
     document.getElementById('globalMonthFilter').addEventListener('change', renderAll);
 
     const fmt = v => (v == null ? 'R$ 0,00' : v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
     const fmtShort = v => { return fmt(v); };
 
-    function clientRevenue(client, month) {
-      if (month === 'ALL') return Object.values(client.meses).reduce((s, m) => s + (m.fat || m.total || 0), 0);
-      return client.meses[month] ? (client.meses[month].fat || client.meses[month].total || 0) : 0;
-    }
-    function clientTax(client, month) {
-      if (month === 'ALL') return Object.values(client.meses).reduce((s, m) => s + (m.das || (m.iss || 0) + (m.pis || 0) + (m.cofins || 0) || 0), 0);
-      const m = client.meses[month]; if (!m) return 0;
-      return m.das || ((m.iss || 0) + (m.pis || 0) + (m.cofins || 0));
-    }
-    function clientStatus(client, month) {
-      if (month === 'ALL') {
-        const keys = MESES.filter(k => client.meses[k]);
-        for (let i = keys.length - 1; i >= 0; i--) {
-          if (client.meses[keys[i]].status && client.meses[keys[i]].status !== 'Pendente') return client.meses[keys[i]].status;
-        }
-        return 'Pendente';
-      }
-      return (client.meses[month] || {}).status || 'Pendente';
-    }
-    function badgeHTML(status) {
-      const map = { 'Concluído': 'badge-concluido', 'Pendente': 'badge-pendente', 'Entregue': 'badge-entregue' };
-      return `<span class="badge ${map[status] || 'badge-pendente'}">${status}</span>`;
-    }
-    function chipRegime(regime) {
-      const map = { 'MEI': 'chip-mei', 'Simples Nacional': 'chip-sn', 'Lucro Presumido': 'chip-lp' };
-      const abbr = { 'MEI': 'MEI', 'Simples Nacional': 'S.N.', 'Lucro Presumido': 'L.P.' };
-      return `<span class="chip ${map[regime] || ''}">${abbr[regime] || regime}</span>`;
-    }
+    function clientRevenue(client, month) { if (month === 'ALL') return Object.values(client.meses).reduce((s, m) => s + (m.fat || m.total || 0), 0); return client.meses[month] ? (client.meses[month].fat || client.meses[month].total || 0) : 0; }
+    function clientTax(client, month) { if (month === 'ALL') return Object.values(client.meses).reduce((s, m) => s + (m.das || (m.iss || 0) + (m.pis || 0) + (m.cofins || 0) || 0), 0); const m = client.meses[month]; if (!m) return 0; return m.das || ((m.iss || 0) + (m.pis || 0) + (m.cofins || 0)); }
+    function clientStatus(client, month) { if (month === 'ALL') { const keys = MESES.filter(k => client.meses[k]); for (let i = keys.length - 1; i >= 0; i--) { if (client.meses[keys[i]].status && client.meses[keys[i]].status !== 'Pendente') return client.meses[keys[i]].status; } return 'Pendente'; } return (client.meses[month] || {}).status || 'Pendente'; }
+    function badgeHTML(status) { const map = { 'Concluído': 'badge-concluido', 'Pendente': 'badge-pendente', 'Entregue': 'badge-entregue', 'Vencido': 'badge-vencido' }; return `<span class="badge ${map[status] || 'badge-pendente'}">${status}</span>`; }
+    function chipRegime(regime) { const map = { 'MEI': 'chip-mei', 'Simples Nacional': 'chip-sn', 'Lucro Presumido': 'chip-lp' }; const abbr = { 'MEI': 'MEI', 'Simples Nacional': 'S.N.', 'Lucro Presumido': 'L.P.' }; return `<span class="chip ${map[regime] || ''}">${abbr[regime] || regime}</span>`; }
 
-    function getRBT12(client, currentMonthName) {
-        if (!client || !currentMonthName || currentMonthName === 'ALL') return 0;
-        const monthIndex = MESES.indexOf(currentMonthName);
-        if(monthIndex === -1) return 0;
-        
-        let sum = 0;
-        const cad = client.cadastro || {};
-        const hist = cad.historico2025 || {};
-
-        for(let i = 0; i < monthIndex; i++) {
-            const m = client.meses[MESES[i]];
-            if(m) sum += (m.total || m.fat || 0);
-        }
-        const monthsNeeded2025 = 12 - monthIndex;
-        for(let i = 12 - monthsNeeded2025; i < 12; i++) {
-            sum += (parseFloat(hist[MESES[i]]) || 0);
-        }
-        return sum;
-    }
-
-    function calcularSimplesEfetivo(rbt12) {
-      if (!rbt12 || rbt12 <= 0) return { anexo1: '0.00%', anexo3: '0.00%' };
-      let a1=0, d1=0, a3=0, d3=0;
-      if (rbt12 <= 180000)      { a1=0.04; d1=0;        a3=0.06; d3=0; }
-      else if (rbt12 <= 360000) { a1=0.073; d1=5940;    a3=0.112; d3=9360; }
-      else if (rbt12 <= 720000) { a1=0.095; d1=13860;   a3=0.135; d3=17640; }
-      else if (rbt12 <= 1800000){ a1=0.107; d1=22500;   a3=0.16; d3=35640; }
-      else if (rbt12 <= 3600000){ a1=0.143; d1=87300;   a3=0.21; d3=125640; }
-      else                      { a1=0.19; d1=378000;   a3=0.33; d3=557640; }
-      return { anexo1: (Math.max(0, ((rbt12 * a1) - d1) / rbt12) * 100).toFixed(2) + '%', anexo3: (Math.max(0, ((rbt12 * a3) - d3) / rbt12) * 100).toFixed(2) + '%' };
-    }
+    function getRBT12(client, currentMonthName) { if (!client || !currentMonthName || currentMonthName === 'ALL') return 0; const monthIndex = MESES.indexOf(currentMonthName); if(monthIndex === -1) return 0; let sum = 0; const cad = client.cadastro || {}; const hist = cad.historico2025 || {}; for(let i = 0; i < monthIndex; i++) { const m = client.meses[MESES[i]]; if(m) sum += (m.total || m.fat || 0); } const monthsNeeded2025 = 12 - monthIndex; for(let i = 12 - monthsNeeded2025; i < 12; i++) { sum += (parseFloat(hist[MESES[i]]) || 0); } return sum; }
+    function calcularSimplesEfetivo(rbt12) { if (!rbt12 || rbt12 <= 0) return { anexo1: '0.00%', anexo3: '0.00%' }; let a1=0, d1=0, a3=0, d3=0; if (rbt12 <= 180000) { a1=0.04; d1=0; a3=0.06; d3=0; } else if (rbt12 <= 360000) { a1=0.073; d1=5940; a3=0.112; d3=9360; } else if (rbt12 <= 720000) { a1=0.095; d1=13860; a3=0.135; d3=17640; } else if (rbt12 <= 1800000){ a1=0.107; d1=22500; a3=0.16; d3=35640; } else if (rbt12 <= 3600000){ a1=0.143; d1=87300; a3=0.21; d3=125640; } else { a1=0.19; d1=378000; a3=0.33; d3=557640; } return { anexo1: (Math.max(0, ((rbt12 * a1) - d1) / rbt12) * 100).toFixed(2) + '%', anexo3: (Math.max(0, ((rbt12 * a3) - d3) / rbt12) * 100).toFixed(2) + '%' }; }
 
     function buildClientFolders() {
-      const container = document.getElementById('clientSection');
-      container.innerHTML = '';
-      const regimes = [{ key: 'MEI', icon: '🟣' }, { key: 'Simples Nacional', icon: '🔵' }, { key: 'Lucro Presumido', icon: '🟠' }];
-      regimes.forEach(({ key, icon }) => {
-        const clients = Object.entries(DB.clients).filter(([, c]) => c.regime === key).sort((a, b) => a[0].localeCompare(b[0]));
-        if (clients.length === 0) return;
-        const folderId = `folder-${key.replace(/\s/g, '_')}`; const chevId = `chev-${key.replace(/\s/g, '_')}`;
-        const wrapper = document.createElement('div'); wrapper.className = 'regime-folder';
-        wrapper.innerHTML = `<button class="regime-folder-btn" onclick="toggleFolder('${folderId}','${chevId}')"><div class="regime-folder-left"><span class="regime-icon">${icon}</span><span class="regime-name">${key}</span><span class="regime-count">${clients.length}</span></div><svg id="${chevId}" class="folder-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button><div id="${folderId}" class="client-list">${clients.map(([name]) => `<button class="client-item" data-client="${name.replace(/"/g, '&quot;')}" onclick="openFichaCliente(this.dataset.client)"><span class="client-dot"></span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${name}</span></button>`).join('')}</div>`;
-        container.appendChild(wrapper);
-      });
+      const container = document.getElementById('clientSection'); container.innerHTML = ''; const regimes = [{ key: 'MEI', icon: '🟣' }, { key: 'Simples Nacional', icon: '🔵' }, { key: 'Lucro Presumido', icon: '🟠' }];
+      regimes.forEach(({ key, icon }) => { const clients = Object.entries(DB.clients).filter(([, c]) => c.regime === key).sort((a, b) => a[0].localeCompare(b[0])); if (clients.length === 0) return; const folderId = `folder-${key.replace(/\s/g, '_')}`; const chevId = `chev-${key.replace(/\s/g, '_')}`; const wrapper = document.createElement('div'); wrapper.className = 'regime-folder'; wrapper.innerHTML = `<button class="regime-folder-btn" onclick="toggleFolder('${folderId}','${chevId}')"><div class="regime-folder-left"><span class="regime-icon">${icon}</span><span class="regime-name">${key}</span><span class="regime-count">${clients.length}</span></div><svg id="${chevId}" class="folder-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button><div id="${folderId}" class="client-list">${clients.map(([name]) => `<button class="client-item" data-client="${name.replace(/"/g, '&quot;')}" onclick="openFichaCliente(this.dataset.client)"><span class="client-dot"></span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${name}</span></button>`).join('')}</div>`; container.appendChild(wrapper); });
     }
     function toggleFolder(f, c) { document.getElementById(f).classList.toggle('open'); document.getElementById(c).classList.toggle('open'); }
-    function showPanel(id) { document.querySelectorAll('.panel').forEach(p => p.classList.remove('active')); document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active')); document.getElementById(`panel-${id}`).classList.add('active'); document.getElementById(`nav-${id}`)?.classList.add('active'); const P = { dashboard: 'Dashboard', mei: 'Painel MEI', sn: 'Simples Nacional', lp: 'Lucro Presumido', table: 'Tabela Geral', vault: 'Cofre de Senhas' }; document.getElementById('pageTitle').textContent = P[id]; }
+    
+    function showPanel(id) { 
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active')); 
+        document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active')); 
+        document.getElementById(`panel-${id}`).classList.add('active'); 
+        document.getElementById(`nav-${id}`)?.classList.add('active'); 
+        const P = { dashboard: 'Dashboard', mei: 'Painel MEI', sn: 'Simples Nacional', lp: 'Lucro Presumido', table: 'Tabela Geral', vault: 'Cofre de Senhas', financeiro: 'Financeiro' }; 
+        document.getElementById('pageTitle').textContent = P[id]; 
+    }
 
+    // ── DASHBOARD GERAL ──
     function renderDashboard(month) {
       const entries = Object.entries(DB.clients); let totalFat = 0, totalDas = 0, pendentes = 0; const regimeMap = {}, statusMap = { Concluído: 0, Pendente: 0, Entregue: 0 };
       const ranked = entries.map(([name, c]) => { const fat = clientRevenue(c, month); const das = clientTax(c, month); const st = clientStatus(c, month); totalFat += fat; totalDas += das; if (st === 'Pendente') pendentes++; regimeMap[c.regime] = (regimeMap[c.regime] || 0) + fat; statusMap[st] = (statusMap[st] || 0) + 1; return { name, regime: c.regime, fat, das }; }).sort((a, b) => b.fat - a.fat).slice(0, 10);
@@ -507,6 +497,98 @@
       if (chartRegime) chartRegime.destroy(); chartRegime = new Chart(document.getElementById('chartRegime'), { type: 'doughnut', data: { labels: Object.keys(regimeMap), datasets: [{ data: Object.values(regimeMap), backgroundColor: ['#5E35B1', '#0277BD', '#FF8A00', '#4CAF50'], borderWidth: 2, borderColor: '#fff' }] }, options: { cutout: '68%', plugins: { legend: { labels: { color: '#6C757D', font: { size: 11, family: 'DM Sans' } } }, tooltip: { callbacks: { label: ctx => ` ${fmt(ctx.raw)}` } } } } });
       if (chartStatus) chartStatus.destroy(); chartStatus = new Chart(document.getElementById('chartStatus'), { type: 'bar', data: { labels: Object.keys(statusMap), datasets: [{ label: 'Clientes', data: Object.values(statusMap), backgroundColor: ['#4CAF50', '#FF9800', '#2196F3'], borderRadius: 6 }] }, options: { scales: { y: { grid: { color: 'rgba(0,0,0,.05)' } }, x: { grid: { display: false } } }, plugins: { legend: { display: false } } } });
       document.getElementById('topClientsBody').innerHTML = ranked.map(c => `<tr><td style="color:var(--navy);font-weight:700">${c.name}</td><td>${chipRegime(c.regime)}</td><td style="color:var(--navy);font-weight:700">${fmt(c.fat)}</td><td style="color:#f57c00">${fmt(c.das)}</td></tr>`).join('');
+    }
+
+    // ── IMPORTAÇÃO DO ASAAS E RENDER DO FINANCEIRO ──
+    async function handleAsaasUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+            const csvText = e.target.result;
+            const lines = csvText.split('\n').filter(l => l.trim());
+            if (lines.length < 2) { showToast("Planilha vazia ou inválida.", "error"); return; }
+            
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            const idxNome = headers.indexOf('Nome');
+            const idxVencido = headers.indexOf('Valor vencido');
+            const idxPago = headers.indexOf('Valor pago');
+            const idxAVencer = headers.indexOf('Valor a vencer');
+
+            if (idxNome === -1 || idxVencido === -1 || idxPago === -1 || idxAVencer === -1) {
+                showToast("Erro: Colunas obrigatórias do Asaas não encontradas.", "error");
+                return;
+            }
+
+            const parsedData = [];
+            for (let i = 1; i < lines.length; i++) {
+                const row = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                if (row.length < headers.length) continue;
+                
+                const nome = row[idxNome]?.replace(/"/g, '').trim();
+                if (!nome) continue;
+
+                const parseMoney = (val) => {
+                    if (!val) return 0;
+                    return parseFloat(val.replace(/"/g, '').replace('R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0;
+                };
+
+                parsedData.push({
+                    nome: nome,
+                    vencido: parseMoney(row[idxVencido]),
+                    pago: parseMoney(row[idxPago]),
+                    avencer: parseMoney(row[idxAVencer])
+                });
+            }
+
+            try {
+                const r = await fetch(`${API}/honorarios/importar`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsedData) });
+                if (!r.ok) throw new Error();
+                DB.honorarios = parsedData;
+                renderFinanceiro();
+                showToast(`Sucesso! ${parsedData.length} cobranças importadas.`);
+            } catch(err) {
+                showToast("Erro ao salvar no banco de dados.", "error");
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    function renderFinanceiro() {
+        const honorarios = DB.honorarios || [];
+        const tbody = document.getElementById('financeiroTableBody');
+        
+        let totalPago = 0, totalAVencer = 0, totalVencido = 0;
+
+        if (honorarios.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhuma planilha importada. Clique em "Importar Planilha Asaas" no topo.</td></tr>';
+        } else {
+            tbody.innerHTML = '';
+            honorarios.sort((a,b) => a.nome.localeCompare(b.nome)).forEach(h => {
+                totalPago += h.pago;
+                totalAVencer += h.avencer;
+                totalVencido += h.vencido;
+
+                let statusStr = "Pendente";
+                if (h.vencido > 0) statusStr = "Vencido";
+                else if (h.pago > 0 && h.avencer === 0) statusStr = "Concluído";
+                
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="color:var(--navy);font-weight:700;text-align:left">${h.nome}</td>
+                    <td style="color:#4CAF50;font-weight:600">${fmt(h.pago)}</td>
+                    <td style="color:#FF9800;font-weight:600">${fmt(h.avencer)}</td>
+                    <td style="color:#F44336;font-weight:700">${fmt(h.vencido)}</td>
+                    <td class="center">${badgeHTML(statusStr)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.getElementById('fin-kpi-pago').textContent = fmt(totalPago);
+        document.getElementById('fin-kpi-avencer').textContent = fmt(totalAVencer);
+        document.getElementById('fin-kpi-vencido').textContent = fmt(totalVencido);
     }
 
     function renderMEI() {
@@ -550,7 +632,7 @@
           tbody.appendChild(tr);
         });
       });
-      if(tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
+      if(tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
     }
 
     function renderLP() {
@@ -612,7 +694,6 @@
     function toggleReveal(id, pass) { const el = document.getElementById(`pw-${id}`); if(el.textContent === '●●●●●●●●') { el.textContent = pass; el.classList.remove('pass-hidden'); } else { el.textContent = '●●●●●●●●'; el.classList.add('pass-hidden'); } }
     async function deletePw(id) { if(confirm('Remover?')) { await fetch(`${API}/data/passwords/${id}`, {method:'DELETE'}); DB.passwords = DB.passwords.filter(p=>p.id!==id); renderVault(); } }
 
-    // ── MODAL DE LANÇAMENTO (AQUI ESTAVA O ERRO DE BUSCAR OS DADOS!) ──
     function buildEntryClientSelect() {
       const sel = document.getElementById('entry-client'); sel.innerHTML = '<option value="">Selecione…</option>';
       Object.keys(DB.clients).sort().forEach(name => { const opt = document.createElement('option'); opt.value = name; opt.textContent = name; sel.appendChild(opt); });
@@ -620,10 +701,7 @@
     
     function openEntryModal() { 
       document.getElementById('entryModal').classList.add('open'); 
-      // Se já tiver algo selecionado, força a puxar os dados
-      if(document.getElementById('entry-client').value) {
-         onEntryClientChange();
-      }
+      if(document.getElementById('entry-client').value) { onEntryClientChange(); }
     }
     
     function closeEntryModal() { document.getElementById('entryModal').classList.remove('open'); document.getElementById('entry-sn-header').style.display = 'none'; }
@@ -671,15 +749,11 @@
          headerSN.style.display = 'none';
       }
 
-      // CORREÇÃO: AGORA O SISTEMA PUXA O QUE JÁ ESTAVA SALVO!
       setTimeout(() => {
         const m = DB.clients[name]?.meses[month];
         if (m) {
           document.querySelectorAll('#entry-fields input').forEach(inp => { 
-             // Se o valor existe e não é zero, preenche na tela!
-             if (m[inp.name] !== undefined && m[inp.name] !== 0) {
-                 inp.value = m[inp.name]; 
-             }
+             if (m[inp.name] !== undefined && m[inp.name] !== 0) { inp.value = m[inp.name]; }
           });
           if (m.status) document.getElementById('entry-status').value = m.status;
         }
