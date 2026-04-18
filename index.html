@@ -162,7 +162,7 @@
     </div>
     <nav id="mainNav">
       <button id="nav-dashboard" class="nav-link active" onclick="showPanel('dashboard')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4" /></svg> Dashboard</button>
-      <button id="nav-mei" class="nav-link" onclick="showPanel('mei')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg> Painel MEI</button>
+      <button id="nav-mei" class="nav-link" onclick="showPanel('mei')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg> Painel MEI</button>
       <button id="nav-sn" class="nav-link" onclick="showPanel('sn')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" /></svg> Simples Nacional</button>
       <button id="nav-lp" class="nav-link" onclick="showPanel('lp')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg> Lucro Presumido</button>
       <button id="nav-table" class="nav-link" onclick="showPanel('table')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18M10 4v16M3 4h18a1 1 0 011 1v14a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z" /></svg> Tabela Geral</button>
@@ -295,7 +295,6 @@
         
         <div id="entry-sn-header" style="display:none; background:#E1F5FE; border:1px solid #81D4FA; padding:15px; border-radius:8px; margin-bottom:5px;">
            <p style="font-size:12px; font-weight:700; color:#0277BD; text-transform:uppercase; margin-bottom:8px; border-bottom:1px solid rgba(2,119,189,0.2); padding-bottom:4px;" id="lbl-cnae-anexo">CNAE: - | Anexo: -</p>
-           
            <div style="display:flex; justify-content:space-between; align-items:center;">
               <div>
                  <p style="font-size:10px; color:#0277BD; font-weight:700; text-transform:uppercase;">RBT12 (Calculado Auto)</p>
@@ -306,7 +305,6 @@
                  <p style="font-size:18px; font-weight:700;"><span id="lbl-alq-1" style="color:var(--navy);">0.00%</span> <span style="color:#0277BD;">|</span> <span id="lbl-alq-3" style="color:var(--gold);">0.00%</span></p>
               </div>
            </div>
-           
            <div id="alerta-sublimite" class="alerta-sublimite">
              ⚠️ ATENÇÃO: RBT12 ULTRAPASSOU R$ 3.600.000,00 (SUBLIMITE). ICMS/ISS FORA DO DAS!
            </div>
@@ -464,15 +462,11 @@
         const cad = client.cadastro || {};
         const hist = cad.historico2025 || {};
 
-        // 1. Soma os meses do ano atual (2026) que vieram ANTES do mês selecionado
         for(let i = 0; i < monthIndex; i++) {
             const m = client.meses[MESES[i]];
             if(m) sum += (m.total || m.fat || 0);
         }
-
-        // 2. Soma os meses que faltam lá no Histórico de 2025 (de trás pra frente)
         const monthsNeeded2025 = 12 - monthIndex;
-        // Ex: Se estamos em MAIO (index 4), precisamos de 8 meses de 2025 (Maio a Dezembro).
         for(let i = 12 - monthsNeeded2025; i < 12; i++) {
             sum += (parseFloat(hist[MESES[i]]) || 0);
         }
@@ -527,9 +521,19 @@
       });
     }
 
+    // ── RENDER SN COM OS FILTROS REATIVADOS ──
     function renderSN() {
       const month = document.getElementById('globalMonthFilter').value;
+      const search = document.getElementById('sn-search').value.toLowerCase();
+      const tipo = document.getElementById('sn-tipo').value;
+      const stF = document.getElementById('sn-status').value;
+
       let rows = Object.entries(DB.clients).filter(([, c]) => c.regime === 'Simples Nacional');
+      
+      // FILTROS APLICADOS AQUI
+      if (tipo) rows = rows.filter(([, c]) => c.tipo === tipo);
+      if (search) rows = rows.filter(([n]) => n.toLowerCase().includes(search));
+
       let totFat = 0, totDas = 0, totInss = 0, totFgts = 0;
       rows.forEach(([, c]) => { const months = month === 'ALL' ? MESES : [month]; months.forEach(m => { const md = c.meses[m]; if (!md) return; totFat += (md.total || 0); totDas += (md.das || 0); totInss += (md.inss || 0); totFgts += (md.fgts || 0); }); });
       document.getElementById('sn-kpis').innerHTML = `<div class="obrig-tile"><p class="obrig-name">Empresas SN</p><p class="obrig-value">${rows.length}</p></div><div class="obrig-tile"><p class="obrig-name">Faturamento</p><p class="obrig-value">${fmtShort(totFat)}</p></div><div class="obrig-tile"><p class="obrig-name">DAS Total</p><p class="obrig-value">${fmtShort(totDas)}</p></div><div class="obrig-tile"><p class="obrig-name">INSS + FGTS</p><p class="obrig-value">${fmtShort(totInss + totFgts)}</p></div>`;
@@ -539,8 +543,13 @@
         const months = month === 'ALL' ? MESES : [month];
         months.forEach(m => {
           const md = client.meses[m]; if (!md) return;
-          const rbt12 = getRBT12(client, m); // CÁLCULO AO VIVO PARA A TABELA
-          const fat = md.total || 0, das = md.das || 0, st = md.status || 'Pendente';
+          const st = md.status || 'Pendente';
+          
+          // FILTRO DE STATUS
+          if (stF && st !== stF) return; 
+
+          const rbt12 = getRBT12(client, m);
+          const fat = md.total || 0, das = md.das || 0;
           const alq = calcularSimplesEfetivo(rbt12);
           
           const tr = document.createElement('tr');
@@ -548,11 +557,20 @@
           tbody.appendChild(tr);
         });
       });
+      if(tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
     }
 
+    // ── RENDER LP COM OS FILTROS REATIVADOS ──
     function renderLP() {
       const month = document.getElementById('globalMonthFilter').value;
+      const search = document.getElementById('lp-search').value.toLowerCase();
+      const stF = document.getElementById('lp-status').value;
+
       let rows = Object.entries(DB.clients).filter(([, c]) => c.regime === 'Lucro Presumido');
+      
+      // FILTROS APLICADOS AQUI
+      if (search) rows = rows.filter(([n]) => n.toLowerCase().includes(search));
+
       let totFat = 0, totIss = 0, totPis = 0, totCofins = 0;
       rows.forEach(([, c]) => { const months = month === 'ALL' ? MESES : [month]; months.forEach(m => { const md = c.meses[m]; if (!md) return; totFat += (md.total || 0); totIss += (md.iss || 0); totPis += (md.pis || 0); totCofins += (md.cofins || 0); }); });
       document.getElementById('lp-kpis').innerHTML = `<div class="obrig-tile"><p class="obrig-name">Empresas LP</p><p class="obrig-value">${rows.length}</p></div><div class="obrig-tile"><p class="obrig-name">Faturamento</p><p class="obrig-value">${fmtShort(totFat)}</p></div><div class="obrig-tile"><p class="obrig-name">ISS Total</p><p class="obrig-value">${fmtShort(totIss)}</p></div><div class="obrig-tile"><p class="obrig-name">PIS + COFINS</p><p class="obrig-value">${fmtShort(totPis + totCofins)}</p></div>`;
@@ -562,16 +580,32 @@
         const months = month === 'ALL' ? MESES : [month];
         months.forEach(m => {
           const md = client.meses[m]; if (!md) return;
+          const st = md.status || 'Pendente';
+          
+          // FILTRO DE STATUS
+          if (stF && st !== stF) return; 
+
           const tr = document.createElement('tr');
-          tr.innerHTML = `<td style="color:var(--navy);font-weight:700">${name} <span style="display:block;font-size:10px;color:var(--text-dim)">${m}</span></td><td>${fmt(md.total || 0)}</td><td style="color:var(--navy); font-weight:600">${fmt(md.iss || 0)}</td><td>${fmt(md.pis || 0)}</td><td>${fmt(md.cofins || 0)}</td><td>${fmt(md.inss || 0)}</td><td>${fmt(md.fgts || 0)}</td><td class="center">${badgeHTML(md.status || 'Pendente')}</td><td class="center"><button class="tbl-btn" onclick="openEntryModalFor('${name.replace(/'/g, "\\'")}','${m}')">Editar</button></td>`;
+          tr.innerHTML = `<td style="color:var(--navy);font-weight:700">${name} <span style="display:block;font-size:10px;color:var(--text-dim)">${m}</span></td><td>${fmt(md.total || 0)}</td><td style="color:var(--navy); font-weight:600">${fmt(md.iss || 0)}</td><td>${fmt(md.pis || 0)}</td><td>${fmt(md.cofins || 0)}</td><td>${fmt(md.inss || 0)}</td><td>${fmt(md.fgts || 0)}</td><td class="center">${badgeHTML(st)}</td><td class="center"><button class="tbl-btn" onclick="openEntryModalFor('${name.replace(/'/g, "\\'")}','${m}')">Editar</button></td>`;
           tbody.appendChild(tr);
         });
       });
+      if(tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
     }
 
+    // ── RENDER TABLE GERAL COM OS FILTROS REATIVADOS ──
     function renderTable(month) {
+      const search = document.getElementById('tableSearch').value.toLowerCase();
+      const regimeF = document.getElementById('tableRegimeFilter').value;
+
+      let rows = Object.entries(DB.clients);
+      
+      // FILTROS APLICADOS AQUI
+      if (regimeF) rows = rows.filter(([, c]) => c.regime === regimeF);
+      if (search) rows = rows.filter(([n]) => n.toLowerCase().includes(search));
+
       const tbody = document.getElementById('mainTableBody'); tbody.innerHTML = '';
-      Object.entries(DB.clients).sort((a, b) => a[0].localeCompare(b[0])).forEach(([name, client]) => {
+      rows.sort((a, b) => a[0].localeCompare(b[0])).forEach(([name, client]) => {
         const months = month === 'ALL' ? MESES : [month];
         months.forEach(m => {
           const md = client.meses[m]; if (!md) return;
@@ -581,6 +615,7 @@
           tbody.appendChild(tr);
         });
       });
+      if(tbody.innerHTML === '') tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
     }
 
     function renderVault() {
@@ -594,7 +629,7 @@
     function toggleReveal(id, pass) { const el = document.getElementById(`pw-${id}`); if(el.textContent === '●●●●●●●●') { el.textContent = pass; el.classList.remove('pass-hidden'); } else { el.textContent = '●●●●●●●●'; el.classList.add('pass-hidden'); } }
     async function deletePw(id) { if(confirm('Remover?')) { await fetch(`${API}/data/passwords/${id}`, {method:'DELETE'}); DB.passwords = DB.passwords.filter(p=>p.id!==id); renderVault(); } }
 
-    // ── MODAL DE LANÇAMENTO (MAGIA DO RBT12) ──
+    // ── MODAL DE LANÇAMENTO ──
     function buildEntryClientSelect() {
       const sel = document.getElementById('entry-client'); sel.innerHTML = '<option value="">Selecione…</option>';
       Object.keys(DB.clients).sort().forEach(name => { const opt = document.createElement('option'); opt.value = name; opt.textContent = name; sel.appendChild(opt); });
@@ -631,26 +666,20 @@
       
       (fieldMap[regime] || []).forEach(f => {
         const div = document.createElement('div'); div.className = 'form-group';
-        // Destaque visual na Folha de Pagamento para o Simples
         let style = (f==='folha'||f==='prolabore') ? 'border-color:var(--gold); background:#FFF3E0;' : '';
         div.innerHTML = `<label>${LABELS[f]}</label><input type="number" step="0.01" name="${f}" placeholder="0.00" style="${style}"/>`;
         container.appendChild(div);
       });
 
-      // SE FOR SIMPLES NACIONAL, CALCULA TUDO E MOSTRA O CABEÇALHO AZUL
       if (regime === 'Simples Nacional') {
          headerSN.style.display = 'block';
-         
          const cad = client.cadastro || {};
          document.getElementById('lbl-cnae-anexo').textContent = `CNAE: ${cad.cnae || 'Não info.'} | Anexo: ${cad.anexo || 'Não info.'}`;
-         
          const rbt12 = getRBT12(client, month);
          document.getElementById('lbl-rbt12-auto').textContent = fmt(rbt12);
-         
          const alq = calcularSimplesEfetivo(rbt12);
          document.getElementById('lbl-alq-1').textContent = alq.anexo1;
          document.getElementById('lbl-alq-3').textContent = alq.anexo3;
-
          if (rbt12 > SUBLIMITE) document.getElementById('alerta-sublimite').style.display = 'block';
          else document.getElementById('alerta-sublimite').style.display = 'none';
       } else {
@@ -665,7 +694,6 @@
       const payload = {};
       document.querySelectorAll('#entry-fields input[name]').forEach(inp => { if (inp.value !== '') payload[inp.name] = parseFloat(inp.value) || 0; });
       
-      // A CORREÇÃO MESTRA: SOMAR TUDO NO TOTAL PARA APARECER NAS TABELAS
       payload.total = (payload.vendas || 0) + (payload.servicos || 0) + (payload.fat || 0);
       payload.status = document.getElementById('entry-status').value;
       
@@ -686,7 +714,7 @@
         nome, regime, tipo: document.getElementById('nc-tipo').value,
         cadastro: {
           razaoSocial: document.getElementById('nc-razao').value, cnpj: document.getElementById('nc-cnpj').value, cnae: document.getElementById('nc-cnae').value, anexo: document.getElementById('nc-anexo').value, inscMunicipal: document.getElementById('nc-im').value, inscEstadual: document.getElementById('nc-ie').value, responsavel: document.getElementById('nc-resp').value, cpfResponsavel: document.getElementById('nc-cpf').value, sefaz: document.getElementById('nc-sefaz').value, prefeitura: document.getElementById('nc-pref').value, govbr: document.getElementById('nc-govbr').value, codigoSimples: document.getElementById('nc-codsn').value,
-          historico2025: {} // Nasce vazio para preencher na ficha
+          historico2025: {}
         },
       };
       try {
@@ -708,7 +736,6 @@
       const row = (l, v, id) => _fichaEditing ? `<div class="form-group"><label>${l}</label><input id="fe-${id}" type="text" value="${safe(v)}" /></div>` : `<div style="display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-soft)"><span style="font-size:11px;color:var(--text-muted);width:150px;font-weight:700;text-transform:uppercase;">${l}</span><span style="font-size:13px;color:var(--text);">${v || '—'}</span></div>`;
       const section = (t, r) => `<div style="margin-bottom:24px"><p style="font-size:11px;text-transform:uppercase;color:var(--navy);font-weight:700;margin-bottom:8px;border-bottom:1px solid var(--border-soft);padding-bottom:5px">${t}</p>${_fichaEditing ? `<div class="form-grid-2">${r}</div>` : r}</div>`;
 
-      // ÁREA DE HISTÓRICO PARA RBT12
       let histHTML = '';
       if (c.regime === 'Simples Nacional') {
          const h = cad.historico2025 || {};
