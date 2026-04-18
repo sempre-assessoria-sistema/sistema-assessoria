@@ -10,14 +10,19 @@ const PORT = process.env.PORT || 3000;
 const DB_PATH = path.join(__dirname, 'database.json');
 const CERT_DIR = path.join(__dirname, 'certificados');
 
-// 🔐 CREDENCIAIS DE ACESSO DO SISTEMA (Você pode mudar depois)
+// 🔐 CREDENCIAIS DE ACESSO DO SISTEMA
 const EMAIL_ACESSO = 'admin@sempreassessoria.com.br';
 const SENHA_ACESSO = 'sempre2026';
+
+// 💰 CHAVE DE INTEGRAÇÃO ASAAS (COLE A SUA CHAVE DENTRO DAS ASPAS ABAIXO)
+const ASAAS_API_KEY = $aact_prod_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6Ojc3ZDdiZWZkLWQ2ZTQtNDkxOC05Y2UyLWZmMjFhNzljOGI5ZDo6JGFhY2hfMzNmZGE1ODQtNDE2MS00NjQwLTkwNjAtNjgyMWQzNzE4YTdi
+;
+const ASAAS_BASE_URL = "https://api.asaas.com/v3";
 
 // Cria pasta /certificados se não existir
 if (!fs.existsSync(CERT_DIR)) fs.mkdirSync(CERT_DIR, { recursive: true });
 
-// ─── Multer (optional – only used when multer is installed) ──────────────────
+// ─── Multer (para os certificados) ───────────────────────────────────────────
 let upload = null;
 try {
   const multer = require('multer');
@@ -75,10 +80,9 @@ app.post('/api/login', (req, res) => {
   }
 });
 
-// ─── Helpers do Banco de Dados ───────────────────────────────────────────────
+// ─── Helpers da Base de Dados ───────────────────────────────────────────────
 function readDB() {
   try { return JSON.parse(fs.readFileSync(DB_PATH, 'utf8')); }
-  // 👇 AQUI ESTÁ A GAVETA DE HONORÁRIOS CRIADA 👇
   catch { return { clients: {}, passwords: [], honorarios: [] }; }
 }
 function writeDB(data) {
@@ -100,8 +104,7 @@ function emptyMeses(regime) {
   return meses;
 }
 
-// ─── Routes da API ───────────────────────────────────────────────────────────
-
+// ─── Rotas da API de Clientes ────────────────────────────────────────────────
 app.get('/api/data', (_req, res) => res.json(readDB()));
 
 app.post('/api/data', (req, res) => {
@@ -174,7 +177,7 @@ app.patch('/api/data/client/:name/month/:month', (req, res) => {
 if (upload) {
   app.post('/api/clients/:name/certificado', upload.single('certificado'), (req, res) => {
     try {
-      if (!req.file) return res.status(400).json({ error: 'Arquivo inválido ou não enviado.' });
+      if (!req.file) return res.status(400).json({ error: 'Ficheiro inválido ou não enviado.' });
       const name = decodeURIComponent(req.params.name);
       const db = readDB();
       if (!db.clients[name]) return res.status(404).json({ error: 'Cliente não encontrado.' });
@@ -191,10 +194,11 @@ if (upload) {
 
 app.get('/api/certificados/:filename', (req, res) => {
   const fp = path.join(CERT_DIR, path.basename(req.params.filename));
-  if (!fs.existsSync(fp)) return res.status(404).json({ error: 'Arquivo não encontrado.' });
+  if (!fs.existsSync(fp)) return res.status(404).json({ error: 'Ficheiro não encontrado.' });
   res.download(fp);
 });
 
+// ─── Cofre de Senhas ─────────────────────────────────────────────────────────
 app.get('/api/data/passwords', (_req, res) => res.json(readDB().passwords || []));
 
 app.post('/api/data/passwords', (req, res) => {
@@ -218,9 +222,59 @@ app.delete('/api/data/passwords/:id', (req, res) => {
   } catch (e) { res.status(500).json({ error: 'Erro interno.' }); }
 });
 
-// 👇 NOVAS ROTAS DO FINANCEIRO (ASAAS) 👇
-app.get('/api/honorarios', (_req, res) => res.json(readDB().honorarios || []));
+// ============================================================================
+// 💰 INTEGRAÇÃO ASAAS (API DIRETA PARA EMISSÃO)
+// ============================================================================
 
+// 1. Rota para buscar clientes diretamente do Asaas
+app.get('/api/asaas/clientes', async (req, res) => {
+  try {
+    if (!ASAAS_API_KEY || ASAAS_API_KEY === "COLE_SUA_CHAVE_AQUI") {
+      return res.status(400).json({ error: "Chave API do Asaas não configurada." });
+    }
+    
+    // Usamos o fetch nativo do Node para contactar o Asaas
+    const response = await fetch(`${ASAAS_BASE_URL}/customers?limit=100`, {
+      method: 'GET',
+      headers: { 
+        'access_token': ASAAS_API_KEY, 
+        'Content-Type': 'application/json' 
+      }
+    });
+    
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Erro Asaas (Clientes):", error);
+    res.status(500).json({ error: 'Falha ao ligar ao Asaas.' });
+  }
+});
+
+// 2. Rota para gerar uma nova cobrança de Honorários
+app.post('/api/asaas/cobrancas', async (req, res) => {
+  try {
+    const response = await fetch(`${ASAAS_BASE_URL}/payments`, {
+      method: 'POST',
+      headers: { 
+        'access_token': ASAAS_API_KEY, 
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify(req.body) // Envia o cliente, valor, data, etc.
+    });
+    
+    const data = await response.json();
+    if (data.errors) {
+       return res.status(400).json({ error: data.errors[0].description });
+    }
+    res.json({ ok: true, cobranca: data });
+  } catch (error) {
+    console.error("Erro Asaas (Cobranças):", error);
+    res.status(500).json({ error: 'Falha ao emitir cobrança no Asaas.' });
+  }
+});
+
+// Mantém a rota antiga da folha de Excel como backup (caso precise)
+app.get('/api/honorarios', (_req, res) => res.json(readDB().honorarios || []));
 app.post('/api/honorarios/importar', (req, res) => {
   try {
     const db = readDB();
@@ -230,7 +284,7 @@ app.post('/api/honorarios/importar', (req, res) => {
   } catch (e) { res.status(500).json({ error: 'Erro ao importar.' }); }
 });
 
-// CÓDIGO PARA LER O CERTIFICADO
+// ─── Código para ler o Certificado (.pfx) ────────────────────────────────────
 const uploadMemoria = require('multer')({ storage: require('multer').memoryStorage() });
 app.post('/ler-certificado', uploadMemoria.single('certificado'), async (req, res) => {
   try {
@@ -258,6 +312,7 @@ app.post('/ler-certificado', uploadMemoria.single('certificado'), async (req, re
 app.listen(PORT, () => {
   console.log('##############################################');
   console.log('🚀 SISTEMA SEMPRE ASSESSORIA: ONLINE COM SEGURANÇA');
+  console.log('🔌 API DO ASAAS: PREPARADA PARA EMISSÃO');
   console.log(`🌍 ACESSE: http://localhost:${PORT}`);
   console.log('##############################################');
 });
