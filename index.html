@@ -426,7 +426,7 @@
       font-weight: 700;
       font-family: 'DM Sans', sans-serif;
     }
-    .kpi-value.white { color: var(--navy); } /* Reescrito para modo claro */
+    .kpi-value.white { color: var(--navy); }
     .kpi-value.gold { color: var(--gold); }
     .kpi-value.red { color: #d32f2f; }
     .kpi-value.amber { color: #f57c00; }
@@ -873,13 +873,12 @@
             <thead>
               <tr>
                 <th style="text-align:left">Cliente</th>
-                <th style="text-align:left">Tipo</th>
-                <th>Faturamento</th>
+                <th>RBT12</th>
+                <th>Alíq. Venda</th>
+                <th>Alíq. Serviço</th>
                 <th>Vendas</th>
                 <th>Serviços</th>
                 <th>DAS</th>
-                <th>INSS</th>
-                <th>FGTS</th>
                 <th class="center">Status</th>
                 <th class="center">Ação</th>
               </tr>
@@ -1209,7 +1208,7 @@
     // ── Helpers ───────────────────────────────────────────────────────────
     const fmt = v => (v == null ? 'R$ 0,00' : v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
     
-    // NÚMEROS AGORA SÃO EXIBIDOS COMPLETOS (CÓDIGO ATUALIZADO)
+    // NÚMEROS AGORA SÃO EXIBIDOS COMPLETOS
     const fmtShort = v => {
       return fmt(v);
     };
@@ -1466,7 +1465,7 @@
       });
     }
 
-    // ── Simples Nacional Panel ────────────────────────────────────────────
+    // ── Simples Nacional Panel (ATUALIZADO COM RBT12 E ALÍQUOTA) ──
     function renderSN() {
       const month = document.getElementById('globalMonthFilter').value;
       const search = document.getElementById('sn-search').value.toLowerCase();
@@ -1503,27 +1502,28 @@
         const months = month === 'ALL' ? MESES : [month];
         months.forEach(m => {
           const md = client.meses[m]; if (!md) return;
-          const fat = md.total || 0, das = md.das || 0, inss = md.inss || 0, fgts = md.fgts || 0;
+          const rbt12 = md.rbt12 || 0;
+          const fat = md.total || 0, das = md.das || 0;
           const st = md.status || 'Pendente';
           if (stF && st !== stF) return;
-          visible.push({ name, m, client, fat, das, inss, fgts, st, month });
+          visible.push({ name, m, client, rbt12, fat, das, st, month });
         });
       });
       if (!visible.length) {
         tbody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhum registro encontrado.</td></tr>';
         return;
       }
-      visible.forEach(({ name, m, client, fat, das, inss, fgts, st, month: mo }) => {
+      visible.forEach(({ name, m, client, rbt12, fat, das, st, month: mo }) => {
+        const alq = calcularSimplesEfetivo(rbt12);
         const tr = document.createElement('tr');
         tr.innerHTML = `
       <td style="color:var(--navy);font-weight:700;text-align:left">${name}${mo === 'ALL' ? `<span style="display:block;font-size:10px;color:var(--text-dim)">${m}</span>` : ''}</td>
-      <td style="text-align:left"><span style="font-size:11px;color:var(--text-muted)">${client.tipo}</span></td>
-      <td>${fmt(fat)}</td>
+      <td>${fmt(rbt12)}</td>
+      <td style="color:var(--navy); font-weight:700">${alq.anexo1}</td>
+      <td style="color:var(--gold); font-weight:700">${alq.anexo3}</td>
       <td>${fmt(client.meses[m]?.vendas || 0)}</td>
       <td>${fmt(client.meses[m]?.servicos || 0)}</td>
       <td style="color:#f57c00; font-weight:600">${fmt(das)}</td>
-      <td>${fmt(inss)}</td>
-      <td>${fmt(fgts)}</td>
       <td class="center">${badgeHTML(st)}</td>
       <td class="center"><button class="tbl-btn" onclick="openEntryModalFor('${name.replace(/'/g, "\\'")}','${m}')">Editar</button></td>`;
         tbody.appendChild(tr);
@@ -1698,7 +1698,7 @@
       } catch (e) { showToast('Erro ao remover.', 'error'); }
     }
 
-    // ── Modal Lançamento ──────────────────────────────────────────────────
+    // ── Modal Lançamento (NOVO MOTOR DO RBT12) ─────────────────────────
     function buildEntryClientSelect() {
       const sel = document.getElementById('entry-client');
       sel.innerHTML = '<option value="">Selecione…</option>';
@@ -1721,7 +1721,11 @@
       if (m) {
         setTimeout(() => {
           document.querySelectorAll('#entry-fields input').forEach(inp => {
-            if (m[inp.name] !== undefined) inp.value = m[inp.name];
+            if (m[inp.name] !== undefined) {
+               inp.value = m[inp.name];
+               // Dispara o evento 'input' para atualizar o cálculo ao vivo se for o campo rbt12
+               if (inp.name === 'rbt12') inp.dispatchEvent(new Event('input'));
+            }
           });
           if (m.status) document.getElementById('entry-status').value = m.status;
         }, 50);
@@ -1736,18 +1740,55 @@
       container.innerHTML = '';
       if (!name || !DB.clients[name]) return;
       const regime = DB.clients[name].regime;
-      const LABELS = { fat: 'Faturamento', das: 'DAS', inss: 'INSS', fgts: 'FGTS', folha: 'Folha', prolabore: 'Pró-labore', vendas: 'Vendas', servicos: 'Serviços', total: 'Total', iss: 'ISS', pis: 'PIS', cofins: 'COFINS' };
+      
+      const LABELS = { rbt12: 'RBT12 (Rec. Bruta 12m)', fat: 'Faturamento', das: 'DAS', inss: 'INSS', fgts: 'FGTS', folha: 'Folha', prolabore: 'Pró-labore', vendas: 'Vendas', servicos: 'Serviços', total: 'Total', iss: 'ISS', pis: 'PIS', cofins: 'COFINS' };
+      
       const fieldMap = {
         'MEI': ['fat', 'das'],
         'Lucro Presumido': ['servicos', 'vendas', 'iss', 'pis', 'cofins', 'inss', 'fgts', 'folha', 'prolabore'],
-        'Simples Nacional': ['vendas', 'servicos', 'das', 'inss', 'fgts', 'folha', 'prolabore'],
+        // RBT12 colocado estrategicamente como primeiro campo do Simples Nacional
+        'Simples Nacional': ['rbt12', 'vendas', 'servicos', 'das', 'inss', 'fgts', 'folha', 'prolabore'], 
       };
+      
       (fieldMap[regime] || []).forEach(f => {
         const div = document.createElement('div');
         div.className = 'form-group';
-        div.innerHTML = `<label>${LABELS[f] || f}</label><input type="number" step="0.01" name="${f}" placeholder="0,00" />`;
+        div.innerHTML = `<label>${LABELS[f] || f}</label><input type="number" step="0.01" name="${f}" placeholder="0.00" />`;
         container.appendChild(div);
       });
+
+      // SE FOR SIMPLES NACIONAL, INJETA A CAIXINHA DE CÁLCULO AO VIVO
+      if (regime === 'Simples Nacional') {
+        const calcBox = document.createElement('div');
+        calcBox.style.gridColumn = '1 / -1'; // Ocupa a largura toda
+        calcBox.innerHTML = `
+          <div style="display:flex;gap:15px;margin-top:5px;padding:14px;background:#E1F5FE;border-radius:8px;border:1px solid #81D4FA">
+              <div style="flex:1">
+                 <p style="font-size:10px;color:#0277BD;text-transform:uppercase;font-weight:700;margin-bottom:4px">Alíquota Comércio (Anexo I)</p>
+                 <p id="live-alq-com" style="font-size:22px;color:#01579B;font-weight:700">0.00%</p>
+              </div>
+              <div style="flex:1">
+                 <p style="font-size:10px;color:#0277BD;text-transform:uppercase;font-weight:700;margin-bottom:4px">Alíquota Serviço (Anexo III)</p>
+                 <p id="live-alq-ser" style="font-size:22px;color:var(--gold);font-weight:700">0.00%</p>
+              </div>
+          </div>
+        `;
+        // Coloca a caixinha logo abaixo do RBT12 (que é o 1º elemento)
+        container.insertBefore(calcBox, container.children[1]);
+
+        // Faz a mágica acontecer ao vivo conforme digita
+        setTimeout(() => {
+          const rbtInput = document.querySelector('#entry-fields input[name="rbt12"]');
+          if (rbtInput) {
+            rbtInput.addEventListener('input', (e) => {
+              const val = parseFloat(e.target.value) || 0;
+              const alq = calcularSimplesEfetivo(val);
+              document.getElementById('live-alq-com').textContent = alq.anexo1;
+              document.getElementById('live-alq-ser').textContent = alq.anexo3;
+            });
+          }
+        }, 100);
+      }
     }
 
     async function saveEntry() {
@@ -1841,7 +1882,6 @@
           prefeitura: document.getElementById('nc-pref').value.trim(),
           govbr: document.getElementById('nc-govbr').value.trim(),
           codigoSimples: document.getElementById('nc-codsn').value.trim(),
-          rbt12: 0,
           certificado: '',
         },
       };
@@ -1867,7 +1907,7 @@
       } catch (e) { showToast('Erro de conexão ao criar cliente.', 'error'); }
     }
 
-    // ── Ficha do Cliente ──────────────────────────────────────────────────
+    // ── Ficha do Cliente (RETORNOU AO PADRÃO LIMPO) ───────────────────────
     let _fichaClient = null;
     let _fichaEditing = false;
 
@@ -1903,23 +1943,7 @@
       };
       const section = (title, rows) => `<div style="margin-bottom:24px"><p style="font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--navy);font-weight:700;margin-bottom:8px;border-bottom:1px solid var(--border-soft);padding-bottom:5px">${title}</p>${_fichaEditing ? `<div class="form-grid-2">${rows}</div>` : rows}</div>`;
 
-      // CÁLCULO DO SIMPLES NACIONAL (NOVA SESSÃO)
-      let calcHTML = '';
-      if (c.regime === 'Simples Nacional') {
-        const rbt12 = parseFloat(cad.rbt12) || 0;
-        const aliquotas = calcularSimplesEfetivo(rbt12);
-        
-        calcHTML = section('📊 Cálculo do Simples Nacional',
-          row('RBT12 (Rec. Bruta 12m)', fmt(rbt12), 'rbt12') +
-          (!_fichaEditing ? `<div style="display:flex;gap:15px;margin-top:10px;padding:12px;background:var(--surface2);border-radius:8px;border:1px solid var(--border)">
-              <div style="flex:1"><p style="font-size:10px;color:var(--text-muted);text-transform:uppercase">Alíquota Comércio (Anexo I)</p><p style="font-size:18px;color:var(--navy);font-weight:700">${aliquotas.anexo1}</p></div>
-              <div style="flex:1"><p style="font-size:10px;color:var(--text-muted);text-transform:uppercase">Alíquota Serviço (Anexo III)</p><p style="font-size:18px;color:var(--gold);font-weight:700">${aliquotas.anexo3}</p></div>
-          </div>` : '')
-        );
-      }
-
       document.getElementById('fichaBody').innerHTML =
-        calcHTML + 
         section('🏢 Dados da Empresa',
           row('Razão Social', cad.razaoSocial, 'razao') +
           row('CNPJ', cad.cnpj, 'cnpj', true) +
@@ -1940,19 +1964,12 @@
       const name = _fichaClient;
       const g = id => document.getElementById(`fe-${id}`)?.value.trim() || '';
       
-      // Captura e limpa o valor do RBT12 digitado pelo usuário (transforma "150.000,00" em número matemático)
-      let rbt12Value = g('rbt12');
-      if(rbt12Value) {
-         rbt12Value = rbt12Value.replace(/[^\d,-]/g, '').replace(',', '.');
-      }
-
       const cadastro = {
         razaoSocial: g('razao'), cnpj: g('cnpj'),
         inscMunicipal: g('im'), inscEstadual: g('ie'),
         responsavel: g('resp'), cpfResponsavel: g('cpf'),
         sefaz: g('sefaz'), prefeitura: g('pref'),
-        govbr: g('govbr'), codigoSimples: g('codsn'),
-        rbt12: rbt12Value ? parseFloat(rbt12Value) : 0
+        govbr: g('govbr'), codigoSimples: g('codsn')
       };
       
       try {
