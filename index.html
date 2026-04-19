@@ -931,7 +931,6 @@
       } catch { showToast('Erro ao guardar', 'error'); }
     }
 
-    // ── FUNÇÃO MÁGICA: GERAR PDF NO FORMATO PREMIUM COM O NOME DA CONTABILIDADE ──
     function gerarPDFCliente() {
       const name = _fichaClient;
       if(!name) return;
@@ -956,6 +955,7 @@
       tempDiv.style.padding = '40px';
       tempDiv.style.width = '800px';
 
+      // ── MUDANÇA: A TAG DE IMAGEM INCLUÍDA AQUI NO CABEÇALHO ──
       tempDiv.innerHTML = `
         <table style="width: 100%; border-bottom: 2px solid #3b82f6; margin-bottom: 30px; padding-bottom: 10px;">
             <tr>
@@ -964,8 +964,7 @@
                     <p style="margin: 5px 0; color: #6b7280; font-weight: bold; font-size: 14px;">Competência: ${compMonth}/2026 | Cliente: ${name}</p>
                 </td>
                 <td style="vertical-align: bottom; text-align: right;">
-                    <p style="margin: 0; color: #FF8A00; font-weight: 800; font-size: 22px; font-family: 'Playfair Display', Georgia, serif;">Sempre</p>
-                    <p style="margin: 0; color: #1e3a8a; font-size: 11px; font-weight: 700; text-transform: uppercase;">Assessoria Contábil</p>
+                    <img src="logo.jpg" style="max-height: 80px; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" alt="Sempre Assessoria" />
                 </td>
             </tr>
         </table>
