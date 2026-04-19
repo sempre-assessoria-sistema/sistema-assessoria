@@ -9,6 +9,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <style>
     /* ── CSS Variables — Paleta SEMPRE 2026 ─────────────────── */
@@ -164,7 +165,9 @@
       <button id="nav-mei" class="nav-link" onclick="showPanel('mei')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg> Painel MEI</button>
       <button id="nav-sn" class="nav-link" onclick="showPanel('sn')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" /></svg> Simples Nacional</button>
       <button id="nav-lp" class="nav-link" onclick="showPanel('lp')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg> Lucro Presumido</button>
-      <button id="nav-financeiro" class="nav-link" onclick="showPanel('financeiro')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Financeiro (Asaas)</button>
+      <button id="nav-financeiro" class="nav-link" onclick="showPanel('financeiro')">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Financeiro (Asaas)
+      </button>
       <button id="nav-table" class="nav-link" onclick="showPanel('table')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18M10 4v16M3 4h18a1 1 0 011 1v14a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z" /></svg> Tabela Geral</button>
       <button id="nav-vault" class="nav-link" onclick="showPanel('vault')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg> Cofre de Senhas</button>
     </nav>
@@ -416,7 +419,7 @@
           </div>
         </div>
         <div id="entry-fields" class="form-grid-2"></div>
-        <div class="form-group"><label>Status</label><select id="entry-status" style="border: 2px solid var(--gold);"><option value="Pendente">Pendente</option><option value="Concluído">Concluído</option><option value="Entregue">Entregue</option></select></div>
+        <div class="form-group"><label>Status</label><select id="entry-status"><option value="Pendente">Pendente</option><option value="Concluído">Concluído</option><option value="Entregue">Entregue</option></select></div>
       </div>
       <div class="modal-footer"><button class="btn-secondary" onclick="closeEntryModal()">Cancelar</button><button class="btn-primary" onclick="saveEntry()">Salvar</button></div>
     </div>
@@ -466,8 +469,15 @@
   <div id="fichaModal" class="modal-overlay">
     <div class="modal-box" style="max-width:680px;overflow-y:auto;max-height:92vh">
       <div class="modal-header" style="position:sticky;top:0;z-index:1">
-        <div><p class="modal-title" id="fichaTitle">Ficha do Cliente</p><p style="font-size:12px;color:var(--text-muted);font-weight:500" id="fichaMeta"></p></div>
-        <div style="display:flex;gap:8px;align-items:center"><button id="fichaEditBtn" class="btn-secondary" onclick="toggleFichaEdit()">Editar</button><button class="modal-close" onclick="closeFichaModal()"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div>
+        <div>
+          <p class="modal-title" id="fichaTitle">Ficha do Cliente</p>
+          <p style="font-size:12px;color:var(--text-muted);font-weight:500" id="fichaMeta"></p>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button id="pdfBtn" class="btn-primary" onclick="gerarPDFCliente()" style="background:var(--navy); font-size:11px; padding:6px 12px">Gerar PDF</button>
+          <button id="fichaEditBtn" class="btn-secondary" onclick="toggleFichaEdit()" style="font-size:11px; padding:6px 12px">✏ Editar</button>
+          <button class="modal-close" onclick="closeFichaModal()"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+        </div>
       </div>
       <div class="modal-body" id="fichaBody"></div>
       <div class="modal-footer" id="fichaFooter" style="display:none"><button class="btn-secondary" onclick="toggleFichaEdit()">Cancelar</button><button class="btn-primary" onclick="saveFichaEdit()">Salvar Alterações</button></div>
@@ -699,14 +709,13 @@
           const pisCof = (md.pis || 0) + (md.cofins || 0);
           const trimestral = (md.irpj || 0) + (md.csll || 0);
 
-          // Lógica de visualização das Obrigações Acessórias
           let obrHtml = '';
           const efdC = md.efdContribuicoes || 'Pendente';
           const efdI = md.efdIcms || 'Pendente';
           const dctf = md.dctfweb || 'Pendente';
 
           if(efdC === 'Entregue' && efdI === 'Entregue' && dctf === 'Entregue') {
-             obrHtml = '<span class="badge badge-entregue">100% OK</span>';
+             obrHtml = '<span class="badge badge-concluido">100% OK</span>';
           } else {
              let pendentes = [];
              if(efdC === 'Pendente') pendentes.push('EFD-C');
@@ -775,12 +784,7 @@
       const regime = client.regime;
       
       const LABELS = { fat: 'Faturamento', das: 'DAS', inss: 'INSS (Folha)', fgts: 'FGTS (Folha)', folha: 'Folha de Pagto.', prolabore: 'Pró-labore', vendas: 'Vendas', servicos: 'Serviços', iss: 'ISS', icms: 'ICMS', pis: 'PIS', cofins: 'COFINS', irpj: 'IRPJ (Trimestral)', csll: 'CSLL (Trimestral)' };
-      
-      const fieldMap = { 
-          'MEI': ['fat', 'das', 'inss', 'fgts', 'folha', 'prolabore'], 
-          'Lucro Presumido': ['vendas', 'servicos', 'icms', 'iss', 'pis', 'cofins', 'irpj', 'csll', 'inss', 'fgts', 'folha', 'prolabore'], 
-          'Simples Nacional': ['vendas', 'servicos', 'das', 'inss', 'fgts', 'folha', 'prolabore'] 
-      };
+      const fieldMap = { 'MEI': ['fat', 'das', 'inss', 'fgts', 'folha', 'prolabore'], 'Lucro Presumido': ['vendas', 'servicos', 'icms', 'iss', 'pis', 'cofins', 'irpj', 'csll', 'inss', 'fgts', 'folha', 'prolabore'], 'Simples Nacional': ['vendas', 'servicos', 'das', 'inss', 'fgts', 'folha', 'prolabore'] };
       
       (fieldMap[regime] || []).forEach(f => {
         const div = document.createElement('div'); div.className = 'form-group';
@@ -795,9 +799,8 @@
           if (trimesters[month]) {
               let sumV = 0, sumS = 0;
               trimesters[month].forEach(mesTrim => { const mData = client.meses[mesTrim] || {}; sumV += (mData.vendas || 0); sumS += (mData.servicos || 0); });
-              container.innerHTML += `<div style="grid-column: span 2; background:#FFF8E1; border:1px solid #FFE0B2; padding:12px; border-radius:8px; margin-top:5px;"><p style="font-size:11px; font-weight:700; color:#E65100; text-transform:uppercase; margin-bottom:6px;">📊 Base para Cálculo Trimestral (${trimesters[month].join(', ')})</p><div style="display:flex; justify-content:space-between;"><span style="font-size:12px; color:#E65100;">Vendas Acumuladas: <b>${fmt(sumV)}</b></span><span style="font-size:12px; color:#E65100;">Serviços Acumulados: <b>${fmt(sumS)}</b></span></div></div>`;
+              container.innerHTML += `<div style="grid-column: span 2; background:#FFF8E1; border:1px solid #FFE0B2; padding:12px; border-radius:8px; margin-top:5px;"><p style="font-size:11px; font-weight:700; color:#E65100; text-transform:uppercase; margin-bottom:6px;">📊 Base para Cálculo Trimestral (${trimesters[month].join(', ')})</p><div style="display:flex; justify-content:space-between;"><span style="font-size:12px; color:#E65100;">Vendas: <b>${fmt(sumV)}</b></span><span style="font-size:12px; color:#E65100;">Serviços: <b>${fmt(sumS)}</b></span></div></div>`;
           }
-
           container.innerHTML += `
              <div style="grid-column: span 2; margin-top: 10px; padding-top: 15px; border-top: 1px solid var(--border-soft);">
                 <p style="font-size:11px; font-weight:700; color:var(--navy); margin-bottom:10px; text-transform:uppercase;">Obrigações Acessórias (Mês)</p>
@@ -825,9 +828,7 @@
       setTimeout(() => {
         const m = DB.clients[name]?.meses[month];
         if (m) {
-          document.querySelectorAll('#entry-fields input, #entry-fields select').forEach(inp => { 
-             if (m[inp.name] !== undefined && m[inp.name] !== 0) { inp.value = m[inp.name]; } 
-          });
+          document.querySelectorAll('#entry-fields input, #entry-fields select').forEach(inp => { if (m[inp.name] !== undefined && m[inp.name] !== 0) { inp.value = m[inp.name]; } });
           if (m.status) document.getElementById('entry-status').value = m.status;
         }
       }, 50);
@@ -838,18 +839,9 @@
       const month = document.getElementById('entry-month').value;
       if (!clientName || !month) return;
       const payload = {};
-      
-      document.querySelectorAll('#entry-fields input[name], #entry-fields select[name]').forEach(inp => { 
-         if (inp.tagName === 'SELECT') {
-             payload[inp.name] = inp.value;
-         } else if (inp.value !== '') { 
-             payload[inp.name] = parseFloat(inp.value) || 0; 
-         } 
-      });
-      
+      document.querySelectorAll('#entry-fields input[name], #entry-fields select[name]').forEach(inp => { if (inp.tagName === 'SELECT') { payload[inp.name] = inp.value; } else if (inp.value !== '') { payload[inp.name] = parseFloat(inp.value) || 0; } });
       payload.total = (payload.vendas || 0) + (payload.servicos || 0) + (payload.fat || 0);
       payload.status = document.getElementById('entry-status').value;
-      
       try {
         await fetch(`${API}/data/client/${encodeURIComponent(clientName)}/month/${encodeURIComponent(month)}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
         DB.clients[clientName].meses[month] = { ...DB.clients[clientName].meses[month], ...payload };
@@ -874,6 +866,7 @@
       } catch (e) {}
     }
 
+    // ── FUNÇÕES DA FICHA DO CLIENTE (RESTAURADAS E COMPLETAS) ──
     let _fichaClient = null; let _fichaEditing = false;
     function openFichaCliente(name) { _fichaClient = name; _fichaEditing = false; renderFicha(); document.getElementById('fichaModal').classList.add('open'); }
     function closeFichaModal() { document.getElementById('fichaModal').classList.remove('open'); }
@@ -899,7 +892,6 @@
       document.getElementById('fichaBody').innerHTML = histHTML + section('🏢 Dados da Empresa', row('Razão Social', cad.razaoSocial, 'razao') + row('CNPJ', cad.cnpj, 'cnpj') + row('CNAE Principal', cad.cnae, 'cnae') + row('Anexo', cad.anexo, 'anexo')) + section('🔑 Acessos e Senhas', row('SEFAZ', cad.sefaz, 'sefaz') + row('Prefeitura', cad.prefeitura, 'pref') + row('GOV.br', cad.govbr, 'govbr') + row('Cód. Simples', cad.codigoSimples, 'codsn'));
     }
 
-    // NOVA FUNÇÃO BLINDADA: Nunca mais apaga dados da Ficha!
     async function saveFichaEdit() {
       const name = _fichaClient; 
       if (!DB.clients[name]) return;
@@ -935,6 +927,115 @@
         DB.clients[name].cadastro = cadastro;
         _fichaEditing = false; renderFicha(); showToast('Salvo com segurança!');
       } catch { showToast('Erro ao guardar', 'error'); }
+    }
+
+    // ── FUNÇÃO MÁGICA: GERAR PDF NO FORMATO PREMIUM ──
+    function gerarPDFCliente() {
+      const name = _fichaClient;
+      if(!name) return;
+      const client = DB.clients[name];
+      const month = document.getElementById('globalMonthFilter').value;
+      const compMonth = month === 'ALL' ? 'MARÇO' : month; 
+      const mData = client.meses[compMonth] || {};
+      
+      const rbt12 = getRBT12(client, compMonth);
+      const alq = calcularSimplesEfetivo(rbt12);
+      
+      const fatMes = (mData.vendas || 0) + (mData.servicos || 0) + (mData.fat || 0) || mData.total || 0;
+      const impostos = clientTax(client, compMonth);
+      
+      const btn = document.getElementById('pdfBtn');
+      btn.textContent = "Gerando...";
+      
+      const tempDiv = document.createElement('div');
+      tempDiv.style.fontFamily = 'Arial, sans-serif';
+      tempDiv.style.color = '#1f2937';
+      tempDiv.style.backgroundColor = '#ffffff';
+      tempDiv.style.padding = '40px';
+      tempDiv.style.width = '800px';
+
+      tempDiv.innerHTML = `
+        <div style="border-bottom: 2px solid #3b82f6; padding-bottom: 20px; margin-bottom: 30px;">
+            <h1 style="margin: 0; color: #1e3a8a; font-size: 28px;">Dashboard Fiscal e Tributário</h1>
+            <p style="margin: 5px 0; color: #6b7280; font-weight: bold;">Competência: ${compMonth}/2026 | Cliente: ${name}</p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px;">
+            <div style="flex: 1; min-width: 30%; background: #f9fafb; border: 1px solid #d1d5db; padding: 20px; border-radius: 8px; border-left: 5px solid #ef4444;">
+                <h3 style="margin: 0; font-size: 12px; color: #4b5563; text-transform: uppercase;">Imposto Devido (Mês)</h3>
+                <div style="font-size: 24px; font-weight: bold; margin-top: 10px; color: #111827;">${fmt(impostos)}</div>
+            </div>
+            <div style="flex: 1; min-width: 30%; background: #f9fafb; border: 1px solid #d1d5db; padding: 20px; border-radius: 8px;">
+                <h3 style="margin: 0; font-size: 12px; color: #4b5563; text-transform: uppercase;">Faturamento Acumulado</h3>
+                <div style="font-size: 24px; font-weight: bold; margin-top: 10px; color: #111827;">${fmt(rbt12)}</div>
+            </div>
+            <div style="flex: 1; min-width: 30%; background: #f9fafb; border: 1px solid #d1d5db; padding: 20px; border-radius: 8px;">
+                <h3 style="margin: 0; font-size: 12px; color: #4b5563; text-transform: uppercase;">Receita Total do Mês</h3>
+                <div style="font-size: 24px; font-weight: bold; margin-top: 10px; color: #111827;">${fmt(fatMes)}</div>
+            </div>
+            <div style="flex: 1; min-width: 30%; background: #f9fafb; border: 1px solid #d1d5db; padding: 20px; border-radius: 8px;">
+                <h3 style="margin: 0; font-size: 12px; color: #4b5563; text-transform: uppercase;">Total em Vendas</h3>
+                <div style="font-size: 24px; font-weight: bold; margin-top: 10px; color: #111827;">${fmt(mData.vendas || 0)}</div>
+            </div>
+            <div style="flex: 1; min-width: 30%; background: #f9fafb; border: 1px solid #d1d5db; padding: 20px; border-radius: 8px;">
+                <h3 style="margin: 0; font-size: 12px; color: #4b5563; text-transform: uppercase;">Total em Serviços</h3>
+                <div style="font-size: 24px; font-weight: bold; margin-top: 10px; color: #111827;">${fmt(mData.servicos || 0)}</div>
+            </div>
+             <div style="flex: 1; min-width: 30%; background: #f9fafb; border: 1px solid #d1d5db; padding: 20px; border-radius: 8px;">
+                <h3 style="margin: 0; font-size: 12px; color: #4b5563; text-transform: uppercase;">Pró-Labore / Folha</h3>
+                <div style="font-size: 24px; font-weight: bold; margin-top: 10px; color: #111827;">${fmt((mData.folha||0) + (mData.prolabore||0))}</div>
+            </div>
+        </div>
+
+        <div style="background: #1e3a8a; color: white; padding: 10px 15px; border-radius: 4px; font-size: 14px; margin-bottom: 15px; font-weight:bold;">Agenda de Pagamentos</div>
+        <div style="display: flex; gap: 20px; margin-bottom: 30px;">
+            <div style="flex: 1;">
+                <div style="padding: 10px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; font-size: 14px;"><span>Imposto / DAS</span> <strong>${fmt(impostos)}</strong></div>
+                <div style="padding: 10px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; font-size: 14px;"><span>INSS</span> <strong>${fmt(mData.inss || 0)}</strong></div>
+            </div>
+            <div style="flex: 1;">
+                <div style="padding: 10px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; font-size: 14px;"><span>FGTS Folha</span> <strong>${fmt(mData.fgts || 0)}</strong></div>
+                <div style="padding: 10px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; font-size: 14px;"><span>Status do Mês</span> <strong>${mData.status || 'Pendente'}</strong></div>
+            </div>
+        </div>
+
+        <div style="background: #1e3a8a; color: white; padding: 10px 15px; border-radius: 4px; font-size: 14px; margin-bottom: 15px; font-weight:bold;">Monitoramento da Faixa Tributária</div>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <thead>
+                <tr>
+                    <th style="background: #f3f4f6; text-align: left; padding: 12px; font-size: 12px; border: 1px solid #d1d5db;">Regime Tributário</th>
+                    <th style="background: #f3f4f6; text-align: left; padding: 12px; font-size: 12px; border: 1px solid #d1d5db;">Status Atual</th>
+                    <th style="background: #f3f4f6; text-align: left; padding: 12px; font-size: 12px; border: 1px solid #d1d5db;">Alíquota Comércio</th>
+                    <th style="background: #f3f4f6; text-align: left; padding: 12px; font-size: 12px; border: 1px solid #d1d5db;">Alíquota Serviços</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #d1d5db; font-size: 14px;">${client.regime}</td>
+                    <td style="padding: 12px; border: 1px solid #d1d5db; font-size: 14px;"><span style="background: #dcfce7; color: #166534; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 12px;">ATIVO</span></td>
+                    <td style="padding: 12px; border: 1px solid #d1d5db; font-size: 14px;"><strong>${client.regime === 'Simples Nacional' ? alq.anexo1 : (client.regime === 'MEI' ? 'Isento' : 'Presumido')}</strong></td>
+                    <td style="padding: 12px; border: 1px solid #d1d5db; font-size: 14px;"><strong>${client.regime === 'Simples Nacional' ? alq.anexo3 : (client.regime === 'MEI' ? 'Isento' : 'Presumido')}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p style="margin-top: 30px; font-size: 12px; color: #6b7280; text-align: center;">
+            Relatório gerado em ${new Date().toLocaleDateString('pt-BR')} via Sistema Sempre Assessoria Contábil.
+        </p>
+      `;
+
+      const opt = { 
+        margin: 0, 
+        filename: `Dashboard_Fiscal_${name}_${compMonth}.pdf`, 
+        image: { type: 'jpeg', quality: 0.98 }, 
+        html2canvas: { scale: 2 }, 
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } 
+      };
+      
+      html2pdf().set(opt).from(tempDiv).save().then(() => {
+          btn.textContent = "Gerar PDF";
+          showToast("PDF gerado com sucesso!");
+      });
     }
 
     function openPasswordModal() { document.getElementById('passwordModal').classList.add('open'); }
