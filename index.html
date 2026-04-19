@@ -128,7 +128,7 @@
     .modal-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--navy); }
     .modal-close { background: var(--surface2); border: none; color: var(--text-muted); cursor: pointer; display: flex; padding: 6px; border-radius: 50%; transition: all .2s; }
     .modal-close:hover { background: #FFEBEE; color: #D32F2F; }
-    .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+    .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; overflow-y: auto; max-height: 70vh; }
     .modal-footer { padding: 0 24px 24px; display: flex; justify-content: flex-end; gap: 10px; }
 
     .form-group label { display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -161,12 +161,10 @@
     </div>
     <nav id="mainNav">
       <button id="nav-dashboard" class="nav-link active" onclick="showPanel('dashboard')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4" /></svg> Dashboard</button>
-      <button id="nav-mei" class="nav-link" onclick="showPanel('mei')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012-2h2a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg> Painel MEI</button>
+      <button id="nav-mei" class="nav-link" onclick="showPanel('mei')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg> Painel MEI</button>
       <button id="nav-sn" class="nav-link" onclick="showPanel('sn')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" /></svg> Simples Nacional</button>
       <button id="nav-lp" class="nav-link" onclick="showPanel('lp')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg> Lucro Presumido</button>
-      <button id="nav-financeiro" class="nav-link" onclick="showPanel('financeiro')">
-        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Financeiro (Asaas)
-      </button>
+      <button id="nav-financeiro" class="nav-link" onclick="showPanel('financeiro')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Financeiro (Asaas)</button>
       <button id="nav-table" class="nav-link" onclick="showPanel('table')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18M10 4v16M3 4h18a1 1 0 011 1v14a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z" /></svg> Tabela Geral</button>
       <button id="nav-vault" class="nav-link" onclick="showPanel('vault')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg> Cofre de Senhas</button>
     </nav>
@@ -290,14 +288,25 @@
 
     <section id="panel-lp" class="panel">
       <div class="regime-panel-header">
-        <div><p class="regime-panel-title">Lucro Presumido</p><p class="regime-panel-subtitle">Empresas no Lucro Presumido – controlo de ISS, PIS, COFINS e obrigações</p></div>
+        <div><p class="regime-panel-title">Lucro Presumido</p><p class="regime-panel-subtitle">Controle completo: Vendas, Serviços, Impostos Mensais, Trimestrais e Obrigações Acessórias.</p></div>
         <div class="filter-bar"><input id="lp-search" type="text" placeholder="Procurar cliente…" oninput="renderLP()" /><select id="lp-status" class="filter-select" onchange="renderLP()"><option value="">Todo status</option><option value="Concluído">Concluído</option><option value="Pendente">Pendente</option><option value="Entregue">Entregue</option></select></div>
       </div>
       <div class="obrig-grid" id="lp-kpis"></div>
       <div class="section-card">
         <div class="data-table-wrap">
           <table class="data-table">
-            <thead><tr><th style="text-align:left">Cliente</th><th>Faturamento</th><th>ISS</th><th>PIS</th><th>COFINS</th><th>INSS</th><th>FGTS</th><th class="center">Status</th><th class="center">Ação</th></tr></thead>
+            <thead>
+              <tr>
+                <th style="text-align:left">Cliente</th>
+                <th>Fat. (V+S)</th>
+                <th>ICMS / ISS</th>
+                <th>PIS / COF</th>
+                <th>IRPJ / CSLL</th>
+                <th class="center">Obrigações</th>
+                <th class="center">Status</th>
+                <th class="center">Ação</th>
+              </tr>
+            </thead>
             <tbody id="lpTableBody"></tbody>
           </table>
         </div>
@@ -361,6 +370,9 @@
            <label>Descrição na Fatura (Opcional)</label>
            <input type="text" id="emissao-desc" placeholder="Honorários Contábeis" value="Honorários Contábeis - Ref. Abril/2026">
         </div>
+        <p style="font-size:10px;color:var(--text-muted);font-style:italic;margin-top:5px;">
+           * Ao clicar em "Gerar Cobrança", o boleto/PIX será emitido no Asaas e as notificações enviadas automaticamente.
+        </p>
       </div>
       <div class="modal-footer">
         <button class="btn-secondary" onclick="closeEmissaoModal()">Cancelar</button>
@@ -404,7 +416,7 @@
           </div>
         </div>
         <div id="entry-fields" class="form-grid-2"></div>
-        <div class="form-group"><label>Status</label><select id="entry-status"><option value="Pendente">Pendente</option><option value="Concluído">Concluído</option><option value="Entregue">Entregue</option></select></div>
+        <div class="form-group"><label>Status</label><select id="entry-status" style="border: 2px solid var(--gold);"><option value="Pendente">Pendente</option><option value="Concluído">Concluído</option><option value="Entregue">Entregue</option></select></div>
       </div>
       <div class="modal-footer"><button class="btn-secondary" onclick="closeEntryModal()">Cancelar</button><button class="btn-primary" onclick="saveEntry()">Salvar</button></div>
     </div>
@@ -496,8 +508,8 @@
     const fmt = v => (v == null ? 'R$ 0,00' : v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
     const fmtShort = v => fmt(v);
 
-    function clientRevenue(client, month) { if (month === 'ALL') return Object.values(client.meses).reduce((s, m) => s + (m.fat || m.total || 0), 0); return client.meses[month] ? (client.meses[month].fat || client.meses[month].total || 0) : 0; }
-    function clientTax(client, month) { if (month === 'ALL') return Object.values(client.meses).reduce((s, m) => s + (m.das || (m.iss || 0) + (m.pis || 0) + (m.cofins || 0) || 0), 0); const m = client.meses[month]; if (!m) return 0; return m.das || ((m.iss || 0) + (m.pis || 0) + (m.cofins || 0)); }
+    function clientRevenue(client, month) { if (month === 'ALL') return Object.values(client.meses).reduce((s, m) => s + (m.fat || m.total || (m.vendas||0)+(m.servicos||0) || 0), 0); const cm = client.meses[month] || {}; return cm.fat || cm.total || ((cm.vendas||0)+(cm.servicos||0)) || 0; }
+    function clientTax(client, month) { if (month === 'ALL') return Object.values(client.meses).reduce((s, m) => s + (m.das || (m.iss || 0) + (m.pis || 0) + (m.cofins || 0) || 0), 0); const m = client.meses[month]; if (!m) return 0; return m.das || ((m.iss || 0) + (m.icms || 0) + (m.pis || 0) + (m.cofins || 0)); }
     function clientStatus(client, month) { if (month === 'ALL') { const keys = MESES.filter(k => client.meses[k]); for (let i = keys.length - 1; i >= 0; i--) { if (client.meses[keys[i]].status && client.meses[keys[i]].status !== 'Pendente') return client.meses[keys[i]].status; } return 'Pendente'; } return (client.meses[month] || {}).status || 'Pendente'; }
     function badgeHTML(status) { const map = { 'Concluído': 'badge-concluido', 'Pendente': 'badge-pendente', 'Entregue': 'badge-entregue', 'Vencido': 'badge-vencido' }; return `<span class="badge ${map[status] || 'badge-pendente'}">${status}</span>`; }
     function chipRegime(regime) { const map = { 'MEI': 'chip-mei', 'Simples Nacional': 'chip-sn', 'Lucro Presumido': 'chip-lp' }; const abbr = { 'MEI': 'MEI', 'Simples Nacional': 'S.N.', 'Lucro Presumido': 'L.P.' }; return `<span class="chip ${map[regime] || ''}">${abbr[regime] || regime}</span>`; }
@@ -671,9 +683,9 @@
       let rows = Object.entries(DB.clients).filter(([, c]) => c.regime === 'Lucro Presumido');
       if (search) rows = rows.filter(([n]) => n.toLowerCase().includes(search));
 
-      let totFat = 0, totIss = 0, totPis = 0, totCofins = 0;
-      rows.forEach(([, c]) => { const months = month === 'ALL' ? MESES : [month]; months.forEach(m => { const md = c.meses[m]; if (!md) return; totFat += (md.total || 0); totIss += (md.iss || 0); totPis += (md.pis || 0); totCofins += (md.cofins || 0); }); });
-      document.getElementById('lp-kpis').innerHTML = `<div class="obrig-tile"><p class="obrig-name">Empresas LP</p><p class="obrig-value">${rows.length}</p></div><div class="obrig-tile"><p class="obrig-name">Faturamento</p><p class="obrig-value">${fmtShort(totFat)}</p></div><div class="obrig-tile"><p class="obrig-name">ISS Total</p><p class="obrig-value">${fmtShort(totIss)}</p></div><div class="obrig-tile"><p class="obrig-name">PIS + COFINS</p><p class="obrig-value">${fmtShort(totPis + totCofins)}</p></div>`;
+      let totFat = 0, totTrim = 0, totMes = 0;
+      rows.forEach(([, c]) => { const months = month === 'ALL' ? MESES : [month]; months.forEach(m => { const md = c.meses[m]; if (!md) return; totFat += (md.vendas||0) + (md.servicos||0); totMes += (md.iss||0)+(md.icms||0)+(md.pis||0)+(md.cofins||0); totTrim += (md.irpj||0)+(md.csll||0); }); });
+      document.getElementById('lp-kpis').innerHTML = `<div class="obrig-tile"><p class="obrig-name">Empresas LP</p><p class="obrig-value">${rows.length}</p></div><div class="obrig-tile"><p class="obrig-name">Faturamento (V+S)</p><p class="obrig-value">${fmtShort(totFat)}</p></div><div class="obrig-tile"><p class="obrig-name">Impostos (Mês)</p><p class="obrig-value">${fmtShort(totMes)}</p></div><div class="obrig-tile"><p class="obrig-name">Impostos (Trim.)</p><p class="obrig-value">${fmtShort(totTrim)}</p></div>`;
       
       const tbody = document.getElementById('lpTableBody'); tbody.innerHTML = '';
       rows.sort((a, b) => a[0].localeCompare(b[0])).forEach(([name, client]) => {
@@ -683,8 +695,28 @@
           const st = md.status || 'Pendente';
           if (stF && st !== stF) return; 
 
+          const icmsIss = (md.icms || 0) + (md.iss || 0);
+          const pisCof = (md.pis || 0) + (md.cofins || 0);
+          const trimestral = (md.irpj || 0) + (md.csll || 0);
+
+          // Lógica de visualização das Obrigações Acessórias
+          let obrHtml = '';
+          const efdC = md.efdContribuicoes || 'Pendente';
+          const efdI = md.efdIcms || 'Pendente';
+          const dctf = md.dctfweb || 'Pendente';
+
+          if(efdC === 'Entregue' && efdI === 'Entregue' && dctf === 'Entregue') {
+             obrHtml = '<span class="badge badge-entregue">100% OK</span>';
+          } else {
+             let pendentes = [];
+             if(efdC === 'Pendente') pendentes.push('EFD-C');
+             if(efdI === 'Pendente') pendentes.push('EFD-I');
+             if(dctf === 'Pendente') pendentes.push('DCTF');
+             obrHtml = `<span class="badge badge-pendente" title="Pendentes">${pendentes.join(', ')}</span>`;
+          }
+
           const tr = document.createElement('tr');
-          tr.innerHTML = `<td style="color:var(--navy);font-weight:700">${name} <span style="display:block;font-size:10px;color:var(--text-dim)">${m}</span></td><td>${fmt(md.total || 0)}</td><td style="color:var(--navy); font-weight:600">${fmt(md.iss || 0)}</td><td>${fmt(md.pis || 0)}</td><td>${fmt(md.cofins || 0)}</td><td>${fmt(md.inss || 0)}</td><td>${fmt(md.fgts || 0)}</td><td class="center">${badgeHTML(st)}</td><td class="center"><button class="tbl-btn" onclick="openEntryModalFor('${name.replace(/'/g, "\\'")}','${m}')">Editar</button></td>`;
+          tr.innerHTML = `<td style="color:var(--navy);font-weight:700">${name} <span style="display:block;font-size:10px;color:var(--text-dim)">${m}</span></td><td>${fmt((md.vendas||0)+(md.servicos||0))}</td><td style="color:var(--navy); font-weight:600">${fmt(icmsIss)}</td><td>${fmt(pisCof)}</td><td style="color:var(--gold); font-weight:700">${fmt(trimestral)}</td><td class="center">${obrHtml}</td><td class="center">${badgeHTML(st)}</td><td class="center"><button class="tbl-btn" onclick="openEntryModalFor('${name.replace(/'/g, "\\'")}','${m}')">Editar</button></td>`;
           tbody.appendChild(tr);
         });
       });
@@ -702,7 +734,8 @@
         const months = month === 'ALL' ? MESES : [month];
         months.forEach(m => {
           const md = client.meses[m]; if (!md) return;
-          const fat = md.fat || md.total || 0; const das = md.das || ((md.iss || 0) + (md.pis || 0) + (md.cofins || 0));
+          const fat = md.fat || md.total || ((md.vendas||0)+(md.servicos||0)) || 0; 
+          const das = md.das || ((md.iss || 0) + (md.icms || 0) + (md.pis || 0) + (md.cofins || 0));
           const tr = document.createElement('tr');
           tr.innerHTML = `<td style="color:var(--navy);font-weight:700">${name} <span style="display:block;font-size:10px;color:var(--text-dim)">${m}</span></td><td>${chipRegime(client.regime)}</td><td style="font-size:11px">${client.tipo}</td><td style="color:var(--navy);font-weight:700">${fmt(fat)}</td><td style="color:#f57c00">${fmt(das)}</td><td>${fmt(md.inss || 0)}</td><td>${fmt(md.fgts || 0)}</td><td class="center">${badgeHTML(md.status || 'Pendente')}</td><td class="center"><button class="tbl-btn" onclick="openEntryModalFor('${name.replace(/'/g, "\\'")}','${m}')">Editar</button></td>`;
           tbody.appendChild(tr);
@@ -741,15 +774,41 @@
       const client = DB.clients[name];
       const regime = client.regime;
       
-      const LABELS = { fat: 'Faturamento', das: 'DAS', inss: 'INSS (Folha)', fgts: 'FGTS (Folha)', folha: 'Folha de Pagto.', prolabore: 'Pró-labore', vendas: 'Vendas', servicos: 'Serviços', iss: 'ISS', pis: 'PIS', cofins: 'COFINS' };
-      const fieldMap = { 'MEI': ['fat', 'das'], 'Lucro Presumido': ['servicos', 'vendas', 'iss', 'pis', 'cofins', 'inss', 'fgts', 'folha', 'prolabore'], 'Simples Nacional': ['vendas', 'servicos', 'das', 'inss', 'fgts', 'folha', 'prolabore'] };
+      const LABELS = { fat: 'Faturamento', das: 'DAS', inss: 'INSS (Folha)', fgts: 'FGTS (Folha)', folha: 'Folha de Pagto.', prolabore: 'Pró-labore', vendas: 'Vendas', servicos: 'Serviços', iss: 'ISS', icms: 'ICMS', pis: 'PIS', cofins: 'COFINS', irpj: 'IRPJ (Trimestral)', csll: 'CSLL (Trimestral)' };
+      
+      const fieldMap = { 
+          'MEI': ['fat', 'das', 'inss', 'fgts', 'folha', 'prolabore'], 
+          'Lucro Presumido': ['vendas', 'servicos', 'icms', 'iss', 'pis', 'cofins', 'irpj', 'csll', 'inss', 'fgts', 'folha', 'prolabore'], 
+          'Simples Nacional': ['vendas', 'servicos', 'das', 'inss', 'fgts', 'folha', 'prolabore'] 
+      };
       
       (fieldMap[regime] || []).forEach(f => {
         const div = document.createElement('div'); div.className = 'form-group';
         let style = (f==='folha'||f==='prolabore') ? 'border-color:var(--gold); background:#FFF3E0;' : '';
+        if(f==='irpj' || f==='csll') style = 'border-color:var(--navy); background:#E8EAF6;';
         div.innerHTML = `<label>${LABELS[f]}</label><input type="number" step="0.01" name="${f}" placeholder="0.00" style="${style}"/>`;
         container.appendChild(div);
       });
+
+      if (regime === 'Lucro Presumido') {
+          const trimesters = { 'MARÇO': ['JANEIRO', 'FEVEREIRO', 'MARÇO'], 'JUNHO': ['ABRIL', 'MAIO', 'JUNHO'], 'SETEMBRO': ['JULHO', 'AGOSTO', 'SETEMBRO'], 'DEZEMBRO': ['OUTUBRO', 'NOVEMBRO', 'DEZEMBRO'] };
+          if (trimesters[month]) {
+              let sumV = 0, sumS = 0;
+              trimesters[month].forEach(mesTrim => { const mData = client.meses[mesTrim] || {}; sumV += (mData.vendas || 0); sumS += (mData.servicos || 0); });
+              container.innerHTML += `<div style="grid-column: span 2; background:#FFF8E1; border:1px solid #FFE0B2; padding:12px; border-radius:8px; margin-top:5px;"><p style="font-size:11px; font-weight:700; color:#E65100; text-transform:uppercase; margin-bottom:6px;">📊 Base para Cálculo Trimestral (${trimesters[month].join(', ')})</p><div style="display:flex; justify-content:space-between;"><span style="font-size:12px; color:#E65100;">Vendas Acumuladas: <b>${fmt(sumV)}</b></span><span style="font-size:12px; color:#E65100;">Serviços Acumulados: <b>${fmt(sumS)}</b></span></div></div>`;
+          }
+
+          container.innerHTML += `
+             <div style="grid-column: span 2; margin-top: 10px; padding-top: 15px; border-top: 1px solid var(--border-soft);">
+                <p style="font-size:11px; font-weight:700; color:var(--navy); margin-bottom:10px; text-transform:uppercase;">Obrigações Acessórias (Mês)</p>
+                <div class="form-grid-2">
+                   <div class="form-group"><label>EFD Contribuições</label><select name="efdContribuicoes"><option value="Pendente">Pendente</option><option value="Entregue">Entregue</option></select></div>
+                   <div class="form-group"><label>EFD ICMS/IPI</label><select name="efdIcms"><option value="Pendente">Pendente</option><option value="Entregue">Entregue</option></select></div>
+                   <div class="form-group"><label>DCTFWeb</label><select name="dctfweb"><option value="Pendente">Pendente</option><option value="Entregue">Entregue</option></select></div>
+                </div>
+             </div>
+          `;
+      }
 
       if (regime === 'Simples Nacional') {
          headerSN.style.display = 'block';
@@ -766,7 +825,9 @@
       setTimeout(() => {
         const m = DB.clients[name]?.meses[month];
         if (m) {
-          document.querySelectorAll('#entry-fields input').forEach(inp => { if (m[inp.name] !== undefined && m[inp.name] !== 0) { inp.value = m[inp.name]; } });
+          document.querySelectorAll('#entry-fields input, #entry-fields select').forEach(inp => { 
+             if (m[inp.name] !== undefined && m[inp.name] !== 0) { inp.value = m[inp.name]; } 
+          });
           if (m.status) document.getElementById('entry-status').value = m.status;
         }
       }, 50);
@@ -777,9 +838,18 @@
       const month = document.getElementById('entry-month').value;
       if (!clientName || !month) return;
       const payload = {};
-      document.querySelectorAll('#entry-fields input[name]').forEach(inp => { if (inp.value !== '') payload[inp.name] = parseFloat(inp.value) || 0; });
+      
+      document.querySelectorAll('#entry-fields input[name], #entry-fields select[name]').forEach(inp => { 
+         if (inp.tagName === 'SELECT') {
+             payload[inp.name] = inp.value;
+         } else if (inp.value !== '') { 
+             payload[inp.name] = parseFloat(inp.value) || 0; 
+         } 
+      });
+      
       payload.total = (payload.vendas || 0) + (payload.servicos || 0) + (payload.fat || 0);
       payload.status = document.getElementById('entry-status').value;
+      
       try {
         await fetch(`${API}/data/client/${encodeURIComponent(clientName)}/month/${encodeURIComponent(month)}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
         DB.clients[clientName].meses[month] = { ...DB.clients[clientName].meses[month], ...payload };
@@ -829,6 +899,7 @@
       document.getElementById('fichaBody').innerHTML = histHTML + section('🏢 Dados da Empresa', row('Razão Social', cad.razaoSocial, 'razao') + row('CNPJ', cad.cnpj, 'cnpj') + row('CNAE Principal', cad.cnae, 'cnae') + row('Anexo', cad.anexo, 'anexo')) + section('🔑 Acessos e Senhas', row('SEFAZ', cad.sefaz, 'sefaz') + row('Prefeitura', cad.prefeitura, 'pref') + row('GOV.br', cad.govbr, 'govbr') + row('Cód. Simples', cad.codigoSimples, 'codsn'));
     }
 
+    // NOVA FUNÇÃO BLINDADA: Nunca mais apaga dados da Ficha!
     async function saveFichaEdit() {
       const name = _fichaClient; 
       if (!DB.clients[name]) return;
