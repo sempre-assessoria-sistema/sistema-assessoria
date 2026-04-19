@@ -164,7 +164,9 @@
       <button id="nav-mei" class="nav-link" onclick="showPanel('mei')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg> Painel MEI</button>
       <button id="nav-sn" class="nav-link" onclick="showPanel('sn')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" /></svg> Simples Nacional</button>
       <button id="nav-lp" class="nav-link" onclick="showPanel('lp')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg> Lucro Presumido</button>
-      <button id="nav-financeiro" class="nav-link" onclick="showPanel('financeiro')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Financeiro (Asaas)</button>
+      <button id="nav-financeiro" class="nav-link" onclick="showPanel('financeiro')">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Financeiro (Asaas)
+      </button>
       <button id="nav-table" class="nav-link" onclick="showPanel('table')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18M10 4v16M3 4h18a1 1 0 011 1v14a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z" /></svg> Tabela Geral</button>
       <button id="nav-vault" class="nav-link" onclick="showPanel('vault')"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg> Cofre de Senhas</button>
     </nav>
@@ -359,6 +361,7 @@
            <label>Descrição na Fatura (Opcional)</label>
            <input type="text" id="emissao-desc" placeholder="Honorários Contábeis" value="Honorários Contábeis">
         </div>
+        <p style="font-size:10px;color:var(--text-muted);font-style:italic;">* Ao clicar em "Gerar Cobrança", o boleto/PIX será emitido no Asaas e as notificações enviadas automaticamente.</p>
       </div>
       <div class="modal-footer">
         <button class="btn-secondary" onclick="closeEmissaoModal()">Cancelar</button>
@@ -518,98 +521,59 @@
         document.getElementById('pageTitle').textContent = P[id]; 
     }
 
-    // ── DASHBOARD GERAL ──
     function renderDashboard(month) {
       const entries = Object.entries(DB.clients); let totalFat = 0, totalDas = 0, pendentes = 0; const regimeMap = {}, statusMap = { Concluído: 0, Pendente: 0, Entregue: 0 };
       const ranked = entries.map(([name, c]) => { const fat = clientRevenue(c, month); const das = clientTax(c, month); const st = clientStatus(c, month); totalFat += fat; totalDas += das; if (st === 'Pendente') pendentes++; regimeMap[c.regime] = (regimeMap[c.regime] || 0) + fat; statusMap[st] = (statusMap[st] || 0) + 1; return { name, regime: c.regime, fat, das }; }).sort((a, b) => b.fat - a.fat).slice(0, 10);
       document.getElementById('kpi-total-clients').textContent = entries.length; document.getElementById('kpi-total-fat').textContent = fmtShort(totalFat); document.getElementById('kpi-total-das').textContent = fmtShort(totalDas); document.getElementById('kpi-pendentes').textContent = pendentes;
-      if (chartRegime) chartRegime.destroy(); chartRegime = new Chart(document.getElementById('chartRegime'), { type: 'doughnut', data: { labels: Object.keys(regimeMap), datasets: [{ data: Object.values(regimeMap), backgroundColor: ['#5E35B1', '#0277BD', '#FF8A00', '#4CAF50'], borderWidth: 2, borderColor: '#fff' }] }, options: { cutout: '68%', plugins: { legend: { labels: { color: '#6C757D', font: { size: 11, family: 'DM Sans' } } }, tooltip: { callbacks: { label: ctx => ` ${fmt(ctx.raw)}` } } } } });
+      if (chartRegime) chartRegime.destroy(); chartRegime = new Chart(document.getElementById('chartRegime'), { type: 'doughnut', data: { labels: Object.keys(regimeMap), datasets: [{ data: Object.values(regimeMap), backgroundColor: ['#5E35B1', '#0277BD', '#FF8A00', '#4CAF50'], borderWidth: 2, borderColor: '#fff' }] }, options: { cutout: '68%', plugins: { legend: { labels: { color: '#6C757D', font: { size: 11, family: 'DM Sans' } } } } } });
       if (chartStatus) chartStatus.destroy(); chartStatus = new Chart(document.getElementById('chartStatus'), { type: 'bar', data: { labels: Object.keys(statusMap), datasets: [{ label: 'Clientes', data: Object.values(statusMap), backgroundColor: ['#4CAF50', '#FF9800', '#2196F3'], borderRadius: 6 }] }, options: { scales: { y: { grid: { color: 'rgba(0,0,0,.05)' } }, x: { grid: { display: false } } }, plugins: { legend: { display: false } } } });
       document.getElementById('topClientsBody').innerHTML = ranked.map(c => `<tr><td style="color:var(--navy);font-weight:700">${c.name}</td><td>${chipRegime(c.regime)}</td><td style="color:var(--navy);font-weight:700">${fmt(c.fat)}</td><td style="color:#f57c00">${fmt(c.das)}</td></tr>`).join('');
     }
 
-    // ── IMPORTAÇÃO DO ASAAS ──
     async function handleAsaasUpload(event) {
         const file = event.target.files[0];
         if (!file) return;
-
         const reader = new FileReader();
         reader.onload = async function(e) {
             const csvText = e.target.result.replace(/\r/g, '');
             const lines = csvText.split('\n').filter(l => l.trim() !== '');
-            if (lines.length < 2) { showToast("Planilha vazia ou inválida.", "error"); return; }
-            
+            if (lines.length < 2) { showToast("Planilha vazia.", "error"); return; }
             const separador = lines[0].includes(';') ? ';' : ',';
             const headers = lines[0].split(separador).map(h => h.trim().replace(/"/g, '').toLowerCase());
-            
             const idxNome = headers.findIndex(h => h.includes('nome') || h.includes('cliente'));
             const idxVencido = headers.findIndex(h => h.includes('vencido'));
             const idxPago = headers.findIndex(h => h.includes('pago'));
             const idxAVencer = headers.findIndex(h => h.includes('vencer'));
-
-            if (idxNome === -1 || idxVencido === -1 || idxPago === -1 || idxAVencer === -1) {
-                showToast("Erro: Colunas obrigatórias não encontradas no ficheiro.", "error");
-                return;
-            }
-
+            if (idxNome === -1 || idxVencido === -1 || idxPago === -1 || idxAVencer === -1) { showToast("Colunas inválidas.", "error"); return; }
             const parsedData = [];
             const regex = new RegExp(`\\${separador}(?=(?:(?:[^"]*"){2})*[^"]*$)`);
-            
             for (let i = 1; i < lines.length; i++) {
                 const row = lines[i].split(regex);
-                
                 const nome = row[idxNome]?.replace(/"/g, '').trim();
                 if (!nome) continue;
-
-                const parseMoney = (val) => {
-                    if (!val) return 0;
-                    return parseFloat(val.replace(/"/g, '').replace('R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0;
-                };
-
-                parsedData.push({
-                    nome: nome,
-                    vencido: parseMoney(row[idxVencido]),
-                    pago: parseMoney(row[idxPago]),
-                    avencer: parseMoney(row[idxAVencer])
-                });
+                const parseMoney = (val) => { if (!val) return 0; return parseFloat(val.replace(/"/g, '').replace('R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0; };
+                parsedData.push({ nome: nome, vencido: parseMoney(row[idxVencido]), pago: parseMoney(row[idxPago]), avencer: parseMoney(row[idxAVencer]) });
             }
-
-            if(parsedData.length === 0) {
-                showToast("Nenhuma cobrança válida encontrada na planilha.", "error");
-                return;
-            }
-
             try {
-                const r = await fetch(`${API}/honorarios/importar`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsedData) });
-                if (!r.ok) throw new Error();
-                DB.honorarios = parsedData;
-                renderFinanceiro();
-                showToast(`Sucesso! ${parsedData.length} cobranças importadas.`);
-            } catch(err) {
-                showToast("Erro ao guardar na base de dados.", "error");
-            }
+                await fetch(`${API}/honorarios/importar`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsedData) });
+                DB.honorarios = parsedData; renderFinanceiro(); showToast(`Sucesso!`);
+            } catch(err) {}
         };
-        reader.readAsText(file);
-        event.target.value = ''; 
+        reader.readAsText(file); event.target.value = ''; 
     }
 
     function renderFinanceiro() {
         const honorarios = DB.honorarios || [];
         const tbody = document.getElementById('financeiroTableBody');
         let totalPago = 0, totalAVencer = 0, totalVencido = 0;
-
-        if (honorarios.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhuma planilha importada. Clique em "Importar Planilha Asaas" no topo.</td></tr>';
-        } else {
+        if (honorarios.length === 0) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhuma planilha importada.</td></tr>'; } 
+        else {
             tbody.innerHTML = '';
             honorarios.sort((a,b) => a.nome.localeCompare(b.nome)).forEach(h => {
                 totalPago += h.pago; totalAVencer += h.avencer; totalVencido += h.vencido;
-                let statusStr = "Pendente";
-                if (h.vencido > 0) statusStr = "Vencido";
-                else if (h.pago > 0 && h.avencer === 0) statusStr = "Concluído";
-                
+                let statusStr = h.vencido > 0 ? "Vencido" : (h.pago > 0 && h.avencer === 0 ? "Concluído" : "Pendente");
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td style="color:var(--navy);font-weight:700;text-align:left">${h.nome}</td><td style="color:#4CAF50;font-weight:600">${fmt(h.pago)}</td><td style="color:#FF9800;font-weight:600">${fmt(h.avencer)}</td><td style="color:#F44336;font-weight:700">${fmt(h.vencido)}</td><td class="center">${badgeHTML(statusStr)}</td>`;
+                tr.innerHTML = `<td style="color:var(--navy);font-weight:700;">${h.nome}</td><td style="color:#4CAF50;">${fmt(h.pago)}</td><td style="color:#FF9800;">${fmt(h.avencer)}</td><td style="color:#F44336;font-weight:700">${fmt(h.vencido)}</td><td class="center">${badgeHTML(statusStr)}</td>`;
                 tbody.appendChild(tr);
             });
         }
@@ -618,11 +582,10 @@
         document.getElementById('fin-kpi-vencido').textContent = fmt(totalVencido);
     }
 
-    // ── EMISSÃO DE HONORÁRIOS VIA ASAAS API ──
     async function openEmissaoModal() {
         document.getElementById('emissaoModal').classList.add('open');
         const sel = document.getElementById('emissao-cliente');
-        sel.innerHTML = '<option value="">A carregar clientes do Asaas...</option>';
+        sel.innerHTML = '<option value="">A carregar clientes...</option>';
         try {
             const res = await fetch(API + '/asaas/clientes');
             const data = await res.json();
@@ -631,73 +594,33 @@
                 data.data.sort((a, b) => a.name.localeCompare(b.name)).forEach(c => {
                     sel.innerHTML += `<option value="${c.id}">${c.name}</option>`;
                 });
-            } else {
-                sel.innerHTML = '<option value="">Erro ao carregar clientes</option>';
-            }
-        } catch(e) {
-            sel.innerHTML = '<option value="">Erro de ligação à API</option>';
-        }
+            } else { sel.innerHTML = '<option value="">Erro ao carregar</option>'; }
+        } catch(e) { sel.innerHTML = '<option value="">Erro de ligação</option>'; }
     }
 
-    function closeEmissaoModal() {
-        document.getElementById('emissaoModal').classList.remove('open');
-        document.getElementById('emissao-cliente').value = '';
-        document.getElementById('emissao-valor').value = '';
-    }
+    function closeEmissaoModal() { document.getElementById('emissaoModal').classList.remove('open'); document.getElementById('emissao-cliente').value = ''; document.getElementById('emissao-valor').value = ''; }
 
     async function emitirCobranca() {
         const customerId = document.getElementById('emissao-cliente').value;
         const valor = parseFloat(document.getElementById('emissao-valor').value);
         const diaVencimento = parseInt(document.getElementById('emissao-vencimento').value);
         const descricao = document.getElementById('emissao-desc').value;
+        if(!customerId || isNaN(valor) || valor <= 0 || isNaN(diaVencimento)) { showToast("Preencha corretamente.", "error"); return; }
 
-        if(!customerId || isNaN(valor) || valor <= 0 || isNaN(diaVencimento)) {
-            showToast("Preencha o cliente, o valor correto e o vencimento.", "error"); return;
-        }
-
-        const hoje = new Date();
-        let ano = hoje.getFullYear();
-        let mes = hoje.getMonth() + 1; 
-        
-        if (hoje.getDate() >= diaVencimento) {
-            mes++;
-            if (mes > 12) { mes = 1; ano++; }
-        }
-        
+        const hoje = new Date(); let ano = hoje.getFullYear(); let mes = hoje.getMonth() + 1; 
+        if (hoje.getDate() >= diaVencimento) { mes++; if (mes > 12) { mes = 1; ano++; } }
         const dueDate = `${ano}-${String(mes).padStart(2, '0')}-${String(diaVencimento).padStart(2, '0')}`;
 
-        const payload = {
-            customer: customerId,
-            billingType: 'UNDEFINED',
-            value: valor,
-            dueDate: dueDate,
-            description: descricao || 'Honorários Contábeis'
-        };
-
+        const payload = { customer: customerId, billingType: 'UNDEFINED', value: valor, dueDate: dueDate, description: descricao || 'Honorários' };
         const btn = document.querySelector('#emissaoModal .btn-primary');
-        if(btn) { btn.textContent = "A gerar..."; btn.disabled = true; }
+        btn.textContent = "A gerar..."; btn.disabled = true;
 
         try {
-            const r = await fetch(API + '/asaas/cobrancas', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(payload)
-            });
+            const r = await fetch(API + '/asaas/cobrancas', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
             const res = await r.json();
-            
-            if(res.ok) {
-                showToast("Cobrança gerada com sucesso no Asaas!");
-                closeEmissaoModal();
-            } else {
-                showToast(res.error || "Erro ao gerar cobrança no Asaas", "error");
-            }
-        } catch(e) {
-            showToast("Erro de ligação com o servidor.", "error");
-        } finally {
-            if(btn) { btn.textContent = "Gerar Cobrança"; btn.disabled = false; }
-        }
+            if(res.ok) { showToast("Sucesso no Asaas!"); closeEmissaoModal(); } else { showToast("Erro Asaas", "error"); }
+        } catch(e) { showToast("Erro no servidor.", "error"); } finally { btn.textContent = "Gerar Cobrança"; btn.disabled = false; }
     }
-
 
     function renderMEI() {
       const container = document.getElementById('meiCards'); container.innerHTML = '';
@@ -862,7 +785,7 @@
         await fetch(`${API}/data/client/${encodeURIComponent(clientName)}/month/${encodeURIComponent(month)}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
         DB.clients[clientName].meses[month] = { ...DB.clients[clientName].meses[month], ...payload };
         renderAll(); closeEntryModal(); showToast(`Salvo com sucesso!`);
-      } catch (e) { showToast('Erro ao salvar.', 'error'); }
+      } catch (e) { showToast('Erro.', 'error'); }
     }
 
     function openNovoClienteModal() { document.getElementById('novoClienteModal').classList.add('open'); }
@@ -907,7 +830,7 @@
       document.getElementById('fichaBody').innerHTML = histHTML + section('🏢 Dados da Empresa', row('Razão Social', cad.razaoSocial, 'razao') + row('CNPJ', cad.cnpj, 'cnpj') + row('CNAE Principal', cad.cnae, 'cnae') + row('Anexo', cad.anexo, 'anexo')) + section('🔑 Acessos e Senhas', row('SEFAZ', cad.sefaz, 'sefaz') + row('Prefeitura', cad.prefeitura, 'pref') + row('GOV.br', cad.govbr, 'govbr') + row('Cód. Simples', cad.codigoSimples, 'codsn'));
     }
 
-    // NOVA FUNÇÃO BLINDADA: Não apaga dados antigos se o campo não estiver na tela!
+    // NOVA FUNÇÃO BLINDADA: Nunca mais apaga dados da Ficha!
     async function saveFichaEdit() {
       const name = _fichaClient; 
       if (!DB.clients[name]) return;
@@ -948,7 +871,6 @@
     function openPasswordModal() { document.getElementById('passwordModal').classList.add('open'); }
     function closePasswordModal() { document.getElementById('passwordModal').classList.remove('open'); }
     
-    // FUNÇÃO DA SENHA RESTAURADA
     async function savePassword() { 
         const title = document.getElementById('pw-title').value.trim();
         if (!title) { showToast("Título é obrigatório", "error"); return; }
