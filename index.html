@@ -449,11 +449,15 @@
           <div class="form-group" style="grid-column: span 2;"><label>Valor Honorários (Mensalidade) R$</label><input id="nc-honorarios" type="number" step="0.01" placeholder="Ex: 350.00" style="border-color:var(--gold)" /></div>
           <div style="margin-bottom: 15px; grid-column: span 2;"><button type="button" onclick="importarCertificado()" class="btn-primary" style="width:100%; justify-content:center; background: var(--navy)">✨ Importar do Certificado (.pfx)</button></div>
           <div class="form-group"><label>CNPJ</label><input id="nc-cnpj" type="text" /></div>
+          <div class="form-group"><label>Inscrição Estadual</label><input id="nc-ie" type="text" /></div>
+          <div class="form-group"><label>Inscrição Municipal</label><input id="nc-im" type="text" /></div>
+          <div class="form-group"><label>CNAE Principal</label><input id="nc-cnae" type="text" /></div>
           <div class="form-group"><label>Regime *</label><select id="nc-regime"><option value="MEI">MEI</option><option value="Simples Nacional">Simples Nacional</option><option value="Lucro Presumido">Lucro Presumido</option></select></div>
-          <div class="form-group"><label>CNAE</label><input id="nc-cnae" type="text" /></div>
-          <div class="form-group"><label>Anexo</label><select id="nc-anexo"><option value="-">Não se aplica</option><option value="Anexo I">Anexo I</option><option value="Anexo II">Anexo II</option><option value="Anexo III">Anexo III</option></select></div>
           <div class="form-group"><label>Tipo</label><select id="nc-tipo"><option value="COMERCIO">Comércio</option><option value="SERVICO">Serviço</option><option value="MISTO">Misto</option></select></div>
-          <div class="form-group"><label>Inscrição Mun.</label><input id="nc-im" type="text" /></div>
+          <div class="form-group" style="grid-column: span 2;"><label>Anexo (Simples Nacional)</label><select id="nc-anexo"><option value="-">Não se aplica</option><option value="Anexo I">Anexo I</option><option value="Anexo II">Anexo II</option><option value="Anexo III">Anexo III</option></select></div>
+          
+          <div class="form-group"><label>Responsável</label><input id="nc-resp" type="text" /></div>
+          <div class="form-group"><label>CPF do Responsável</label><input id="nc-cpf" type="text" /></div>
         </div>
         <p style="font-size:11px;text-transform:uppercase;color:var(--navy);font-weight:700;margin-top:8px;">🔑 Acessos</p>
         <div class="form-grid-2">
@@ -505,14 +509,12 @@
         DB = await r.json();
         if (!DB.honorarios) DB.honorarios = [];
         
-        // ── CORREÇÃO DEFINITIVA DA TIME ENG ──
         let precisaSalvar = false;
         let timeEngKey = Object.keys(DB.clients).find(k => k.toLowerCase().includes('time eng'));
         if (timeEngKey && DB.clients[timeEngKey].regime === 'Lucro Presumido') {
             DB.clients[timeEngKey].regime = 'Simples Nacional';
             precisaSalvar = true;
         }
-        // Se corrigiu, manda gravar no banco de dados oficial do Render
         if (precisaSalvar) {
             await fetch(`${API}/data`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(DB) });
         }
@@ -943,7 +945,7 @@
       const payload = {
         nome, regime, tipo: document.getElementById('nc-tipo').value,
         cadastro: {
-          razaoSocial: document.getElementById('nc-razao').value, cnpj: document.getElementById('nc-cnpj').value, cnae: document.getElementById('nc-cnae').value, anexo: document.getElementById('nc-anexo').value, inscMunicipal: document.getElementById('nc-im').value, inscEstadual: '', responsavel: document.getElementById('nc-resp').value, cpfResponsavel: document.getElementById('nc-cpf').value, sefaz: document.getElementById('nc-sefaz').value, prefeitura: document.getElementById('nc-pref').value, govbr: document.getElementById('nc-govbr').value, codigoSimples: document.getElementById('nc-codsn').value, historico2025: {}, honorarios: parseFloat(document.getElementById('nc-honorarios').value) || 0
+          razaoSocial: document.getElementById('nc-razao').value, cnpj: document.getElementById('nc-cnpj').value, inscEstadual: document.getElementById('nc-ie').value, cnae: document.getElementById('nc-cnae').value, anexo: document.getElementById('nc-anexo').value, inscMunicipal: document.getElementById('nc-im').value, responsavel: document.getElementById('nc-resp').value, cpfResponsavel: document.getElementById('nc-cpf').value, sefaz: document.getElementById('nc-sefaz').value, prefeitura: document.getElementById('nc-pref').value, govbr: document.getElementById('nc-govbr').value, codigoSimples: document.getElementById('nc-codsn').value, historico2025: {}, honorarios: parseFloat(document.getElementById('nc-honorarios').value) || 0
         }
       };
       try {
@@ -961,7 +963,7 @@
       const name = _fichaClient; const c = DB.clients[name]; const cad = c.cadastro || {};
       document.getElementById('fichaTitle').textContent = name; document.getElementById('fichaMeta').textContent = `${c.regime} · ${c.tipo}`; document.getElementById('fichaEditBtn').textContent = _fichaEditing ? 'Cancelar' : '✏ Editar'; document.getElementById('fichaFooter').style.display = _fichaEditing ? 'flex' : 'none';
       const safe = v => (v || '').toString().replace(/"/g, '&quot;');
-      const row = (l, v, id) => _fichaEditing ? `<div class="form-group"><label>${l}</label><input id="fe-${id}" type="${id==='honorarios'?'number':'text'}" step="0.01" value="${safe(v)}" /></div>` : `<div style="display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-soft)"><span style="font-size:11px;color:var(--text-muted);width:150px;font-weight:700;text-transform:uppercase;">${l}</span><span style="font-size:13px;color:var(--text);">${v || '—'}</span></div>`;
+      const row = (l, v, id) => _fichaEditing ? `<div class="form-group"><label>${l}</label><input id="fe-${id}" type="${id==='honorarios'?'number':'text'}" step="${id==='honorarios'?'0.01':''}" value="${safe(v)}" /></div>` : `<div style="display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-soft)"><span style="font-size:11px;color:var(--text-muted);width:150px;font-weight:700;text-transform:uppercase;">${l}</span><span style="font-size:13px;color:var(--text);">${v || '—'}</span></div>`;
       const section = (t, r) => `<div style="margin-bottom:24px"><p style="font-size:11px;text-transform:uppercase;color:var(--navy);font-weight:700;margin-bottom:8px;border-bottom:1px solid var(--border-soft);padding-bottom:5px">${t}</p>${_fichaEditing ? `<div class="form-grid-2">${r}</div>` : r}</div>`;
 
       let histHTML = '';
@@ -991,7 +993,27 @@
       }
 
       const honVal = _fichaEditing ? (cad.honorarios||'') : fmt(cad.honorarios||0);
-      document.getElementById('fichaBody').innerHTML = histHTML + tribHTML + section('🏢 Dados da Empresa', row('Razão Social', cad.razaoSocial, 'razao') + row('CNPJ', cad.cnpj, 'cnpj') + row('Honorários (Mensalidade)', honVal, 'honorarios') + row('CNAE Principal', cad.cnae, 'cnae') + row('Anexo', cad.anexo, 'anexo')) + section('🔑 Acessos e Senhas', row('SEFAZ', cad.sefaz, 'sefaz') + row('Prefeitura', cad.prefeitura, 'pref') + row('GOV.br', cad.govbr, 'govbr') + row('Cód. Simples', cad.codigoSimples, 'codsn'));
+      
+      // ── OS CAMPOS AGORA APARECEM NA FICHA E PODEM SER EDITADOS ──
+      document.getElementById('fichaBody').innerHTML = 
+          histHTML + tribHTML + 
+          section('🏢 Dados da Empresa', 
+              row('Razão Social', cad.razaoSocial, 'razao') + 
+              row('CNPJ', cad.cnpj, 'cnpj') + 
+              row('Insc. Estadual', cad.inscEstadual, 'ie') + 
+              row('Insc. Municipal', cad.inscMunicipal, 'im') + 
+              row('CNAE Principal', cad.cnae, 'cnae') + 
+              row('Anexo', cad.anexo, 'anexo') + 
+              row('Responsável', cad.responsavel, 'resp') + 
+              row('CPF Resp.', cad.cpfResponsavel, 'cpf') + 
+              row('Honorários (R$)', honVal, 'honorarios')
+          ) + 
+          section('🔑 Acessos e Senhas', 
+              row('SEFAZ', cad.sefaz, 'sefaz') + 
+              row('Prefeitura', cad.prefeitura, 'pref') + 
+              row('GOV.br', cad.govbr, 'govbr') + 
+              row('Cód. Simples', cad.codigoSimples, 'codsn')
+          );
     }
 
     async function saveFichaEdit() {
@@ -1006,6 +1028,10 @@
       const cadastro = { 
           razaoSocial: document.getElementById('fe-razao') ? g('razao') : cadAntigo.razaoSocial, 
           cnpj: document.getElementById('fe-cnpj') ? g('cnpj') : cadAntigo.cnpj, 
+          inscEstadual: document.getElementById('fe-ie') ? g('ie') : cadAntigo.inscEstadual, 
+          inscMunicipal: document.getElementById('fe-im') ? g('im') : cadAntigo.inscMunicipal, 
+          responsavel: document.getElementById('fe-resp') ? g('resp') : cadAntigo.responsavel, 
+          cpfResponsavel: document.getElementById('fe-cpf') ? g('cpf') : cadAntigo.cpfResponsavel, 
           cnae: document.getElementById('fe-cnae') ? g('cnae') : cadAntigo.cnae, 
           anexo: document.getElementById('fe-anexo') ? g('anexo') : cadAntigo.anexo, 
           sefaz: document.getElementById('fe-sefaz') ? g('sefaz') : cadAntigo.sefaz, 
