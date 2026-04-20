@@ -12,8 +12,8 @@ const CERT_DIR = path.join(__dirname, 'certificados');
 const EMAIL_ACESSO = 'admin@sempreassessoria.com.br';
 const SENHA_ACESSO = 'sempre2026';
 
-// 💰 CHAVE DE INTEGRAÇÃO ASAAS
-const ASAAS_API_KEY = "COLE_SUA_CHAVE_AQUI"; // <-- APAGUE ISTO E COLE A SUA CHAVE AQUI DENTRO DAS ASPAS
+// 💰 CHAVE DE INTEGRAÇÃO ASAAS (AGORA SEGURA NA NUVEM!)
+const ASAAS_API_KEY = process.env.ASAAS_API_KEY; 
 const ASAAS_BASE_URL = "https://api.asaas.com/v3";
 
 if (!fs.existsSync(CERT_DIR)) fs.mkdirSync(CERT_DIR, { recursive: true });
@@ -51,7 +51,7 @@ function writeDB(data) { fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2)
 const MESES = ['JANEIRO', 'FEVEREIRO', 'MARÇO', 'ABRIL', 'MAIO', 'JUNHO', 'JULHO', 'AGOSTO', 'SETEMBRO', 'OUTUBRO', 'NOVEMBRO', 'DEZEMBRO'];
 function emptyMeses(regime) {
   const meses = {};
-  const base = regime === 'MEI' ? { fat: 0, das: 0, inss: 0, fgts: 0, folha: 0, prolabore: 0, status: 'Pendente' } : { vendas: 0, servicos: 0, total: 0, das: 0, iss: 0, pis: 0, cofins: 0, inss: 0, fgts: 0, folha: 0, prolabore: 0, status: 'Pendente' };
+  const base = regime === 'MEI' ? { fat: 0, das: 0, inss: 0, fgts: 0, folha: 0, prolabore: 0, status: 'Pendente' } : { vendas: 0, servicos: 0, total: 0, das: 0, iss: 0, icms: 0, pis: 0, cofins: 0, irpj: 0, csll: 0, inss: 0, fgts: 0, folha: 0, prolabore: 0, status: 'Pendente' };
   MESES.forEach(m => (meses[m] = { ...base })); return meses;
 }
 
@@ -90,10 +90,10 @@ app.delete('/api/data/passwords/:id', (req, res) => {
   writeDB(db); res.json({ ok: true });
 });
 
-// ASAAS API
+// ASAAS API - LIGAÇÃO SEGURA
 app.get('/api/asaas/clientes', async (req, res) => {
   try {
-    if (!ASAAS_API_KEY || ASAAS_API_KEY.includes("COLE_SUA_CHAVE")) return res.status(400).json({ error: "Chave API não configurada." });
+    if (!ASAAS_API_KEY) return res.status(400).json({ error: "Chave API do Asaas não configurada no Render." });
     const response = await fetch(`${ASAAS_BASE_URL}/customers?limit=100`, { method: 'GET', headers: { 'access_token': ASAAS_API_KEY, 'Content-Type': 'application/json' } });
     res.json(await response.json());
   } catch (error) { res.status(500).json({ error: 'Falha no Asaas.' }); }
@@ -101,6 +101,7 @@ app.get('/api/asaas/clientes', async (req, res) => {
 
 app.post('/api/asaas/cobrancas', async (req, res) => {
   try {
+    if (!ASAAS_API_KEY) return res.status(400).json({ error: "Chave API do Asaas não configurada no Render." });
     const response = await fetch(`${ASAAS_BASE_URL}/payments`, { method: 'POST', headers: { 'access_token': ASAAS_API_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(req.body) });
     const data = await response.json();
     if (data.errors) return res.status(400).json({ error: data.errors[0].description });
