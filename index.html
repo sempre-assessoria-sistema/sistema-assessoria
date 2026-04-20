@@ -353,7 +353,7 @@
       <div class="modal-body">
         <div class="form-group">
            <label>Selecione o Cliente (Dados do Asaas) *</label>
-           <select id="emissao-cliente"><option value="">A carregar clientes...</option></select>
+           <select id="emissao-cliente" onchange="autoPreencherHonorario()"><option value="">A carregar clientes...</option></select>
         </div>
         <div class="form-grid-2">
            <div class="form-group">
@@ -446,6 +446,7 @@
         <div class="form-grid-2">
           <div class="form-group"><label>Nome *</label><input id="nc-nome" type="text" /></div>
           <div class="form-group"><label>Razão Social</label><input id="nc-razao" type="text" /></div>
+          <div class="form-group" style="grid-column: span 2;"><label>Valor Honorários (Mensalidade) R$</label><input id="nc-honorarios" type="number" step="0.01" placeholder="Ex: 350.00" style="border-color:var(--gold)" /></div>
           <div style="margin-bottom: 15px; grid-column: span 2;"><button type="button" onclick="importarCertificado()" class="btn-primary" style="width:100%; justify-content:center; background: var(--navy)">✨ Importar do Certificado (.pfx)</button></div>
           <div class="form-group"><label>CNPJ</label><input id="nc-cnpj" type="text" /></div>
           <div class="form-group"><label>Regime *</label><select id="nc-regime"><option value="MEI">MEI</option><option value="Simples Nacional">Simples Nacional</option><option value="Lucro Presumido">Lucro Presumido</option></select></div>
@@ -623,6 +624,30 @@
     }
 
     function closeEmissaoModal() { document.getElementById('emissaoModal').classList.remove('open'); document.getElementById('emissao-cliente').value = ''; document.getElementById('emissao-valor').value = ''; }
+
+    // ── MÁGICA: PREENCHER VALOR AUTOMATICAMENTE DO ASAAS ──
+    function autoPreencherHonorario() {
+        const sel = document.getElementById('emissao-cliente');
+        const inputValor = document.getElementById('emissao-valor');
+        
+        if (!sel.value) { 
+            inputValor.value = ''; 
+            return; 
+        }
+        
+        const nomeAsaas = sel.options[sel.selectedIndex].text.toLowerCase();
+        
+        // Procura no nosso banco se tem um cliente com nome parecido
+        for (const [nomeDb, dados] of Object.entries(DB.clients)) {
+            if (nomeAsaas.includes(nomeDb.toLowerCase()) || nomeDb.toLowerCase().includes(nomeAsaas)) {
+                if (dados.cadastro && dados.cadastro.honorarios) {
+                    inputValor.value = dados.cadastro.honorarios;
+                    return;
+                }
+            }
+        }
+        inputValor.value = ''; // se não encontrar acordo de honorário, deixa em branco
+    }
 
     async function emitirCobranca() {
         const customerId = document.getElementById('emissao-cliente').value;
@@ -860,7 +885,7 @@
       const payload = {
         nome, regime, tipo: document.getElementById('nc-tipo').value,
         cadastro: {
-          razaoSocial: document.getElementById('nc-razao').value, cnpj: document.getElementById('nc-cnpj').value, cnae: document.getElementById('nc-cnae').value, anexo: document.getElementById('nc-anexo').value, inscMunicipal: document.getElementById('nc-im').value, inscEstadual: '', responsavel: document.getElementById('nc-resp').value, cpfResponsavel: document.getElementById('nc-cpf').value, sefaz: document.getElementById('nc-sefaz').value, prefeitura: document.getElementById('nc-pref').value, govbr: document.getElementById('nc-govbr').value, codigoSimples: document.getElementById('nc-codsn').value, historico2025: {}
+          razaoSocial: document.getElementById('nc-razao').value, cnpj: document.getElementById('nc-cnpj').value, cnae: document.getElementById('nc-cnae').value, anexo: document.getElementById('nc-anexo').value, inscMunicipal: document.getElementById('nc-im').value, inscEstadual: '', responsavel: document.getElementById('nc-resp').value, cpfResponsavel: document.getElementById('nc-cpf').value, sefaz: document.getElementById('nc-sefaz').value, prefeitura: document.getElementById('nc-pref').value, govbr: document.getElementById('nc-govbr').value, codigoSimples: document.getElementById('nc-codsn').value, historico2025: {}, honorarios: parseFloat(document.getElementById('nc-honorarios').value) || 0
         }
       };
       try {
@@ -878,7 +903,7 @@
       const name = _fichaClient; const c = DB.clients[name]; const cad = c.cadastro || {};
       document.getElementById('fichaTitle').textContent = name; document.getElementById('fichaMeta').textContent = `${c.regime} · ${c.tipo}`; document.getElementById('fichaEditBtn').textContent = _fichaEditing ? 'Cancelar' : '✏ Editar'; document.getElementById('fichaFooter').style.display = _fichaEditing ? 'flex' : 'none';
       const safe = v => (v || '').toString().replace(/"/g, '&quot;');
-      const row = (l, v, id) => _fichaEditing ? `<div class="form-group"><label>${l}</label><input id="fe-${id}" type="text" value="${safe(v)}" /></div>` : `<div style="display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-soft)"><span style="font-size:11px;color:var(--text-muted);width:150px;font-weight:700;text-transform:uppercase;">${l}</span><span style="font-size:13px;color:var(--text);">${v || '—'}</span></div>`;
+      const row = (l, v, id) => _fichaEditing ? `<div class="form-group"><label>${l}</label><input id="fe-${id}" type="${id==='honorarios'?'number':'text'}" step="0.01" value="${safe(v)}" /></div>` : `<div style="display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-soft)"><span style="font-size:11px;color:var(--text-muted);width:150px;font-weight:700;text-transform:uppercase;">${l}</span><span style="font-size:13px;color:var(--text);">${v || '—'}</span></div>`;
       const section = (t, r) => `<div style="margin-bottom:24px"><p style="font-size:11px;text-transform:uppercase;color:var(--navy);font-weight:700;margin-bottom:8px;border-bottom:1px solid var(--border-soft);padding-bottom:5px">${t}</p>${_fichaEditing ? `<div class="form-grid-2">${r}</div>` : r}</div>`;
 
       let histHTML = '';
@@ -891,7 +916,9 @@
          });
          histHTML = section('📊 Faturamento 2025 (Base RBT12)', inputs);
       }
-      document.getElementById('fichaBody').innerHTML = histHTML + section('🏢 Dados da Empresa', row('Razão Social', cad.razaoSocial, 'razao') + row('CNPJ', cad.cnpj, 'cnpj') + row('CNAE Principal', cad.cnae, 'cnae') + row('Anexo', cad.anexo, 'anexo')) + section('🔑 Acessos e Senhas', row('SEFAZ', cad.sefaz, 'sefaz') + row('Prefeitura', cad.prefeitura, 'pref') + row('GOV.br', cad.govbr, 'govbr') + row('Cód. Simples', cad.codigoSimples, 'codsn'));
+      
+      const honVal = _fichaEditing ? (cad.honorarios||'') : fmt(cad.honorarios||0);
+      document.getElementById('fichaBody').innerHTML = histHTML + section('🏢 Dados da Empresa', row('Razão Social', cad.razaoSocial, 'razao') + row('CNPJ', cad.cnpj, 'cnpj') + row('Honorários (Mensalidade)', honVal, 'honorarios') + row('CNAE Principal', cad.cnae, 'cnae') + row('Anexo', cad.anexo, 'anexo')) + section('🔑 Acessos e Senhas', row('SEFAZ', cad.sefaz, 'sefaz') + row('Prefeitura', cad.prefeitura, 'pref') + row('GOV.br', cad.govbr, 'govbr') + row('Cód. Simples', cad.codigoSimples, 'codsn'));
     }
 
     async function saveFichaEdit() {
@@ -911,6 +938,7 @@
           prefeitura: document.getElementById('fe-pref') ? g('pref') : cadAntigo.prefeitura, 
           govbr: document.getElementById('fe-govbr') ? g('govbr') : cadAntigo.govbr, 
           codigoSimples: document.getElementById('fe-codsn') ? g('codsn') : cadAntigo.codigoSimples, 
+          honorarios: document.getElementById('fe-honorarios') ? (parseFloat(g('honorarios')) || 0) : (cadAntigo.honorarios || 0),
           historico2025: { ...historicoAntigo } 
       };
       
@@ -955,7 +983,6 @@
       tempDiv.style.padding = '40px';
       tempDiv.style.width = '800px';
 
-      // ── MUDANÇA: A TAG DE IMAGEM INCLUÍDA AQUI NO CABEÇALHO ──
       tempDiv.innerHTML = `
         <table style="width: 100%; border-bottom: 2px solid #3b82f6; margin-bottom: 30px; padding-bottom: 10px;">
             <tr>
