@@ -505,8 +505,17 @@
         DB = await r.json();
         if (!DB.honorarios) DB.honorarios = [];
         
-        // CORREÇÃO AUTOMÁTICA DA TIME ENG PARA SIMPLES NACIONAL E REGRA DA ROSILENE (SP)
-        if (DB.clients['Time Eng']) { DB.clients['Time Eng'].regime = 'Simples Nacional'; }
+        // ── CORREÇÃO DEFINITIVA DA TIME ENG ──
+        let precisaSalvar = false;
+        let timeEngKey = Object.keys(DB.clients).find(k => k.toLowerCase().includes('time eng'));
+        if (timeEngKey && DB.clients[timeEngKey].regime === 'Lucro Presumido') {
+            DB.clients[timeEngKey].regime = 'Simples Nacional';
+            precisaSalvar = true;
+        }
+        // Se corrigiu, manda gravar no banco de dados oficial do Render
+        if (precisaSalvar) {
+            await fetch(`${API}/data`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(DB) });
+        }
         
         document.getElementById('dbStatus').textContent = `${Object.keys(DB.clients).length} clientes carregados.`;
         document.getElementById('dbStatus').style.color = 'rgba(255,255,255,0.8)';
@@ -793,7 +802,6 @@
     function closeEntryModal() { document.getElementById('entryModal').classList.remove('open'); document.getElementById('entry-sn-header').style.display = 'none'; }
     function openEntryModalFor(clientName, month) { document.getElementById('entry-client').value = clientName; document.getElementById('entry-month').value = month; onEntryClientChange(); openEntryModal(); }
 
-    // ── MÁGICA: CÁLCULO AUTOMÁTICO DO LUCRO PRESUMIDO ──
     function onEntryClientChange() {
       const name = document.getElementById('entry-client').value;
       const month = document.getElementById('entry-month').value;
@@ -813,7 +821,6 @@
         let style = (f==='folha'||f==='prolabore') ? 'border-color:var(--gold); background:#FFF3E0;' : '';
         if(f==='irpj' || f==='csll') style = 'border-color:var(--navy); background:#E8EAF6;';
         
-        // Se for LP, adiciona evento de calcular impostos nas Vendas e Serviços
         let onInputAttr = '';
         if (regime === 'Lucro Presumido' && (f === 'vendas' || f === 'servicos')) {
             onInputAttr = 'oninput="calcularLucroPresumido()"';
@@ -828,10 +835,9 @@
           if (trimesters[month]) {
               let sumV = 0, sumS = 0;
               trimesters[month].forEach(mesTrim => { 
-                  if(mesTrim === month) return; // Não soma o mês atual pois ele ainda está a ser digitado
+                  if(mesTrim === month) return; 
                   const mData = client.meses[mesTrim] || {}; sumV += (mData.vendas || 0); sumS += (mData.servicos || 0); 
               });
-              // Guarda a soma num campo invisível para ajudar no cálculo
               container.innerHTML += `<input type="hidden" id="lp-sumV" value="${sumV}"><input type="hidden" id="lp-sumS" value="${sumS}">`;
               container.innerHTML += `<div style="grid-column: span 2; background:#FFF8E1; border:1px solid #FFE0B2; padding:12px; border-radius:8px; margin-top:5px;"><p style="font-size:11px; font-weight:700; color:#E65100; text-transform:uppercase; margin-bottom:6px;">📊 Base Acumulada (${trimesters[month].filter(m=>m!==month).join(' e ')})</p><div style="display:flex; justify-content:space-between;"><span style="font-size:12px; color:#E65100;">Vendas: <b>${fmt(sumV)}</b></span><span style="font-size:12px; color:#E65100;">Serviços: <b>${fmt(sumS)}</b></span></div></div>`;
           }
@@ -878,18 +884,14 @@
         const vServicos = parseFloat(document.getElementById('entry-servicos')?.value) || 0;
         const totalMes = vVendas + vServicos;
 
-        // Alíquotas configuradas na Ficha (ou padrões de SP)
         const aliqPis = (cad.tribPis !== undefined ? cad.tribPis : 0.65) / 100;
         const aliqCofins = (cad.tribCofins !== undefined ? cad.tribCofins : 3.00) / 100;
-        const aliqIss = (cad.tribIss !== undefined ? cad.tribIss : (name.toLowerCase().includes('rosilene') ? 2.00 : 5.00)) / 100; // Rosilene = 2% (exemplo), restante SP = 5%
+        const aliqIss = (cad.tribIss !== undefined ? cad.tribIss : (name.toLowerCase().includes('rosilene') ? 2.00 : 5.00)) / 100;
         
-        // Impostos Mensais
         const elPis = document.getElementById('entry-pis'); if(elPis) elPis.value = (totalMes * aliqPis).toFixed(2);
         const elCofins = document.getElementById('entry-cofins'); if(elCofins) elCofins.value = (totalMes * aliqCofins).toFixed(2);
         const elIss = document.getElementById('entry-iss'); if(elIss) elIss.value = (vServicos * aliqIss).toFixed(2);
-        // O ICMS varia muito por NCM, por isso deixamos para o usuário preencher ou configuramos depois.
 
-        // Impostos Trimestrais (IRPJ e CSLL)
         const elIrpj = document.getElementById('entry-irpj');
         const elCsll = document.getElementById('entry-csll');
         
@@ -900,7 +902,6 @@
             const totalVendasTrim = sumV + vVendas;
             const totalServicosTrim = sumS + vServicos;
 
-            // Presunção Padrão LP: Vendas (8% IRPJ, 12% CSLL) | Serviços (32% IRPJ, 32% CSLL)
             const preIrpjV = (cad.preIrpjVendas !== undefined ? cad.preIrpjVendas : 8) / 100;
             const preIrpjS = (cad.preIrpjServicos !== undefined ? cad.preIrpjServicos : 32) / 100;
             const preCsllV = (cad.preCsllVendas !== undefined ? cad.preCsllVendas : 12) / 100;
@@ -909,9 +910,7 @@
             const baseIrpj = (totalVendasTrim * preIrpjV) + (totalServicosTrim * preIrpjS);
             const baseCsll = (totalVendasTrim * preCsllV) + (totalServicosTrim * preCsllS);
 
-            // Alíquotas do imposto sobre a base (IRPJ 15% e CSLL 9%)
             let valorIrpj = baseIrpj * 0.15;
-            // Adicional de IRPJ (10% sobre o que passar de 60.000 no trimestre)
             if (baseIrpj > 60000) { valorIrpj += (baseIrpj - 60000) * 0.10; }
             
             let valorCsll = baseCsll * 0.09;
@@ -1020,7 +1019,7 @@
       if (DB.clients[name].regime === 'Lucro Presumido') {
           cadastro.tribPis = num('tribPis', cadAntigo.tribPis !== undefined ? cadAntigo.tribPis : 0.65);
           cadastro.tribCofins = num('tribCofins', cadAntigo.tribCofins !== undefined ? cadAntigo.tribCofins : 3.00);
-          cadastro.tribIss = num('tribIss', cadAntigo.tribIss !== undefined ? cadAntigo.tribIss : 5.00);
+          cadastro.tribIss = num('tribIss', cadAntigo.tribIss !== undefined ? cadAntigo.tribIss : (name.toLowerCase().includes('rosilene') ? 2.00 : 5.00));
           cadastro.preIrpjVendas = num('preIrpjVendas', cadAntigo.preIrpjVendas !== undefined ? cadAntigo.preIrpjVendas : 8.00);
           cadastro.preIrpjServicos = num('preIrpjServicos', cadAntigo.preIrpjServicos !== undefined ? cadAntigo.preIrpjServicos : 32.00);
           cadastro.preCsllVendas = num('preCsllVendas', cadAntigo.preCsllVendas !== undefined ? cadAntigo.preCsllVendas : 12.00);
