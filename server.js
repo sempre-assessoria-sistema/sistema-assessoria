@@ -1,4 +1,4 @@
-// server.js
+// server.js - v2.1 COM ROTA DE MIGRAÇÃO
 const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
@@ -9,7 +9,6 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.use(express.static(__dirname));
 const DB_PATH = process.env.DB_PATH || './dados.db';
 
 // ── MIDDLEWARE ─────────────────────────────────────────────
@@ -25,11 +24,11 @@ const db = new sqlite3.Database(DB_PATH, (err) => {
 // Inicializar schema
 function initDB() {
   db.serialize(() => {
-    // Tabela Clientes
+    // Tabela Clientes (SEM UNIQUE em cnpj para permitir N/A)
     db.run(`CREATE TABLE IF NOT EXISTS clientes (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       nome TEXT UNIQUE NOT NULL,
-      cnpj TEXT UNIQUE NOT NULL,
+      cnpj TEXT,
       regime TEXT NOT NULL,
       atividade TEXT NOT NULL,
       email TEXT,
@@ -145,6 +144,103 @@ const driveService = {
   }
 };
 
+// ── ROTA DE MIGRAÇÃO (SOLUÇÃO DEFINITIVA) ────────────────────
+app.post('/api/migrate', (req, res) => {
+  console.log('🔄 Iniciando migração de 49 clientes...\n');
+
+  const clientes49 = [
+    { nome: "ABRAAO", regime: "MEI" },
+    { nome: "ALGODAO DOCES", regime: "Simples Nacional" },
+    { nome: "ANA", regime: "Simples Nacional" },
+    { nome: "BIG PARTNER", regime: "Simples Nacional" },
+    { nome: "C PRECISA", regime: "Simples Nacional" },
+    { nome: "CHAVEIRO", regime: "Simples Nacional" },
+    { nome: "CONTROL", regime: "Simples Nacional" },
+    { nome: "DEBORA", regime: "Simples Nacional" },
+    { nome: "ELCIO", regime: "Simples Nacional" },
+    { nome: "ESTILLOS", regime: "Simples Nacional" },
+    { nome: "EVERTON", regime: "Lucro Presumido" },
+    { nome: "GROW YOUR", regime: "Lucro Presumido" },
+    { nome: "IFART", regime: "Simples Nacional" },
+    { nome: "IMPORTS MASTER", regime: "Simples Nacional" },
+    { nome: "JCARLOS", regime: "Lucro Presumido" },
+    { nome: "JOSUE", regime: "MEI" },
+    { nome: "JULIO CESAR", regime: "Simples Nacional" },
+    { nome: "KAUAN", regime: "Simples Nacional" },
+    { nome: "LG MOTOS", regime: "Simples Nacional" },
+    { nome: "LINDINALVA", regime: "MEI" },
+    { nome: "M B CONFC", regime: "Simples Nacional" },
+    { nome: "M G UENOBO", regime: "Simples Nacional" },
+    { nome: "M. V. CAMA", regime: "Simples Nacional" },
+    { nome: "MARCIA FERREIRA", regime: "Simples Nacional" },
+    { nome: "MARISA", regime: "Simples Nacional" },
+    { nome: "MERC ARRUDA", regime: "Simples Nacional" },
+    { nome: "MITIKO", regime: "Simples Nacional" },
+    { nome: "N&L CARDOSO", regime: "Simples Nacional" },
+    { nome: "NANDO", regime: "Simples Nacional" },
+    { nome: "NEW SEVEN", regime: "Simples Nacional" },
+    { nome: "NH MAT", regime: "Simples Nacional" },
+    { nome: "OSMAR", regime: "MEI" },
+    { nome: "POLO RETIFICA", regime: "Simples Nacional" },
+    { nome: "REGIANE", regime: "Simples Nacional" },
+    { nome: "RF IMPORTS", regime: "Simples Nacional" },
+    { nome: "RICARDO - ZERO BALA", regime: "Simples Nacional" },
+    { nome: "RICARDO FRETA", regime: "Simples Nacional" },
+    { nome: "ROSILENE", regime: "Lucro Presumido" },
+    { nome: "SABRINA", regime: "Simples Nacional" },
+    { nome: "SEMPRE CONTA", regime: "Simples Nacional" },
+    { nome: "SIMONE", regime: "MEI" },
+    { nome: "SIMONE PERUA", regime: "Simples Nacional" },
+    { nome: "SOM EXPRESS", regime: "Lucro Presumido" },
+    { nome: "TELHADO GAMA", regime: "MEI" },
+    { nome: "TIME ENG", regime: "Lucro Presumido" },
+    { nome: "TIME OBRAS", regime: "Lucro Presumido" },
+    { nome: "VERO", regime: "Lucro Presumido" },
+    { nome: "VITAL", regime: "Simples Nacional" }
+  ];
+
+  // Limpar tabela de clientes
+  db.run('DELETE FROM clientes', (err) => {
+    if (err) {
+      console.error('Erro ao limpar:', err);
+      return res.status(500).json({ error: 'Erro ao limpar banco' });
+    }
+
+    // Inserir 49 clientes
+    let insertados = 0;
+    let erros = 0;
+
+    clientes49.forEach((cliente, index) => {
+      db.run(
+        'INSERT INTO clientes (nome, cnpj, regime, atividade, email, telefone, status) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [cliente.nome, 'N/A', cliente.regime, 'Não informado', '', '', 'Ativo'],
+        function (err) {
+          if (err) {
+            console.error(`❌ ${cliente.nome}:`, err.message);
+            erros++;
+          } else {
+            console.log(`✅ ${cliente.nome} (${cliente.regime})`);
+            insertados++;
+          }
+
+          // Se foi o último, retorna resposta
+          if (index === clientes49.length - 1) {
+            setTimeout(() => {
+              console.log(`\n✨ Migração concluída: ${insertados}/49 clientes\n`);
+              res.json({
+                success: true,
+                insertados,
+                erros,
+                mensagem: `${insertados} clientes migrados com sucesso!`
+              });
+            }, 100);
+          }
+        }
+      );
+    });
+  });
+});
+
 // ── ROTAS: CLIENTES ────────────────────────────────────────
 app.get('/api/clientes', (req, res) => {
   db.all('SELECT * FROM clientes ORDER BY nome', (err, rows) => {
@@ -156,16 +252,16 @@ app.get('/api/clientes', (req, res) => {
 app.post('/api/clientes', (req, res) => {
   const { nome, cnpj, regime, atividade, email, telefone } = req.body;
 
-  if (!nome || !cnpj || !regime) {
+  if (!nome || !regime) {
     return res.status(400).json({ error: 'Campos obrigatórios' });
   }
 
   db.run(
     'INSERT INTO clientes (nome, cnpj, regime, atividade, email, telefone) VALUES (?, ?, ?, ?, ?, ?)',
-    [nome, cnpj, regime, atividade, email, telefone],
+    [nome, cnpj || 'N/A', regime, atividade || '', email || '', telefone || ''],
     function (err) {
       if (err) return res.status(400).json({ error: err.message });
-      res.status(201).json({ id: this.lastID, nome, cnpj, regime });
+      res.status(201).json({ id: this.lastID, nome, regime });
     }
   );
 });
@@ -252,7 +348,6 @@ app.get('/api/relatorios/:cliente_id', (req, res) => {
     return res.status(400).json({ error: 'Mês e ano obrigatórios' });
   }
 
-  // Buscar lançamentos do mês
   db.all(
     `SELECT * FROM lancamentos 
      WHERE cliente_id = ? 
@@ -270,8 +365,7 @@ app.get('/api/relatorios/:cliente_id', (req, res) => {
         .filter(l => l.tipo === 'Despesa')
         .reduce((a, l) => a + l.valor, 0);
 
-      // Calcular impostos (Simples Nacional simplificado)
-      const impostos = receita * 0.08; // 8% base
+      const impostos = receita * 0.08;
 
       res.json({
         cliente_id,
@@ -321,7 +415,6 @@ app.post('/api/senhas', (req, res) => {
     return res.status(400).json({ error: 'Campos obrigatórios' });
   }
 
-  // Encrypt senha (simples - usar crypto em produção)
   const senhaEncriptada = Buffer.from(senha).toString('base64');
 
   db.run(
@@ -406,7 +499,7 @@ app.get('/api/health', (req, res) => {
   res.json({
     status: 'online',
     timestamp: new Date().toISOString(),
-    version: '2.0.0',
+    version: '2.1.0',
     database: 'SQLite',
     drive: driveService.drive ? 'connected' : 'disconnected'
   });
@@ -434,21 +527,18 @@ app.get('/api/stats', (req, res) => {
 app.listen(PORT, async () => {
   console.log(`
 ╔════════════════════════════════════════════════╗
-║  Sempre Assessoria Contábil - API v2.0         ║
+║  Sempre Assessoria Contábil - API v2.1         ║
 ║  Servidor rodando em http://localhost:${PORT}   ║
 ╚════════════════════════════════════════════════╝
   `);
 
-  // Tentar conectar ao Google Drive
   await driveService.init();
 
-  // Auto-backup diário
   setInterval(() => {
     driveService.backupDatabase();
   }, 24 * 60 * 60 * 1000);
 });
 
-// ── GRACEFUL SHUTDOWN ──────────────────────────────────────
 process.on('SIGINT', () => {
   console.log('\n✓ Encerrando servidor...');
   db.close();
