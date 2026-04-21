@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sempre Assessoria Contábil – Sistema 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.min.js"></script>
+
+  <style>
+    :root {
+      --navy: #22316C;
+      --navy-mid: #2A3C85;
+      --navy-light: #364A9C;
+      --gold: #FF8A00;
+      --gold-light: #FF9E2C;
+      --gold-dark: #E67E00;
+      --bg: #F4F6F9;
+      --surface: #FFFFFF;
+      --surface2: #F8F9FA;
+      --border: #E1E5EB;
+      --border-soft: #F0F2F5;
+      --text: #495057;
+      --text-muted: #6C757D;
+      --text-dim: #A0AAB5;
+      --success: #4CAF50;
+      --warning: #FF9800;
+      --error: #d32f2f;
+      --radius: 12px;
+      --sombra: rgba(0, 0, 0, 0.06);
+      --transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      overflow: hidden;
+      letter-spacing: 0.3px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--text-dim);
+      border-radius: 99px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--navy-light);
+    }
+
+    /* SIDEBAR */
+    #sidebar {
+      width: 260px;
+      min-height: 100vh;
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+      color: #fff;
+      z-index: 30;
+      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .sidebar-logo {
+      padding: 20px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sidebar-logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(255, 138, 0, 0.35);
+      flex-shrink: 0;
+    }
+
+    .sidebar-logo-text {
+      flex: 1;
+    }
+
+    .sidebar-logo-text p:first-child {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .sidebar-logo-text p:last-child {
+      font-size: 10px;
+      color: var(--gold-light);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    #mainNav {
+      padding: 16px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 11px 13px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.65);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: left;
+      width: 100%;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 138, 0, 0.12);
+      color: var(--gold-light);
+      transform: translateX(2px);
+    }
+
+    .nav-link.active {
+      background: rgba(255, 138, 0, 0.18);
+      color: var(--gold);
+      border-left: 3px solid var(--gold);
+      padding-left: 10px;
+    }
+
+    .sidebar-section-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: rgba(255, 255, 255, 0.45);
+      font-weight: 700;
+      padding: 12px 14px 6px;
+      margin-top: 8px;
+    }
+
+    #clientSection {
+      padding: 0 10px 12px;
+    }
+
+    .regime-folder-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      color: #fff;
+      transition: var(--transition);
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .regime-folder-btn:hover {
+      background: rgba(255, 138, 0, 0.12);
+      border-color: rgba(255, 138, 0, 0.35);
+      transform: translateX(2px);
+    }
+
+    .regime-folder-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .regime-count {
+      font-size: 10px;
+      background: var(--gold);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 20px;
+      margin-left: 6px;
+      font-weight: 700;
+    }
+
+    .client-list {
+      display: none;
+      padding: 6px 0 6px 10px;
+      max-height: 300px;
+      overflow-y: auto;
+      border-left: 2px solid rgba(255, 138, 0, 0.3);
+      margin-left: 16px;
+      margin-top: 4px;
+    }
+
+    .client-list.open {
+      display: block;
+    }
+
+    .client-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.65);
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      transition: var(--transition);
+    }
+
+    .client-item:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(2px);
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 14px 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+      min-height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+    }
+
+    #topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    #pageTitle {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 9px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      transition: var(--transition);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 138, 0, 0.3);
+    }
+
+    .panel {
+      display: none;
+      padding: 28px;
+      animation: slideInUp 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 4px 12px var(--sombra);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--navy-light);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .kpi-value {
+      font-size: 28px;
+      font-weight: 700;
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: -1px;
+      color: var(--navy);
+    }
+
+    .kpi-subtext {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 4px 12px var(--sombra);
+      transition: var(--transition);
+    }
+
+    .chart-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 18px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .card-title-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .chart-wrap {
+      height: 240px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+
+    .empty-state-text {
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    thead {
+      background: var(--surface2);
+    }
+
+    th {
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-soft);
+      font-size: 13px;
+    }
+
+    tr:hover {
+      background: rgba(255, 138, 0, 0.02);
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 14px 20px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 600;
+      display: none;
+      z-index: 110;
+      animation: slideInRight 0.3s;
+      max-width: 300px;
+    }
+
+    #toast.ok {
+      background: var(--success);
+      color: #fff;
+    }
+
+    #toast.error {
+      background: var(--error);
+      color: #fff;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(120%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-success {
+      background: rgba(76, 175, 80, 0.1);
+      color: var(--success);
+    }
+
+    .badge-warning {
+      background: rgba(255, 152, 0, 0.1);
+      color: var(--warning);
+    }
+
+    .badge-error {
+      background: rgba(211, 47, 47, 0.1);
+      color: var(--error);
+    }
+
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 4px 12px var(--sombra);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- SIDEBAR -->
+  <aside id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">$</div>
+      <div class="sidebar-logo-text">
+        <p>SEMPRE</p>
+        <p>CONTÁBIL 2026</p>
+      </div>
+    </div>
+
+    <nav id="mainNav">
+      <button class="nav-link active" data-panel="dashboard" onclick="switchPanel('dashboard')">
+        <span>📊</span> Dashboard
+      </button>
+      <button class="nav-link" data-panel="clientes" onclick="switchPanel('clientes')">
+        <span>👥</span> Clientes
+      </button>
+      <button class="nav-link" data-panel="lancamentos" onclick="switchPanel('lancamentos')">
+        <span>📝</span> Lançamentos
+      </button>
+      <button class="nav-link" data-panel="relatorios" onclick="switchPanel('relatorios')">
+        <span>📈</span> Relatórios
+      </button>
+    </nav>
+
+    <div class="sidebar-section-label">Clientes por Regime</div>
+    <div id="clientSection"></div>
+
+    <div class="sidebar-footer">
+      <span>v2.1 2026</span>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- TOPBAR -->
+    <div id="topbar">
+      <div>
+        <h1 id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn-primary" onclick="openLancamentoModal()">
+          <span>➕</span> Novo Lançamento
+        </button>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="panel active">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Clientes Ativos</div>
+          <div class="kpi-value" id="kpi-clientes">0</div>
+          <div class="kpi-subtext">Carteira</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Receita Total (Mês)</div>
+          <div class="kpi-value" id="kpi-receita">R$ 0,00</div>
+          <div class="kpi-subtext">Últimos 30 dias</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Ticket Médio</div>
+          <div class="kpi-value" id="kpi-ticket">R$ 0,00</div>
+          <div class="kpi-subtext">Por cliente</div>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <div class="card-title">
+            <div class="card-title-dot"></div>
+            Clientes por Regime
+          </div>
+          <div class="chart-wrap">
+            <canvas id="chartRegime"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="card-title">
+            <div class="card-title-dot"></div>
+            Últimos Lançamentos
+          </div>
+          <div id="ultimos-lancamentos" class="empty-state">
+            <div class="empty-state-icon">📭</div>
+            <div class="empty-state-text">Nenhum lançamento</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENTES -->
+    <div id="clientes" class="panel">
+      <button class="btn-primary" onclick="openClienteModal()" style="margin-bottom: 20px;">
+        <span>➕</span> Novo Cliente
+      </button>
+
+      <div class="section-card">
+        <h3 style="color: var(--navy); margin-bottom: 15px;">Lista de Clientes</h3>
+        <table id="tableClientes">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Regime</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="clientesList">
+            <tr>
+              <td colspan="3" class="empty-state">
+                <div class="empty-state-icon">📭</div>
+                <div class="empty-state-text">Nenhum cliente cadastrado</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- LANÇAMENTOS -->
+    <div id="lancamentos" class="panel">
+      <button class="btn-primary" onclick="openLancamentoModal()" style="margin-bottom: 20px;">
+        <span>➕</span> Novo Lançamento
+      </button>
+
+      <div class="section-card">
+        <h3 style="color: var(--navy); margin-bottom: 15px;">Lançamentos</h3>
+        <table id="tableLancamentos">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Cliente</th>
+              <th>Tipo</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody id="lancamentosList">
+            <tr>
+              <td colspan="4" class="empty-state">
+                <div class="empty-state-icon">📭</div>
+                <div class="empty-state-text">Nenhum lançamento</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- RELATÓRIOS -->
+    <div id="relatorios" class="panel">
+      <div class="section-card">
+        <h3 style="color: var(--navy);">Relatórios</h3>
+        <p style="color: var(--text-muted); margin-top: 10px;">Selecione um cliente para gerar relatórios</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODALS -->
+  <!-- Cliente Modal -->
+  <div id="clienteModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center;">
+    <div style="background: var(--surface); border-radius: var(--radius); padding: 28px; max-width: 500px; width: 90%;">
+      <h2 style="color: var(--navy); margin-bottom: 20px;">Novo Cliente</h2>
+      <form onsubmit="saveCliente(event)">
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Nome</label>
+          <input type="text" id="c-nome" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px;" required />
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Regime</label>
+          <select id="c-regime" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px;" required>
+            <option value="">Selecione...</option>
+            <option value="Simples Nacional">Simples Nacional</option>
+            <option value="MEI">MEI</option>
+            <option value="Lucro Presumido">Lucro Presumido</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%;">Salvar Cliente</button>
+        <button type="button" class="btn-primary" style="width: 100%; background: var(--text-dim); margin-top: 10px;" onclick="document.getElementById('clienteModal').style.display = 'none';">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lançamento Modal -->
+  <div id="lancamentoModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center;">
+    <div style="background: var(--surface); border-radius: var(--radius); padding: 28px; max-width: 500px; width: 90%;">
+      <h2 style="color: var(--navy); margin-bottom: 20px;">Novo Lançamento</h2>
+      <form onsubmit="saveLancamento(event)">
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Cliente</label>
+          <select id="l-cliente" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px;" required>
+            <option value="">Selecione...</option>
+          </select>
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Data</label>
+          <input type="date" id="l-data" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px;" required />
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Tipo</label>
+          <select id="l-tipo" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px;" required>
+            <option value="">Selecione...</option>
+            <option value="Venda">Venda</option>
+            <option value="Serviço">Serviço</option>
+            <option value="Despesa">Despesa</option>
+          </select>
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px;">Valor</label>
+          <input type="number" id="l-valor" step="0.01" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px;" required />
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%;">Registrar</button>
+        <button type="button" class="btn-primary" style="width: 100%; background: var(--text-dim); margin-top: 10px;" onclick="document.getElementById('lancamentoModal').style.display = 'none';">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script>
+    const API = 'https://sistema.sempreassessoriacontabil.com.br/api';
+    let DB = { clientes: [], lancamentos: [] };
+    let chartRegimeInstance = null;
+
+    async function init() {
+      try {
+        const res = await fetch(`${API}/clientes`);
+        if (res.ok) {
+          DB.clientes = await res.json();
+        }
+
+        const res2 = await fetch(`${API}/lancamentos`);
+        if (res2.ok) {
+          DB.lancamentos = await res2.json();
+        }
+
+        renderSidebar();
+        renderDashboard();
+      } catch (e) {
+        console.error('Erro ao carregar:', e);
+        showToast('Erro ao carregar dados', 'error');
+      }
+    }
+
+    function renderSidebar() {
+      const regimes = ['Simples Nacional', 'MEI', 'Lucro Presumido'];
+      const container = document.getElementById('clientSection');
+      container.innerHTML = '';
+
+      regimes.forEach(regime => {
+        const clientes = DB.clientes.filter(c => c.regime === regime);
+        const icon = regime === 'Simples Nacional' ? '🔵' : regime === 'MEI' ? '🟣' : '🟠';
+
+        const html = `
+          <div style="margin-bottom: 8px;">
+            <button class="regime-folder-btn" onclick="toggleFolder(this)">
+              <div class="regime-folder-left">
+                <span>${icon}</span>
+                <span>${regime}</span>
+                <span class="regime-count">${clientes.length}</span>
+              </div>
+              <span>▼</span>
+            </button>
+            <div class="client-list" style="display: none;">
+              ${clientes.map(c => `
+                <button class="client-item">${c.nome}</button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+        container.innerHTML += html;
+      });
+
+      updateClientDropdowns();
+    }
+
+    function toggleFolder(btn) {
+      const list = btn.nextElementSibling;
+      list.style.display = list.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function updateClientDropdowns() {
+      const select = document.getElementById('l-cliente');
+      select.innerHTML = '<option value="">Selecione...</option>' +
+        DB.clientes.map(c => `<option value="${c.id}">${c.nome}</option>`).join('');
+    }
+
+    function renderDashboard() {
+      document.getElementById('kpi-clientes').textContent = DB.clientes.length;
+      
+      const receita = DB.lancamentos.filter(l => l.tipo !== 'Despesa').reduce((a, l) => a + l.valor, 0);
+      document.getElementById('kpi-receita').textContent = fmt(receita);
+      document.getElementById('kpi-ticket').textContent = fmt(DB.clientes.length > 0 ? receita / DB.clientes.length : 0);
+
+      drawChart();
+
+      const ultimos = DB.lancamentos.slice(-5).reverse();
+      const html = ultimos.length > 0 ? `
+        <table>
+          <tbody>
+            ${ultimos.map(l => {
+              const cliente = DB.clientes.find(c => c.id == l.cliente_id);
+              return `
+                <tr>
+                  <td>${new Date(l.data).toLocaleDateString('pt-BR')}</td>
+                  <td>${cliente?.nome || 'N/A'}</td>
+                  <td><span class="badge ${l.tipo === 'Venda' ? 'badge-success' : l.tipo === 'Serviço' ? 'badge-warning' : 'badge-error'}">${l.tipo}</span></td>
+                  <td><strong>${fmt(l.valor)}</strong></td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+      ` : `<div class="empty-state"><div class="empty-state-icon">📭</div></div>`;
+
+      document.getElementById('ultimos-lancamentos').innerHTML = html;
+    }
+
+    function drawChart() {
+      const ctx = document.getElementById('chartRegime')?.getContext('2d');
+      if (!ctx) return;
+
+      const regimes = ['Simples Nacional', 'MEI', 'Lucro Presumido'];
+      const dados = regimes.map(r => DB.clientes.filter(c => c.regime === r).length);
+
+      if (chartRegimeInstance) chartRegimeInstance.destroy();
+      chartRegimeInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: regimes,
+          datasets: [{
+            data: dados,
+            backgroundColor: ['#FF8A00', '#22316C', '#364A9C'],
+            borderColor: '#fff',
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'bottom' } }
+        }
+      });
+    }
+
+    function renderClientes() {
+      const tbody = document.getElementById('clientesList');
+      const html = DB.clientes.length > 0 ? DB.clientes.map(c => `
+        <tr>
+          <td>${c.nome}</td>
+          <td><span class="badge badge-success">${c.regime}</span></td>
+          <td><span class="badge badge-success">Ativo</span></td>
+        </tr>
+      `).join('') : '<tr><td colspan="3" class="empty-state"><div class="empty-state-icon">👤</div></td></tr>';
+
+      tbody.innerHTML = html;
+    }
+
+    function renderLancamentos() {
+      const tbody = document.getElementById('lancamentosList');
+      const html = DB.lancamentos.length > 0 ? DB.lancamentos.map(l => {
+        const cliente = DB.clientes.find(c => c.id == l.cliente_id);
+        return `
+          <tr>
+            <td>${new Date(l.data).toLocaleDateString('pt-BR')}</td>
+            <td>${cliente?.nome || 'N/A'}</td>
+            <td><span class="badge ${l.tipo === 'Venda' ? 'badge-success' : l.tipo === 'Serviço' ? 'badge-warning' : 'badge-error'}">${l.tipo}</span></td>
+            <td><strong>${fmt(l.valor)}</strong></td>
+          </tr>
+        `;
+      }).join('') : '<tr><td colspan="4" class="empty-state"><div class="empty-state-icon">📭</div></td></tr>';
+
+      tbody.innerHTML = html;
+    }
+
+    function switchPanel(panelName) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(panelName).classList.add('active');
+
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      document.querySelector(`[data-panel="${panelName}"]`).classList.add('active');
+
+      if (panelName === 'clientes') renderClientes();
+      if (panelName === 'lancamentos') renderLancamentos();
+
+      const titles = {
+        dashboard: 'Dashboard',
+        clientes: 'Clientes',
+        lancamentos: 'Lançamentos',
+        relatorios: 'Relatórios'
+      };
+      document.getElementById('pageTitle').textContent = titles[panelName] || 'Dashboard';
+    }
+
+    async function saveCliente(e) {
+      e.preventDefault();
+      const cliente = {
+        nome: document.getElementById('c-nome').value,
+        regime: document.getElementById('c-regime').value,
+        atividade: 'Não informado',
+        cnpj: 'N/A',
+        email: '',
+        telefone: '',
+        status: 'Ativo'
+      };
+
+      try {
+        const res = await fetch(`${API}/clientes`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(cliente)
+        });
+        if (res.ok) {
+          DB.clientes.push(await res.json());
+          renderSidebar();
+          renderClientes();
+          document.getElementById('clienteModal').style.display = 'none';
+          showToast('Cliente salvo!');
+        }
+      } catch (e) {
+        showToast('Erro ao salvar', 'error');
+      }
+    }
+
+    async function saveLancamento(e) {
+      e.preventDefault();
+      const lancamento = {
+        cliente_id: document.getElementById('l-cliente').value,
+        data: document.getElementById('l-data').value,
+        tipo: document.getElementById('l-tipo').value,
+        descricao: 'Lançamento',
+        valor: parseFloat(document.getElementById('l-valor').value)
+      };
+
+      try {
+        const res = await fetch(`${API}/lancamentos`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(lancamento)
+        });
+        if (res.ok) {
+          DB.lancamentos.push(await res.json());
+          renderLancamentos();
+          renderDashboard();
+          document.getElementById('lancamentoModal').style.display = 'none';
+          showToast('Lançamento registrado!');
+        }
+      } catch (e) {
+        showToast('Erro ao registrar', 'error');
+      }
+    }
+
+    function openClienteModal() {
+      document.getElementById('clienteModal').style.display = 'flex';
+    }
+
+    function openLancamentoModal() {
+      document.getElementById('lancamentoModal').style.display = 'flex';
+    }
+
+    function fmt(value) {
+      return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+    }
+
+    function showToast(msg, type = 'ok') {
+      const e = document.getElementById('toast');
+      e.textContent = msg;
+      e.className = type;
+      e.style.display = 'block';
+      setTimeout(() => e.style.display = 'none', 3000);
+    }
+
+    init();
+  </script>
+</body>
+</html>
