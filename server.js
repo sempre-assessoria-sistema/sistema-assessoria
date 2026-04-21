@@ -14,6 +14,7 @@ const DB_PATH = process.env.DB_PATH || './dados.db';
 // ── MIDDLEWARE ─────────────────────────────────────────────
 app.use(cors());
 app.use(express.json());
+app.use(express.static(__dirname));
 
 // ── DATABASE ───────────────────────────────────────────────
 const db = new sqlite3.Database(DB_PATH, (err) => {
