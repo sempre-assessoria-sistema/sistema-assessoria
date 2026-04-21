@@ -1829,8 +1829,56 @@
       showToast('Dark mode em breve 🌙');
     }
 
-    // Inicializar
-    init();
-  </script>
+// --- INÍCIO DA VACINA BLINDADA ---
+    init().then(() => {
+        const listaOuro = {
+            "ABRAAO": "MEI", "ALGODAO DOCES": "Simples Nacional", "ANA": "Simples Nacional",
+            "BIG PARTNER": "Simples Nacional", "C PRECISA": "Simples Nacional", "CHAVEIRO": "Simples Nacional",
+            "CONTROL": "Simples Nacional", "DEBORA": "Simples Nacional", "ELCIO": "Simples Nacional",
+            "ESTILLOS": "Simples Nacional", "EVERTON": "Lucro Presumido", "GROW YOUR": "Lucro Presumido",
+            "IFART": "Simples Nacional", "IMPORTS MASTER": "Simples Nacional", "JCARLOS": "Lucro Presumido",
+            "JOSUE": "MEI", "JULIO CESAR": "Simples Nacional", "KAUAN": "Simples Nacional",
+            "LG MOTOS": "Simples Nacional", "LINDINALVA": "MEI", "M B CONFC": "Simples Nacional",
+            "M G UENOBO": "Simples Nacional", "M. V. CAMA": "Simples Nacional", "MARCIA FERREIRA": "Simples Nacional",
+            "MARISA": "Simples Nacional", "MERC ARRUDA": "Simples Nacional", "MITIKO": "Simples Nacional",
+            "N&L CARDOSO": "Simples Nacional", "NANDO": "Simples Nacional", "NEW SEVEN": "Simples Nacional",
+            "NH MAT": "Simples Nacional", "OSMAR": "MEI", "POLO RETIFICA": "Simples Nacional",
+            "REGIANE": "Simples Nacional", "RF IMPORTS": "Simples Nacional", "RICARDO - ZERO BALA": "Simples Nacional",
+            "RICARDO FRETA": "Simples Nacional", "ROSILENE": "Lucro Presumido", "SABRINA": "Simples Nacional",
+            "SEMPRE CONTA": "Simples Nacional", "SIMONE": "MEI", "SIMONE PERUA": "Simples Nacional",
+            "SOM EXPRESS": "Lucro Presumido", "TELHADO GAMA": "MEI", "TIME ENG": "Lucro Presumido",
+            "TIME OBRAS": "Lucro Presumido", "VERO": "Lucro Presumido", "VITAL": "Simples Nacional"
+        };
+
+        if (!DB.clients) DB.clients = {};
+        
+        for (const [nome, regime] of Object.entries(listaOuro)) {
+            // Se o cliente não existir no banco, a vacina injeta ele na tela
+            if (!DB.clients[nome]) {
+                DB.clients[nome] = {
+                    nome: nome,
+                    regime: regime,
+                    tipo: "SERVICO",
+                    cadastro: {
+                        razaoSocial: nome, cnpj: "00.000.000/0000-00", inscEstadual: "Isento", inscMunicipal: "Isento", cnae: "0000000", anexo: "-", responsavel: "Não informado", cpfResponsavel: "000.000.000-00", sefaz: "0000", prefeitura: "0000", govbr: "0000", codigoSimples: "0000", honorarios: 0, historico2025: {}
+                    },
+                    meses: {
+                        'JANEIRO':{status:'Pendente'}, 'FEVEREIRO':{status:'Pendente'}, 'MARÇO':{status:'Pendente'},
+                        'ABRIL':{status:'Pendente'}, 'MAIO':{status:'Pendente'}, 'JUNHO':{status:'Pendente'},
+                        'JULHO':{status:'Pendente'}, 'AGOSTO':{status:'Pendente'}, 'SETEMBRO':{status:'Pendente'},
+                        'OUTUBRO':{status:'Pendente'}, 'NOVEMBRO':{status:'Pendente'}, 'DEZEMBRO':{status:'Pendente'}
+                    }
+                };
+            }
+        }
+        
+        // Forçar o visual do sistema a mostrar todos os clientes
+        buildClientFolders();
+        buildEntryClientSelect();
+        renderAll();
+        
+        document.getElementById('dbStatus').textContent = `${Object.keys(DB.clients).length} clientes ativos e vacinados!`;
+    });
+    // --- FIM DA VACINA BLINDADA ---  </script>
 </body>
 </html>
