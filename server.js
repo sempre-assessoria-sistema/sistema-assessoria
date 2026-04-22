@@ -523,7 +523,25 @@ app.get('/api/stats', (req, res) => {
     });
   });
 });
+// ── ROTA PARA RECEBER O FATURAMENTO DO N8N E DO SITE ────────
+app.patch('/api/data/client/:name/month/:month', (req, res) => {
+  const nomeCliente = decodeURIComponent(req.params.name);
+  const mes = decodeURIComponent(req.params.month);
+  const total = req.body.total || 0;
 
+  console.log(`[n8n] Faturamento Recebido: ${nomeCliente} | Mês: ${mes} | Valor: R$ ${total}`);
+
+  db.get('SELECT id FROM clientes WHERE nome = ?', [nomeCliente], (err, row) => {
+    if (row && total > 0) {
+        const mesNum = {"JANEIRO":"01","FEVEREIRO":"02","MARÇO":"03","ABRIL":"04","MAIO":"05","JUNHO":"06","JULHO":"07","AGOSTO":"08","SETEMBRO":"09","OUTUBRO":"10","NOVEMBRO":"11","DEZEMBRO":"12"}[mes.toUpperCase()] || "01";
+        db.run('INSERT INTO lancamentos (cliente_id, data, tipo, descricao, valor, categoria) VALUES (?, ?, ?, ?, ?, ?)',
+            [row.id, `2026-${mesNum}-01`, 'Receita', `Faturamento ${mes} via n8n`, total, 'Faturamento']
+        );
+    }
+  });
+
+  return res.json({ message: "Dados atualizados com sucesso" });
+});
 // ── INICIALIZAR SERVIDOR ───────────────────────────────────
 app.listen(PORT, async () => {
   console.log(`
