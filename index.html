@@ -195,6 +195,8 @@
     </header>
 
     <section id="panel-dashboard" class="panel active">
+      <div id="dash-alerts" style="display:flex; gap:15px; margin-bottom:24px; flex-wrap:wrap;"></div>
+
       <div class="kpi-grid">
         <div class="kpi-card"><p class="kpi-label">Total de Clientes</p><p class="kpi-value white" id="kpi-total-clients">–</p><p class="kpi-sub">empresas cadastradas</p></div>
         <div class="kpi-card"><p class="kpi-label">Faturamento Total</p><p class="kpi-value gold" id="kpi-total-fat">–</p><p class="kpi-sub" id="kpi-fat-label">no período</p></div>
@@ -416,7 +418,6 @@
           <div class="form-group"><label>Regime *</label><select id="nc-regime"><option value="MEI">MEI</option><option value="Simples Nacional">Simples Nacional</option><option value="Lucro Presumido">Lucro Presumido</option></select></div>
           <div class="form-group"><label>Tipo</label><select id="nc-tipo"><option value="COMERCIO">Comércio</option><option value="SERVICO">Serviço</option><option value="MISTO">Misto</option></select></div>
           <div class="form-group" style="grid-column: span 2;"><label>Anexo (Simples Nacional)</label><select id="nc-anexo"><option value="-">Não se aplica</option><option value="Anexo I">Anexo I</option><option value="Anexo II">Anexo II</option><option value="Anexo III">Anexo III</option></select></div>
-          
           <div class="form-group"><label>Responsável</label><input id="nc-resp" type="text" /></div>
           <div class="form-group"><label>CPF do Responsável</label><input id="nc-cpf" type="text" /></div>
         </div>
@@ -513,10 +514,9 @@
       buildClientFolders(); buildEntryClientSelect(); renderAll();
     }
 
-    // --- O AMORTECEDOR DE CARGA (Para não pesar a tela) ---
+    // --- O AMORTECEDOR DE CARGA ---
     function renderAll() {
       const month = document.getElementById('globalMonthFilter').value;
-      // Desenhamos as abas com 50 milissegundos de diferença. Fica invisível ao olho nu, mas o navegador agradece!
       setTimeout(() => renderDashboard(month), 0);
       setTimeout(() => renderMEI(), 50);
       setTimeout(() => renderSN(), 100);
@@ -557,6 +557,24 @@
     function renderDashboard(month) {
       const entries = Object.entries(DB.clients); let totalFat = 0, totalDas = 0, pendentes = 0; const regimeMap = {}, statusMap = { Concluído: 0, Pendente: 0, Entregue: 0 };
       const ranked = entries.map(([name, c]) => { const fat = clientRevenue(c, month); const das = clientTax(c, month); const st = clientStatus(c, month); totalFat += fat; totalDas += das; if (st === 'Pendente') pendentes++; regimeMap[c.regime] = (regimeMap[c.regime] || 0) + fat; statusMap[st] = (statusMap[st] || 0) + 1; return { name, regime: c.regime, fat, das }; }).sort((a, b) => b.fat - a.fat).slice(0, 10);
+      
+      // --- NOVOS ALERTAS INTELIGENTES DO DASHBOARD ---
+      let vencidosAsaas = DB.honorarios ? DB.honorarios.filter(h => h.vencido > 0).length : 0;
+      let totalVencidoAsaas = DB.honorarios ? DB.honorarios.reduce((a,b)=>a+b.vencido, 0) : 0;
+      
+      let alertasHTML = '';
+      if (pendentes > 0) {
+          alertasHTML += `<div style="background:#FFF3E0; border-left:4px solid #FF9800; padding:12px 20px; border-radius:8px; flex:1; min-width:250px; box-shadow:0 2px 5px rgba(0,0,0,0.05);"><p style="font-size:11px; color:#E65100; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">⚠️ Pendências Fiscais</p><p style="font-size:14px; color:#333; margin-top:5px;"><b>${pendentes}</b> clientes com status pendente em ${month}.</p></div>`;
+      }
+      if (vencidosAsaas > 0) {
+          alertasHTML += `<div style="background:#FFEBEE; border-left:4px solid #F44336; padding:12px 20px; border-radius:8px; flex:1; min-width:250px; box-shadow:0 2px 5px rgba(0,0,0,0.05);"><p style="font-size:11px; color:#C62828; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">🚨 Inadimplência Asaas</p><p style="font-size:14px; color:#333; margin-top:5px;"><b>${vencidosAsaas}</b> cobranças vencidas (Total: ${fmt(totalVencidoAsaas)}).</p></div>`;
+      }
+      if (alertasHTML === '') {
+          alertasHTML = `<div style="background:#E8F5E9; border-left:4px solid #4CAF50; padding:12px 20px; border-radius:8px; flex:1; box-shadow:0 2px 5px rgba(0,0,0,0.05);"><p style="font-size:11px; color:#2E7D32; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">✅ Tudo em Ordem</p><p style="font-size:14px; color:#333; margin-top:5px;">Nenhum alerta crítico para este período.</p></div>`;
+      }
+      document.getElementById('dash-alerts').innerHTML = alertasHTML;
+      // -----------------------------------------------
+
       document.getElementById('kpi-total-clients').textContent = entries.length; document.getElementById('kpi-total-fat').textContent = fmtShort(totalFat); document.getElementById('kpi-total-das').textContent = fmtShort(totalDas); document.getElementById('kpi-pendentes').textContent = pendentes;
       if (chartRegime) chartRegime.destroy(); chartRegime = new Chart(document.getElementById('chartRegime'), { type: 'doughnut', data: { labels: Object.keys(regimeMap), datasets: [{ data: Object.values(regimeMap), backgroundColor: ['#5E35B1', '#0277BD', '#FF8A00', '#4CAF50'], borderWidth: 2, borderColor: '#fff' }] }, options: { cutout: '68%', plugins: { legend: { labels: { color: '#6C757D', font: { size: 11, family: 'DM Sans' } } } } } });
       if (chartStatus) chartStatus.destroy(); chartStatus = new Chart(document.getElementById('chartStatus'), { type: 'bar', data: { labels: Object.keys(statusMap), datasets: [{ label: 'Clientes', data: Object.values(statusMap), backgroundColor: ['#4CAF50', '#FF9800', '#2196F3'], borderRadius: 6 }] }, options: { scales: { y: { grid: { color: 'rgba(0,0,0,.05)' } }, x: { grid: { display: false } } }, plugins: { legend: { display: false } } } });
@@ -590,6 +608,8 @@
             try {
                 await fetch(`${API}/honorarios/importar`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(parsedData) });
                 DB.honorarios = parsedData; renderFinanceiro(); showToast(`Sucesso!`);
+                // Atualizar dashboard para refletir novos alertas do Asaas
+                renderDashboard(document.getElementById('globalMonthFilter').value); 
             } catch(err) {}
         };
         reader.readAsText(file); event.target.value = ''; 
@@ -599,7 +619,7 @@
         const honorarios = DB.honorarios || [];
         const tbody = document.getElementById('financeiroTableBody');
         let totalPago = 0, totalAVencer = 0, totalVencido = 0;
-        if (honorarios.length === 0) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--text-dim)">Nenhuma planilha importada.</td></tr>'; } 
+        if (honorarios.length === 0) { tbody.innerHTML = '<tr><td colspan=\"5\" style=\"text-align:center;padding:32px;color:var(--text-dim)\">Nenhuma planilha importada. Clique em \"Importar Planilha Asaas\" no topo.</td></tr>'; } 
         else {
             tbody.innerHTML = '';
             honorarios.sort((a,b) => a.nome.localeCompare(b.nome)).forEach(h => {
